@@ -54,6 +54,8 @@ Example Agent Cards:
 
 Try the [web scorecard](https://lindixu6-hash.github.io/awesome-agentic-engineering/),
 share a reproducible score URL, or run the zero-dependency CLI locally.
+For the evidence behind each score, read the
+[10-gate production readiness guide](https://lindixu6-hash.github.io/awesome-agentic-engineering/guide/).
 
 Run the zero-dependency scorecard CLI against an Agent Card JSON file:
 

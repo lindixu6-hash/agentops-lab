@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="A practical 10-gate AI agent production readiness checklist with evidence requirements, scoring, incident regressions, and a GitHub Actions CI gate."
+    >
+    <link
+      rel="canonical"
+      href="https://lindixu6-hash.github.io/awesome-agentic-engineering/guide/"
+    >
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://lindixu6-hash.github.io/awesome-agentic-engineering/guide/"
+    >
+    <link
+      rel="alternate"
+      hreflang="zh-CN"
+      href="https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/guide/"
+    >
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://lindixu6-hash.github.io/awesome-agentic-engineering/guide/"
+    >
+    <meta property="og:type" content="article">
+    <meta
+      property="og:title"
+      content="AI Agent Production Readiness Checklist: 10 Evidence Gates"
+    >
+    <meta
+      property="og:description"
+      content="Move from a working demo to a controlled release with ten evidence-based gates and a CI-ready scorecard."
+    >
+    <meta
+      property="og:url"
+      content="https://lindixu6-hash.github.io/awesome-agentic-engineering/guide/"
+    >
+    <meta
+      property="og:image"
+      content="https://lindixu6-hash.github.io/awesome-agentic-engineering/assets/social-preview.png"
+    >
+    <meta name="twitter:card" content="summary_large_image">
+    <meta
+      name="twitter:title"
+      content="AI Agent Production Readiness Checklist: 10 Evidence Gates"
+    >
+    <meta
+      name="twitter:description"
+      content="A machine-readable scorecard, CI gate, and incident regression loop for production AI agents."
+    >
+    <meta
+      name="twitter:image"
+      content="https://lindixu6-hash.github.io/awesome-agentic-engineering/assets/social-preview.png"
+    >
+    <title>AI Agent Production Readiness Checklist: 10 Evidence Gates</title>
+    <link rel="stylesheet" href="../guide.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "AI Agent Production Readiness Checklist: 10 Evidence Gates",
+        "description": "A practical AI agent production readiness checklist with evidence requirements, scoring, incident regressions, and a GitHub Actions CI gate.",
+        "datePublished": "2026-08-17",
+        "dateModified": "2026-08-17",
+        "inLanguage": "en",
+        "author": {
+          "@type": "Organization",
+          "name": "Awesome Agentic Engineering",
+          "url": "https://github.com/lindixu6-hash/awesome-agentic-engineering"
+        },
+        "mainEntityOfPage": "https://lindixu6-hash.github.io/awesome-agentic-engineering/guide/",
+        "image": "https://lindixu6-hash.github.io/awesome-agentic-engineering/assets/social-preview.png"
+      }
+    </script>
+  </head>
+  <body>
+    <header class="guide-topbar">
+      <a class="guide-brand" href="../">
+        <span class="brand-mark" aria-hidden="true">AE</span>
+        <span>Awesome Agentic Engineering</span>
+      </a>
+      <nav class="guide-nav" aria-label="Primary navigation">
+        <a href="../">Scorecard</a>
+        <a href="../zh/guide/" lang="zh-CN">中文</a>
+        <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering">
+          GitHub
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <header class="guide-hero">
+        <div class="guide-hero-inner">
+          <p class="eyebrow">Production guide · 10 evidence gates</p>
+          <h1>AI Agent Production Readiness Checklist</h1>
+          <p class="lede">
+            A demo proves that an agent can complete a task once. A production
+            review asks whether the task is bounded, repeatable, observable,
+            recoverable, affordable, and safe when real users and real tools are
+            involved.
+          </p>
+          <div class="hero-actions">
+            <a class="primary" href="../">Score your agent</a>
+            <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering">
+              Get the templates
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <div class="guide-layout">
+        <article class="guide-article">
+          <section id="how-to-use">
+            <h2>How to use this checklist</h2>
+            <p>
+              Score each gate from 0 to 2. A 0 means the control is missing, a 1
+              means it exists but is incomplete or manual, and a 2 means the
+              team can show repeatable evidence. Record the result in an
+              <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/templates/agent-card.md">
+                Agent Card
+              </a>
+              and review it whenever the model, tools, permissions, data sources,
+              or release scope changes.
+            </p>
+            <div class="callout">
+              <p>
+                <strong>A total score never overrides a launch blocker.</strong>
+                Missing authorization, unbounded destructive tools, exposed
+                secrets, or no recovery path should stop a release regardless
+                of the other points.
+              </p>
+            </div>
+          </section>
+
+          <section id="ten-gates">
+            <h2>The 10 production gates</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Gate</th>
+                    <th>Evidence for 2/2</th>
+                    <th>Block release when</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Goal clarity</td>
+                    <td>Named users, bounded task, success metric, and explicit non-goals</td>
+                    <td>The agent is expected to handle an undefined class of requests</td>
+                  </tr>
+                  <tr>
+                    <td>Tool permissions</td>
+                    <td>Per-tool scopes, allowlists, validation, and approval for risky writes</td>
+                    <td>A model-controlled action can exceed the requester's authority</td>
+                  </tr>
+                  <tr>
+                    <td>Memory</td>
+                    <td>Schema, owner, retention, inspection, deletion, and tenant boundaries</td>
+                    <td>State can leak across users or cannot be removed</td>
+                  </tr>
+                  <tr>
+                    <td>Evals</td>
+                    <td>Versioned scenarios for normal, edge, adversarial, and failure paths</td>
+                    <td>Release quality is judged only by demo prompts</td>
+                  </tr>
+                  <tr>
+                    <td>Failure handling</td>
+                    <td>Timeouts, bounded retries, fallback, idempotency, and user recovery</td>
+                    <td>A partial failure can silently duplicate or lose a side effect</td>
+                  </tr>
+                  <tr>
+                    <td>Security</td>
+                    <td>Injection, data-boundary, secret, egress, and unsafe-tool tests</td>
+                    <td>Retrieved content can redefine instructions or expose credentials</td>
+                  </tr>
+                  <tr>
+                    <td>Observability</td>
+                    <td>Trace IDs across model, retrieval, tools, policy, cost, and outcome</td>
+                    <td>Operators cannot reconstruct why a consequential action occurred</td>
+                  </tr>
+                  <tr>
+                    <td>Cost control</td>
+                    <td>Per-run budget, step limits, concurrency quotas, alerts, and aborts</td>
+                    <td>A loop can spend without a deterministic ceiling</td>
+                  </tr>
+                  <tr>
+                    <td>Human review</td>
+                    <td>Risk tiers, authorized approvers, preserved evidence, and resumable state</td>
+                    <td>Irreversible or high-impact actions execute without review</td>
+                  </tr>
+                  <tr>
+                    <td>Documentation</td>
+                    <td>Setup, architecture, ownership, threat model, runbook, and examples</td>
+                    <td>Only the original builder can operate or disable the agent</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="evidence">
+            <h2>What counts as evidence</h2>
+            <p>
+              A policy sentence is not the same as an enforced control. Prefer
+              artifacts that another engineer can inspect or rerun:
+            </p>
+            <ul>
+              <li>
+                <strong>Goal:</strong> acceptance criteria and non-goals tied to
+                a named workflow.
+              </li>
+              <li>
+                <strong>Permissions:</strong> tool schemas, scopes, policy
+                decisions, and denied-call tests.
+              </li>
+              <li>
+                <strong>Evals:</strong> fixtures with expected outcomes and a
+                release threshold.
+              </li>
+              <li>
+                <strong>Operations:</strong> traces, budget alerts, rollback
+                steps, and an owner for incidents.
+              </li>
+              <li>
+                <strong>Human control:</strong> an approval record showing who
+                reviewed which evidence before execution.
+              </li>
+            </ul>
+            <p>
+              The
+              <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering/tree/main/examples">
+                example Agent Cards
+              </a>
+              show how to keep this evidence close to the code instead of in a
+              release meeting that cannot be reproduced.
+            </p>
+          </section>
+
+          <section id="score">
+            <h2>Interpret the 20-point score</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Score</th>
+                    <th>Stage</th>
+                    <th>Recommended action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>0–7</td>
+                    <td>Demo only</td>
+                    <td>Keep tools read-only or simulated; define the workflow and owners</td>
+                  </tr>
+                  <tr>
+                    <td>8–14</td>
+                    <td>Prototype</td>
+                    <td>Use internal users, strict limits, and mandatory review</td>
+                  </tr>
+                  <tr>
+                    <td>15–18</td>
+                    <td>Limited beta</td>
+                    <td>Canary a bounded cohort and close every launch blocker</td>
+                  </tr>
+                  <tr>
+                    <td>19–20</td>
+                    <td>Production candidate</td>
+                    <td>Run the operational review; expand authority only with evidence</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              Use the <a href="../">browser scorecard</a> to generate a
+              shareable result and download a machine-readable
+              <code>agent-card.json</code>.
+            </p>
+          </section>
+
+          <section id="ci-gate">
+            <h2>Turn the review into a CI gate</h2>
+            <p>
+              Keep the Agent Card in the consumer repository and run the public
+              Node 24 Action whenever the card, workflow, tools, or evals change.
+            </p>
+            <pre><code>- uses: lindixu6-hash/awesome-agentic-engineering@v0
+  with:
+    card: agent-card.json
+    min-score: "15"
+    fail-below: "true"</code></pre>
+            <p>
+              The Action writes the numeric score, rating, and badge as outputs
+              and adds the ten-area result to the workflow summary. It uses no
+              model API and requires no external key.
+            </p>
+            <p>
+              For a local check without cloning this project:
+            </p>
+            <pre><code>npm exec --yes \
+  --package=github:lindixu6-hash/awesome-agentic-engineering#v0 \
+  -- agentic-score agent-card.json</code></pre>
+          </section>
+
+          <section id="incident-regressions">
+            <h2>Convert incidents into regression tests</h2>
+            <p>
+              Production readiness improves when a public incident, internal
+              failure, vulnerability, or red-team finding becomes a test that
+              can fail before the next release.
+            </p>
+            <ol>
+              <li>
+                Record the source and classify it accurately: observed incident,
+                vulnerability, adversarial test, or research proof of concept.
+              </li>
+              <li>
+                Write the precondition as <strong>Given</strong>, the unsafe or
+                failing behavior as <strong>When</strong>, and the required
+                control as <strong>Then</strong>.
+              </li>
+              <li>
+                Add the fixture to the eval suite and define the expected refusal,
+                approval, fallback, or containment behavior.
+              </li>
+              <li>
+                Gate releases on that fixture so the same class of failure cannot
+                return silently.
+              </li>
+            </ol>
+            <p>
+              See the
+              <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/docs/production-incidents.md">
+                source-linked incident library
+              </a>
+              for complete Given/When/Then examples.
+            </p>
+          </section>
+
+          <section id="release-review">
+            <h2>A practical release review</h2>
+            <ol>
+              <li>Score all ten gates and attach evidence for every 2.</li>
+              <li>List launch blockers separately from the numeric total.</li>
+              <li>Run normal, adversarial, timeout, partial-failure, and budget tests.</li>
+              <li>Confirm approvers, rollback owner, disable path, and incident channel.</li>
+              <li>Start read-only, shadow, or canary; expand authority only after review.</li>
+            </ol>
+            <p>
+              Copy the
+              <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/templates/launch-checklist.md">
+                launch checklist
+              </a>
+              into the release issue so the decision and its evidence remain
+              reviewable.
+            </p>
+          </section>
+        </article>
+
+        <aside class="guide-toc" aria-label="On this page">
+          <strong>On this page</strong>
+          <a href="#how-to-use">How to use it</a>
+          <a href="#ten-gates">The 10 gates</a>
+          <a href="#evidence">Required evidence</a>
+          <a href="#score">Score interpretation</a>
+          <a href="#ci-gate">CI release gate</a>
+          <a href="#incident-regressions">Incident regressions</a>
+          <a href="#release-review">Release review</a>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="guide-footer">
+      <div class="guide-footer-inner">
+        <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering">
+          Awesome Agentic Engineering
+        </a>
+        <span>Open source under the MIT License</span>
+      </div>
+    </footer>
+  </body>
+</html>

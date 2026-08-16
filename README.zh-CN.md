@@ -53,6 +53,8 @@ Agent Card 示例：
 
 直接打开[在线评分器](https://lindixu6-hash.github.io/awesome-agentic-engineering/)，
 生成可复现、可分享的评分链接，也可以在本地运行零依赖 CLI。
+每项分数需要什么证据，见
+[10 项生产就绪门槛指南](https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/guide/)。
 
 用零依赖 CLI 检查一个 Agent Card JSON：
 

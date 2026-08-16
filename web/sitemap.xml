@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://lindixu6-hash.github.io/awesome-agentic-engineering/</loc>
+    <lastmod>2026-08-17</lastmod>
+  </url>
+  <url>
+    <loc>https://lindixu6-hash.github.io/awesome-agentic-engineering/guide/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="en"
+                href="https://lindixu6-hash.github.io/awesome-agentic-engineering/guide/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN"
+                href="https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/guide/"/>
+  </url>
+  <url>
+    <loc>https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/guide/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="en"
+                href="https://lindixu6-hash.github.io/awesome-agentic-engineering/guide/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN"
+                href="https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/guide/"/>
+  </url>
+</urlset>

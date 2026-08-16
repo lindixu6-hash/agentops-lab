@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="一份可落地的 AI Agent 生产就绪检查清单：10 项证据门槛、20 分评分、事故回归测试和 GitHub Actions CI 门禁。"
+    >
+    <link
+      rel="canonical"
+      href="https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/guide/"
+    >
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://lindixu6-hash.github.io/awesome-agentic-engineering/guide/"
+    >
+    <link
+      rel="alternate"
+      hreflang="zh-CN"
+      href="https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/guide/"
+    >
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://lindixu6-hash.github.io/awesome-agentic-engineering/guide/"
+    >
+    <meta property="og:type" content="article">
+    <meta
+      property="og:title"
+      content="AI Agent 生产就绪检查清单：上线前的 10 项证据门槛"
+    >
+    <meta
+      property="og:description"
+      content="用可机器读取的评分卡、CI 门禁和事故回归闭环，把能跑的 Agent 变成可控的生产系统。"
+    >
+    <meta
+      property="og:url"
+      content="https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/guide/"
+    >
+    <meta
+      property="og:image"
+      content="https://lindixu6-hash.github.io/awesome-agentic-engineering/assets/social-preview.png"
+    >
+    <meta name="twitter:card" content="summary_large_image">
+    <meta
+      name="twitter:title"
+      content="AI Agent 生产就绪检查清单：上线前的 10 项证据门槛"
+    >
+    <meta
+      name="twitter:description"
+      content="生产级 AI Agent 的机器可读评分卡、CI 门禁与事故回归流程。"
+    >
+    <meta
+      name="twitter:image"
+      content="https://lindixu6-hash.github.io/awesome-agentic-engineering/assets/social-preview.png"
+    >
+    <title>AI Agent 生产就绪检查清单：上线前的 10 项证据门槛</title>
+    <link rel="stylesheet" href="../../guide.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "AI Agent 生产就绪检查清单：上线前的 10 项证据门槛",
+        "description": "一份包含证据要求、20 分评分、事故回归和 GitHub Actions CI 门禁的 AI Agent 生产就绪检查清单。",
+        "datePublished": "2026-08-17",
+        "dateModified": "2026-08-17",
+        "inLanguage": "zh-CN",
+        "author": {
+          "@type": "Organization",
+          "name": "Awesome Agentic Engineering",
+          "url": "https://github.com/lindixu6-hash/awesome-agentic-engineering"
+        },
+        "mainEntityOfPage": "https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/guide/",
+        "image": "https://lindixu6-hash.github.io/awesome-agentic-engineering/assets/social-preview.png"
+      }
+    </script>
+  </head>
+  <body>
+    <header class="guide-topbar">
+      <a class="guide-brand" href="../../">
+        <span class="brand-mark" aria-hidden="true">AE</span>
+        <span>Awesome Agentic Engineering</span>
+      </a>
+      <nav class="guide-nav" aria-label="主导航">
+        <a href="../../">在线评分</a>
+        <a href="../../guide/" lang="en">English</a>
+        <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering">
+          GitHub
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <header class="guide-hero">
+        <div class="guide-hero-inner">
+          <p class="eyebrow">生产指南 · 10 项证据门槛</p>
+          <h1>AI Agent 生产就绪检查清单</h1>
+          <p class="lede">
+            Demo 只能证明 Agent 偶尔能完成一次任务。生产评审要回答的是：当真实用户、真实数据和真实工具进入系统后，任务是否有边界、行为是否可重复、过程是否可观测、失败是否可恢复、成本是否受控。
+          </p>
+          <div class="hero-actions">
+            <a class="primary" href="../../">给 Agent 评分</a>
+            <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering">
+              获取模板
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <div class="guide-layout">
+        <article class="guide-article">
+          <section id="how-to-use">
+            <h2>如何使用这份清单</h2>
+            <p>
+              每项按 0–2 分评估：0 分表示控制缺失；1 分表示已有控制，但仍不完整或依赖人工；2 分表示团队能提供可重复验证的证据。把结果记录进
+              <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/templates/agent-card.md">
+                Agent Card
+              </a>
+              ，并在模型、工具、权限、数据源或上线范围变化时重新评审。
+            </p>
+            <div class="callout">
+              <p>
+                <strong>总分不能覆盖上线阻塞项。</strong>
+                如果缺少授权控制、破坏性工具没有边界、密钥可能暴露，或者失败后没有恢复路径，无论其他维度得分多高，都应该停止上线。
+              </p>
+            </div>
+          </section>
+
+          <section id="ten-gates">
+            <h2>10 项生产门槛</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>维度</th>
+                    <th>达到 2 分的证据</th>
+                    <th>必须阻断上线的情况</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>目标清晰度</td>
+                    <td>明确用户、任务边界、成功指标和非目标</td>
+                    <td>要求 Agent 处理一类无法定义边界的请求</td>
+                  </tr>
+                  <tr>
+                    <td>工具权限</td>
+                    <td>逐工具权限、白名单、参数校验和高风险写操作审批</td>
+                    <td>模型控制的动作可以超过请求者自身权限</td>
+                  </tr>
+                  <tr>
+                    <td>记忆</td>
+                    <td>状态结构、所有者、保留期、查看、删除和租户隔离</td>
+                    <td>状态可能跨用户泄漏，或用户无法删除</td>
+                  </tr>
+                  <tr>
+                    <td>评估</td>
+                    <td>覆盖正常、边界、对抗和失败路径的版本化用例</td>
+                    <td>上线质量只靠几条 Demo Prompt 判断</td>
+                  </tr>
+                  <tr>
+                    <td>失败处理</td>
+                    <td>超时、有界重试、降级、幂等和用户恢复路径</td>
+                    <td>局部失败可能静默重复执行或丢失副作用</td>
+                  </tr>
+                  <tr>
+                    <td>安全</td>
+                    <td>提示注入、数据边界、密钥、网络出口和危险工具测试</td>
+                    <td>检索内容可以重写系统指令或暴露凭据</td>
+                  </tr>
+                  <tr>
+                    <td>可观测性</td>
+                    <td>模型、检索、工具、策略、成本和结果共用 Trace ID</td>
+                    <td>运维人员无法还原一次关键动作为什么发生</td>
+                  </tr>
+                  <tr>
+                    <td>成本控制</td>
+                    <td>单次预算、步骤上限、并发配额、告警和强制终止</td>
+                    <td>循环执行没有确定性的花费上限</td>
+                  </tr>
+                  <tr>
+                    <td>人工审核</td>
+                    <td>风险分级、授权审批人、完整证据和可恢复状态</td>
+                    <td>不可逆或高影响动作无需人工确认即可执行</td>
+                  </tr>
+                  <tr>
+                    <td>文档</td>
+                    <td>安装、架构、负责人、威胁模型、Runbook 和示例</td>
+                    <td>只有原始开发者知道如何运维或关闭 Agent</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="evidence">
+            <h2>什么才算证据</h2>
+            <p>
+              文档里写了一句“要安全”不等于系统真的执行了安全控制。优先提供其他工程师可以检查或重新运行的产物：
+            </p>
+            <ul>
+              <li>
+                <strong>目标证据：</strong>与明确工作流绑定的验收标准和非目标。
+              </li>
+              <li>
+                <strong>权限证据：</strong>工具 Schema、Scope、策略决策记录和拒绝调用测试。
+              </li>
+              <li>
+                <strong>评估证据：</strong>包含预期结果的 Fixture 和明确的发布阈值。
+              </li>
+              <li>
+                <strong>运维证据：</strong>Trace、预算告警、回滚步骤和事故负责人。
+              </li>
+              <li>
+                <strong>人工控制证据：</strong>谁在执行前审核了什么证据，以及审批结果。
+              </li>
+            </ul>
+            <p>
+              可以参考仓库中的
+              <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering/tree/main/examples">
+                Agent Card 示例
+              </a>
+              ，把证据放在代码附近，而不是只存在于一次无法复现的上线会议里。
+            </p>
+          </section>
+
+          <section id="score">
+            <h2>如何解释 20 分评分</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>分数</th>
+                    <th>阶段</th>
+                    <th>建议动作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>0–7</td>
+                    <td>仅 Demo</td>
+                    <td>保持只读或模拟工具，先定义工作流和负责人</td>
+                  </tr>
+                  <tr>
+                    <td>8–14</td>
+                    <td>原型</td>
+                    <td>只面向内部用户，设置严格限制并强制人工审核</td>
+                  </tr>
+                  <tr>
+                    <td>15–18</td>
+                    <td>有限 Beta</td>
+                    <td>小流量灰度，关闭全部上线阻塞项</td>
+                  </tr>
+                  <tr>
+                    <td>19–20</td>
+                    <td>生产候选</td>
+                    <td>完成运维评审，只在证据充分后逐步扩大权限</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              使用
+              <a href="../../">在线评分器</a>
+              可以生成可分享的评分链接，并下载机器可读的
+              <code>agent-card.json</code>。
+            </p>
+          </section>
+
+          <section id="ci-gate">
+            <h2>把评审变成 CI 门禁</h2>
+            <p>
+              将 Agent Card 保存在实际消费仓库中。当卡片、工作流、工具或评估发生变化时，运行公开的 Node 24 Action。
+            </p>
+            <pre><code>- uses: lindixu6-hash/awesome-agentic-engineering@v0
+  with:
+    card: agent-card.json
+    min-score: "15"
+    fail-below: "true"</code></pre>
+            <p>
+              Action 会输出数值得分、评级和徽章，并在 Workflow Summary 中生成十项评分表。整个过程不调用模型 API，也不需要外部 Key。
+            </p>
+            <p>无需 clone，也可以直接在本地运行：</p>
+            <pre><code>npm exec --yes \
+  --package=github:lindixu6-hash/awesome-agentic-engineering#v0 \
+  -- agentic-score agent-card.json</code></pre>
+          </section>
+
+          <section id="incident-regressions">
+            <h2>把事故变成回归测试</h2>
+            <p>
+              当公开事故、内部失败、安全漏洞或红队结果被转成下一次发布前必跑的测试，生产就绪度才会真正累积。
+            </p>
+            <ol>
+              <li>
+                记录来源，并准确区分：真实事故、漏洞、对抗测试还是研究 PoC。
+              </li>
+              <li>
+                用 <strong>Given</strong> 写前置状态，用 <strong>When</strong>
+                写危险行为，用 <strong>Then</strong> 写必须生效的控制。
+              </li>
+              <li>
+                将 Fixture 加入评估集，定义预期的拒绝、审批、降级或隔离结果。
+              </li>
+              <li>
+                用该用例阻断发布，避免同类问题静默回归。
+              </li>
+            </ol>
+            <p>
+              查看
+              <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/docs/production-incidents.zh-CN.md">
+                带来源的中文生产事故案例库
+              </a>
+              ，其中每个案例都包含 Given/When/Then 回归测试。
+            </p>
+          </section>
+
+          <section id="release-review">
+            <h2>一次可执行的上线评审</h2>
+            <ol>
+              <li>完成十项评分，并为每个 2 分附上证据。</li>
+              <li>将上线阻塞项与数字总分分开记录。</li>
+              <li>执行正常、对抗、超时、局部失败和预算耗尽测试。</li>
+              <li>确认审批人、回滚负责人、关闭路径和事故沟通渠道。</li>
+              <li>从只读、影子或小流量模式开始，依据证据逐步扩大权限。</li>
+            </ol>
+            <p>
+              把
+              <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/templates/launch-checklist.md">
+                上线检查模板
+              </a>
+              复制进 Release Issue，让最终决策和证据可以被复盘。
+            </p>
+          </section>
+        </article>
+
+        <aside class="guide-toc" aria-label="本文目录">
+          <strong>本文目录</strong>
+          <a href="#how-to-use">如何使用</a>
+          <a href="#ten-gates">10 项门槛</a>
+          <a href="#evidence">证据要求</a>
+          <a href="#score">评分解释</a>
+          <a href="#ci-gate">CI 发布门禁</a>
+          <a href="#incident-regressions">事故回归</a>
+          <a href="#release-review">上线评审</a>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="guide-footer">
+      <div class="guide-footer-inner">
+        <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering">
+          Awesome Agentic Engineering
+        </a>
+        <span>基于 MIT License 开源</span>
+      </div>
+    </footer>
+  </body>
+</html>
