@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Score an AI agent across ten production-readiness areas."
+    >
+    <title>Agent Production Readiness Scorecard</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="https://github.com/lindixu6-hash/awesome-agentic-engineering">
+        <span class="brand-mark" aria-hidden="true">AE</span>
+        <span>Awesome Agentic Engineering</span>
+      </a>
+      <div class="topbar-actions">
+        <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering">
+          GitHub
+        </a>
+        <button id="language-toggle" class="icon-button" type="button" title="切换语言">
+          中
+        </button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="scorecard-panel" aria-labelledby="page-title">
+        <div class="section-heading">
+          <p class="eyebrow">20-point review</p>
+          <h1 id="page-title">Production Readiness Scorecard</h1>
+        </div>
+        <div id="scorecard-rows" class="scorecard-rows"></div>
+      </section>
+
+      <aside class="result-panel" aria-live="polite">
+        <img
+          src="assets/scorecard.svg"
+          alt="Production Agent Scorecard overview"
+          width="1200"
+          height="630"
+        >
+        <div class="score-summary">
+          <div>
+            <span id="score-label">Score</span>
+            <strong><span id="score-total">0</span><small>/20</small></strong>
+          </div>
+          <div class="rating-block">
+            <span id="rating-label">Rating</span>
+            <strong id="rating-value">demo only</strong>
+          </div>
+        </div>
+
+        <div class="progress-track" aria-hidden="true">
+          <span id="progress-bar"></span>
+        </div>
+
+        <section class="blockers" aria-labelledby="blockers-title">
+          <h2 id="blockers-title">Priority gaps</h2>
+          <ol id="blocker-list"></ol>
+        </section>
+
+        <div class="commands">
+          <button id="copy-button" class="primary-command" type="button">
+            Copy JSON
+          </button>
+          <button id="download-button" type="button">
+            Download
+          </button>
+          <button id="reset-button" class="icon-button" type="button" title="Reset scorecard">
+            ↺
+          </button>
+        </div>
+        <p id="command-status" class="command-status" role="status"></p>
+      </aside>
+    </main>
+
+    <script type="module" src="scorecard.js"></script>
+  </body>
+</html>

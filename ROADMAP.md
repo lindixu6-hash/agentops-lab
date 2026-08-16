@@ -18,7 +18,7 @@
 
 ## v0.3
 
-- Web scorecard playground
+- [x] Bilingual web scorecard playground
 - Eval fixture pack
 - Case study library
 - Model/tool routing patterns

@@ -39,6 +39,9 @@ Use these first:
 
 ## Quick Score
 
+Try the [web scorecard](https://lindixu6-hash.github.io/awesome-agentic-engineering/)
+or run the zero-dependency CLI locally.
+
 Run the zero-dependency scorecard CLI against an Agent Card JSON file:
 
 ```bash
