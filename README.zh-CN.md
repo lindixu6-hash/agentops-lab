@@ -140,8 +140,9 @@ Action 会输出 `score`、`rating`、`badge`、`passed`、`blocker-count`、
 
 - [Content OS Pipeline](https://github.com/lindixu6-hash/ai-content-workflow-skills)
   使用10/20作为人机协作内容Agent的CI门槛，当前真实得分为12/20（`prototype`）。
-  [main 工作流](https://github.com/lindixu6-hash/ai-content-workflow-skills/actions/runs/31970162918)
-  同时运行严格阻塞项审计，明确暴露3个未解决的上线阻塞项，不让达标总分掩盖真实技术债。
+  [main 工作流](https://github.com/lindixu6-hash/ai-content-workflow-skills/actions/runs/31974318431)
+  同时运行严格阻塞项与 `draft-only` Profile 审计，明确暴露 12/14 总分差距、
+  1/2 工具权限差距和 3 个未解决的上线阻塞项，不让兼容门槛通过掩盖真实技术债。
 
 发布到 GitHub 后，可以这样检查 star：
 
