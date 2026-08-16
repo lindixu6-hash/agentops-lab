@@ -2,6 +2,11 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+[![CI](https://github.com/lindixu6-hash/awesome-agentic-engineering/actions/workflows/ci.yml/badge.svg)](https://github.com/lindixu6-hash/awesome-agentic-engineering/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/lindixu6-hash/awesome-agentic-engineering?style=flat-square)](https://github.com/lindixu6-hash/awesome-agentic-engineering/releases/latest)
+[![License](https://img.shields.io/github/license/lindixu6-hash/awesome-agentic-engineering?style=flat-square)](LICENSE)
+[![Use This Template](https://img.shields.io/badge/use_this-template-0969da?style=flat-square)](https://github.com/new?template_name=awesome-agentic-engineering&template_owner=lindixu6-hash)
+
 Production-ready patterns, templates, evals, and failure cases for shipping AI agents that survive real users.
 
 ![Production Agent Scorecard](assets/scorecard.svg)

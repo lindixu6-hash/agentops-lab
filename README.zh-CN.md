@@ -2,6 +2,11 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+[![CI](https://github.com/lindixu6-hash/awesome-agentic-engineering/actions/workflows/ci.yml/badge.svg)](https://github.com/lindixu6-hash/awesome-agentic-engineering/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/lindixu6-hash/awesome-agentic-engineering?style=flat-square)](https://github.com/lindixu6-hash/awesome-agentic-engineering/releases/latest)
+[![License](https://img.shields.io/github/license/lindixu6-hash/awesome-agentic-engineering?style=flat-square)](LICENSE)
+[![使用此模板](https://img.shields.io/badge/使用此仓库-创建模板-0969da?style=flat-square)](https://github.com/new?template_name=awesome-agentic-engineering&template_owner=lindixu6-hash)
+
 一个面向真实业务落地的 AI Agent 工程化手册：模板、评估、架构模式、失败案例和发布清单。
 
 ![Production Agent Scorecard](assets/scorecard.svg)
