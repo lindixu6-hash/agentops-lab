@@ -40,7 +40,29 @@ jobs:
           test "$BLOCKER_COUNT" = "2"
 
       - name: Test published v0 Action
+        id: published-v0
         uses: lindixu6-hash/awesome-agentic-engineering@v0
         with:
           card: examples/support-agent.card.json
           min-score: "0"
+
+      - name: Test published v0 strict blocker gate
+        id: published-v0-strict
+        continue-on-error: true
+        uses: lindixu6-hash/awesome-agentic-engineering@v0
+        with:
+          card: examples/coding-agent.card.json
+          min-score: "15"
+          fail-on-blockers: "true"
+
+      - name: Verify published v0 outputs
+        env:
+          COMPAT_PASSED: ${{ steps.published-v0.outputs.passed }}
+          STRICT_OUTCOME: ${{ steps.published-v0-strict.outcome }}
+          STRICT_PASSED: ${{ steps.published-v0-strict.outputs.passed }}
+          STRICT_BLOCKER_COUNT: ${{ steps.published-v0-strict.outputs.blocker-count }}
+        run: |
+          test "$COMPAT_PASSED" = "true"
+          test "$STRICT_OUTCOME" = "failure"
+          test "$STRICT_PASSED" = "false"
+          test "$STRICT_BLOCKER_COUNT" = "2"
