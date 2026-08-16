@@ -1,5 +1,7 @@
 # Awesome Agentic Engineering
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 Production-ready patterns, templates, evals, and failure cases for shipping AI agents that survive real users.
 
 ![Production Agent Scorecard](assets/scorecard.svg)

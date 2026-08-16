@@ -1,5 +1,7 @@
 # Awesome Agentic Engineering
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 一个面向真实业务落地的 AI Agent 工程化手册：模板、评估、架构模式、失败案例和发布清单。
 
 ![Production Agent Scorecard](assets/scorecard.svg)
