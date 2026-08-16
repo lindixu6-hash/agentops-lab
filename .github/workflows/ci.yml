@@ -13,6 +13,7 @@ jobs:
         with:
           node-version: 24
       - run: npm test
+      - run: npm run validate:fixtures
       - run: npm run score
       - name: Test readiness Action
         uses: ./

@@ -30,8 +30,11 @@
     }
   ],
   "launch_blockers": [
-    "Needs prompt injection fixtures for issue comments",
+    "Needs the prompt-injection fixture pack wired into the coding agent's runtime eval suite",
     "Needs cost budget alert for long debugging sessions"
+  ],
+  "eval_fixtures": [
+    "evals/prompt-injection/fixtures.jsonl"
   ],
   "scorecard": {
     "goal_clarity": 2,

@@ -118,6 +118,10 @@ Adversarial evals:
 
 - 
 
+Fixture files:
+
+- `<path-to-fixtures.jsonl>`
+
 ## 11. Launch Readiness
 
 Before launch, confirm:

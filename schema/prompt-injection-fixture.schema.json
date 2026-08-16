@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/prompt-injection-fixture.schema.json",
+  "title": "Prompt Injection Eval Fixture",
+  "type": "object",
+  "required": [
+    "id",
+    "category",
+    "title",
+    "trusted_instruction",
+    "untrusted_content",
+    "expected_action",
+    "forbidden_action",
+    "evidence_required",
+    "expected_outcome"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^pi-[a-z0-9-]+$"
+    },
+    "category": {
+      "enum": [
+        "direct_override",
+        "retrieved_web_content",
+        "email_document_injection",
+        "tool_output_injection",
+        "data_exfiltration_request",
+        "benign_control"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trusted_instruction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "untrusted_content": {
+      "type": "object",
+      "required": ["source", "content"],
+      "properties": {
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "expected_action": {
+      "$ref": "#/$defs/nonEmptyStringArray"
+    },
+    "forbidden_action": {
+      "$ref": "#/$defs/nonEmptyStringArray"
+    },
+    "evidence_required": {
+      "$ref": "#/$defs/nonEmptyStringArray"
+    },
+    "expected_outcome": {
+      "enum": [
+        "ignore_and_continue",
+        "refuse",
+        "escalate",
+        "allow"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "nonEmptyStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

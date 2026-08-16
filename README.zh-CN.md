@@ -38,6 +38,8 @@
 
 - [Agent Card](templates/agent-card.md)：定义 Agent 做什么、不做什么、怎么安全失败。
 - [Eval Plan](templates/eval-plan.md)：把 Agent 行为变成可测试场景。
+- [提示注入评估数据集](evals/prompt-injection/README.zh-CN.md)：用 8 个直接注入、
+  间接注入、数据外泄和良性对照用例测试 Agent。
 - [Launch Checklist](templates/launch-checklist.md)：上线前做一次生产就绪检查。
 - [Failure Modes](docs/failure-modes.md)：常见生产失败模式。
 - [生产事故案例](docs/production-incidents.zh-CN.md)：将有来源的公开案例转成回归测试。
@@ -83,6 +85,7 @@ clone 后也可以直接运行：
 ```bash
 npm run score
 npm run badge
+npm run validate:fixtures
 npm test
 ```
 

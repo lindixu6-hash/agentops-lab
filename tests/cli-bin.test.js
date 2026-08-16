@@ -12,13 +12,13 @@ const projectRoot = path.resolve(
 );
 const cardPath = path.join(projectRoot, "examples/coding-agent.card.json");
 
-function runThroughSymlink(binName, args = []) {
+function runThroughSymlink(binName, args = [], inputPath = cardPath) {
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), `${binName}-`));
   const linkPath = path.join(tempDir, binName);
 
   try {
     fs.symlinkSync(path.join(projectRoot, "bin", `${binName}.js`), linkPath);
-    return execFileSync(process.execPath, [linkPath, cardPath, ...args], {
+    return execFileSync(process.execPath, [linkPath, inputPath, ...args], {
       encoding: "utf8"
     });
   } finally {
@@ -38,4 +38,15 @@ test("agentic-badge runs when invoked through an npm-style symlink", () => {
 
   assert.match(output, /^https:\/\/img\.shields\.io\/badge\//);
   assert.match(output, /16%2F20%20limited%20beta/);
+});
+
+test("fixture validator runs when invoked through an npm-style symlink", () => {
+  const output = runThroughSymlink(
+    "validate-prompt-injection-fixtures",
+    [],
+    path.join(projectRoot, "evals/prompt-injection/fixtures.jsonl")
+  );
+
+  assert.match(output, /Validated 8 prompt-injection fixture\(s\)/);
+  assert.match(output, /benign_control: 2/);
 });

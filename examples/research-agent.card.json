@@ -37,9 +37,12 @@
     }
   ],
   "launch_blockers": [
-    "Needs adversarial fixtures for prompt injection inside retrieved pages",
+    "Needs the prompt-injection fixture pack wired into the research agent's runtime eval suite",
     "Needs a per-report search and token budget",
     "Needs a citation checker that rejects unsupported claims"
+  ],
+  "eval_fixtures": [
+    "evals/prompt-injection/fixtures.jsonl"
   ],
   "scorecard": {
     "goal_clarity": 2,

@@ -38,6 +38,8 @@ Use these first:
 
 - [Agent Card](templates/agent-card.md): define what the agent does, what it must never do, and how it fails safely.
 - [Eval Plan](templates/eval-plan.md): turn agent behavior into testable scenarios.
+- [Prompt Injection Fixtures](evals/prompt-injection/README.md): run eight direct,
+  indirect, exfiltration, and benign-control cases against your agent.
 - [Launch Checklist](templates/launch-checklist.md): review readiness before showing the agent to real users.
 - [Failure Modes](docs/failure-modes.md): common ways production agents break.
 - [Production Incidents](docs/production-incidents.md): source-linked cases
@@ -84,6 +86,7 @@ You can also use the npm scripts after cloning:
 ```bash
 npm run score
 npm run badge
+npm run validate:fixtures
 npm test
 ```
 
@@ -300,6 +303,10 @@ docs/
   failure-modes.md
   mcp-safety-checklist.md
   star-growth-playbook.md
+evals/
+  prompt-injection/
+    fixtures.jsonl
+    README.md
 examples/
   coding-agent.card.json
   support-agent.card.json
