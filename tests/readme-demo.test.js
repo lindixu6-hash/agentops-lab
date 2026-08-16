@@ -51,3 +51,19 @@ test("both READMEs link to the adopter's strict blocker audit", () => {
     assert.match(content, /3|three/);
   }
 });
+
+test("both READMEs distinguish the project from similarly named resource lists", () => {
+  const english = fs.readFileSync(path.join(projectRoot, "README.md"), "utf8");
+  const chinese = fs.readFileSync(
+    path.join(projectRoot, "README.zh-CN.md"),
+    "utf8"
+  );
+
+  assert.match(
+    english,
+    /^# Awesome Agentic Engineering: Production Readiness Gate/m
+  );
+  assert.match(english, /Not another resource list/);
+  assert.match(chinese, /^# Awesome Agentic Engineering：AI Agent 生产就绪门禁/m);
+  assert.match(chinese, /不是另一份资源清单/);
+});

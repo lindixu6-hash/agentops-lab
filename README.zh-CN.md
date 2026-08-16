@@ -1,4 +1,4 @@
-# Awesome Agentic Engineering
+# Awesome Agentic Engineering：AI Agent 生产就绪门禁
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
@@ -7,7 +7,8 @@
 [![License](https://img.shields.io/github/license/lindixu6-hash/awesome-agentic-engineering?style=flat-square)](LICENSE)
 [![使用此模板](https://img.shields.io/badge/使用此仓库-创建模板-0969da?style=flat-square)](https://github.com/new?template_name=awesome-agentic-engineering&template_owner=lindixu6-hash)
 
-一个面向真实业务落地的 AI Agent 工程化手册：模板、评估、架构模式、失败案例和发布清单。
+这不是另一份资源清单，而是一套可执行的 AI Agent 评分卡与 GitHub Actions
+上线门禁。
 
 [![将 AI Agent 从 0/20 评到生产候选](assets/readiness-scorecard-demo.gif)](https://lindixu6-hash.github.io/awesome-agentic-engineering/)
 

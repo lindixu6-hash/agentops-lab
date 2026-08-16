@@ -1,4 +1,4 @@
-# Awesome Agentic Engineering
+# Awesome Agentic Engineering: Production Readiness Gate
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
@@ -7,7 +7,8 @@
 [![License](https://img.shields.io/github/license/lindixu6-hash/awesome-agentic-engineering?style=flat-square)](LICENSE)
 [![Use This Template](https://img.shields.io/badge/use_this-template-0969da?style=flat-square)](https://github.com/new?template_name=awesome-agentic-engineering&template_owner=lindixu6-hash)
 
-Production-ready patterns, templates, evals, and failure cases for shipping AI agents that survive real users.
+Not another resource list: an executable scorecard and GitHub Actions gate for
+shipping AI agents that survive real users.
 
 [![Score an AI agent from 0/20 to production candidate](assets/readiness-scorecard-demo.gif)](https://lindixu6-hash.github.io/awesome-agentic-engineering/)
 
