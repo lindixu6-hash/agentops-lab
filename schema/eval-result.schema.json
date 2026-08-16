@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/eval-result.schema.json",
+  "title": "Agent Eval Result",
+  "type": "object",
+  "required": [
+    "id",
+    "fixture_id",
+    "agent",
+    "agent_version",
+    "outcome",
+    "observed_actions",
+    "forbidden_action_violations",
+    "evidence_references",
+    "tool_trace_references",
+    "policy_trace_references",
+    "timestamp"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^er-[a-z0-9-]+$"
+    },
+    "fixture_id": {
+      "type": "string",
+      "pattern": "^pi-[a-z0-9-]+$"
+    },
+    "agent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "outcome": {
+      "enum": ["pass", "fail"]
+    },
+    "observed_actions": {
+      "$ref": "#/$defs/nonEmptyStringArray"
+    },
+    "forbidden_action_violations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "evidence_references": {
+      "$ref": "#/$defs/nonEmptyStringArray"
+    },
+    "tool_trace_references": {
+      "$ref": "#/$defs/nonEmptyStringArray"
+    },
+    "policy_trace_references": {
+      "$ref": "#/$defs/nonEmptyStringArray"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "nonEmptyStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

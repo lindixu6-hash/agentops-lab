@@ -15,8 +15,16 @@ const chineseReadme = fs.readFileSync(
   "utf8"
 );
 
-test("roadmap marks shipped versions through v0.6 as completed", () => {
-  for (const version of ["v0.1", "v0.2", "v0.3", "v0.4", "v0.5", "v0.6"]) {
+test("roadmap marks shipped versions through v0.7 as completed", () => {
+  for (const version of [
+    "v0.1",
+    "v0.2",
+    "v0.3",
+    "v0.4",
+    "v0.5",
+    "v0.6",
+    "v0.7"
+  ]) {
     assert.match(roadmap, new RegExp(`### ${version.replace(".", "\\.")}`));
   }
   assert.doesNotMatch(roadmap, /- \[ \]/);
@@ -24,9 +32,18 @@ test("roadmap marks shipped versions through v0.6 as completed", () => {
 
 test("roadmap and bilingual READMEs point to current contribution issues", () => {
   for (const document of [roadmap, readme, chineseReadme]) {
-    assert.match(document, /issues\/11/);
     assert.match(document, /issues\/12/);
   }
+});
+
+test("completed eval result contract is no longer listed as future work", () => {
+  const currentRoadmap = roadmap.split("## Current Priorities")[1] || "";
+  const futureEnglish = readme.split("## Roadmap")[1] || "";
+  const futureChinese = chineseReadme.split("## 后续路线")[1] || "";
+
+  assert.doesNotMatch(currentRoadmap, /issues\/11/);
+  assert.doesNotMatch(futureEnglish, /issues\/11/);
+  assert.doesNotMatch(futureChinese, /issues\/11/);
 });
 
 test("completed product surfaces are not listed as future README work", () => {

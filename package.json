@@ -1,13 +1,14 @@
 {
   "name": "awesome-agentic-engineering",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Production-ready patterns, templates, evals, and scorecards for shipping AI agents.",
   "license": "MIT",
   "type": "module",
   "bin": {
     "agentic-score": "./bin/agentic-score.js",
     "agentic-badge": "./bin/agentic-badge.js",
-    "agentic-validate-fixtures": "./bin/validate-prompt-injection-fixtures.js"
+    "agentic-validate-fixtures": "./bin/validate-prompt-injection-fixtures.js",
+    "agentic-validate-results": "./bin/validate-eval-results.js"
   },
   "files": [
     "assets",
@@ -32,6 +33,7 @@
     "score": "node bin/agentic-score.js examples/coding-agent.card.json",
     "score:operations": "node bin/agentic-score.js examples/operations-agent.card.json",
     "validate:fixtures": "node bin/validate-prompt-injection-fixtures.js evals/prompt-injection/fixtures.jsonl",
+    "validate:results": "node bin/validate-eval-results.js examples/eval-results/pass.json --fixtures evals/prompt-injection/fixtures.jsonl && node bin/validate-eval-results.js examples/eval-results/fail.json --fixtures evals/prompt-injection/fixtures.jsonl",
     "test": "node --test tests/*.test.js"
   },
   "keywords": [

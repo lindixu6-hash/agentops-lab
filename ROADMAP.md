@@ -47,9 +47,15 @@ feature counts.
 - [x] Gemini CLI workspace-trust and allowlist regressions
 - [x] Automated structure and impact-boundary checks
 
+### v0.7: Machine-readable eval results
+
+- [x] Framework-neutral Eval Result JSON Schema
+- [x] Zero-dependency validator for JSON, JSON arrays, and JSONL
+- [x] Fixture-reference, duplicate-ID, and result-consistency checks
+- [x] Inert pass/fail examples and English/Chinese adapter guidance
+
 ## Current Priorities
 
-- [Machine-readable eval result contract and validator](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/11)
 - [Risk-tiered readiness profiles](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/12)
 - Wire the prompt-injection fixtures into real consumer eval runners.
 - Add source-linked incidents only when they introduce a distinct control or

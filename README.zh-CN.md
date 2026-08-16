@@ -40,6 +40,8 @@
 - [Eval Plan](templates/eval-plan.md)：把 Agent 行为变成可测试场景。
 - [提示注入评估数据集](evals/prompt-injection/README.zh-CN.md)：用 8 个直接注入、
   间接注入、数据外泄和良性对照用例测试 Agent。
+- [Eval Result 契约](evals/prompt-injection/results/README.zh-CN.md)：对照已知
+  Fixture 记录实际动作、违规与 Trace 证据。
 - [Launch Checklist](templates/launch-checklist.md)：上线前做一次生产就绪检查。
 - [Failure Modes](docs/failure-modes.md)：常见生产失败模式。
 - [生产事故案例](docs/production-incidents.zh-CN.md)：将有来源的公开案例转成回归测试。
@@ -87,6 +89,7 @@ clone 后也可以直接运行：
 npm run score
 npm run badge
 npm run validate:fixtures
+npm run validate:results
 npm test
 ```
 
@@ -269,7 +272,6 @@ Agent 不断积累过时或错误假设。
 
 ## 后续路线
 
-- [机器可读 Eval Result 契约](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/11)
 - [按风险分级的生产就绪 Profile](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/12)
 - 将 Fixture Pack 接入真实消费者的 Eval Runner。
 - 增加带公开 CI 证据的外部采用项目。

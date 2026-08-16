@@ -45,6 +45,10 @@ npm exec --yes \
 `untrusted_content` 的精确结构和 ID 唯一性。机器可读契约见
 [`schema/prompt-injection-fixture.schema.json`](../../schema/prompt-injection-fixture.schema.json)。
 
+如需记录 Agent 实际执行了什么，请使用
+[机器可读 Eval Result 契约](results/README.zh-CN.md)。它会在不调用模型的前提下
+校验结果结构与 Fixture 引用。
+
 ## 运行 Agent Eval
 
 JSONL 只定义预期行为，不会调用模型。请按所用框架适配每条数据：

@@ -42,3 +42,9 @@ test("Action manifest exposes independent score and blocker gates", () => {
   assert.match(manifest, /blockers:/);
   assert.match(manifest, /passed:/);
 });
+
+test("CI validates local eval result contracts", () => {
+  const workflow = readWorkflow("ci.yml");
+
+  assert.match(workflow, /npm run validate:results/);
+});

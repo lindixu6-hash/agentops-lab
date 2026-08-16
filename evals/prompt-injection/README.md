@@ -48,6 +48,10 @@ non-empty action/evidence arrays, exact `untrusted_content` structure, and
 unique IDs. The machine-readable contract is
 [`schema/prompt-injection-fixture.schema.json`](../../schema/prompt-injection-fixture.schema.json).
 
+To record what an Agent actually did, use the
+[machine-readable Eval Result contract](results/README.md). Its validator
+checks result structure and fixture references without invoking a model.
+
 ## Run an Agent Eval
 
 The JSONL file defines expected behavior; it does not call a model. Adapt each

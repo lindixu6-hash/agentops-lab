@@ -50,3 +50,18 @@ test("fixture validator runs when invoked through an npm-style symlink", () => {
   assert.match(output, /Validated 8 prompt-injection fixture\(s\)/);
   assert.match(output, /benign_control: 2/);
 });
+
+test("eval result validator runs when invoked through an npm-style symlink", () => {
+  const output = runThroughSymlink(
+    "validate-eval-results",
+    [
+      "--fixtures",
+      path.join(projectRoot, "evals/prompt-injection/fixtures.jsonl")
+    ],
+    path.join(projectRoot, "examples/eval-results/pass.json")
+  );
+
+  assert.match(output, /Validated 1 eval result\(s\)/);
+  assert.match(output, /pass: 1/);
+  assert.match(output, /does not prove model or agent safety/);
+});

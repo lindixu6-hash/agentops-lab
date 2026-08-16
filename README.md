@@ -40,6 +40,8 @@ Use these first:
 - [Eval Plan](templates/eval-plan.md): turn agent behavior into testable scenarios.
 - [Prompt Injection Fixtures](evals/prompt-injection/README.md): run eight direct,
   indirect, exfiltration, and benign-control cases against your agent.
+- [Eval Result Contract](evals/prompt-injection/results/README.md): record
+  observed actions, violations, and trace evidence against known fixtures.
 - [Launch Checklist](templates/launch-checklist.md): review readiness before showing the agent to real users.
 - [Failure Modes](docs/failure-modes.md): common ways production agents break.
 - [Production Incidents](docs/production-incidents.md): source-linked cases
@@ -88,6 +90,7 @@ You can also use the npm scripts after cloning:
 npm run score
 npm run badge
 npm run validate:fixtures
+npm run validate:results
 npm test
 ```
 
@@ -342,7 +345,6 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting.
 
 ## Roadmap
 
-- [Machine-readable eval result contract](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/11)
 - [Risk-tiered readiness profiles](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/12)
 - Wire fixture packs into real consumer eval runners.
 - Add external adopters with public CI evidence.

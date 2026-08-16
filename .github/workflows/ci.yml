@@ -14,6 +14,7 @@ jobs:
           node-version: 24
       - run: npm test
       - run: npm run validate:fixtures
+      - run: npm run validate:results
       - name: Test published v0 fixture validator
         run: |
           npm exec --yes \
