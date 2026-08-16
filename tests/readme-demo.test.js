@@ -39,3 +39,15 @@ test("README demo is a compact 900px product recording", () => {
   assert.equal(demo.readUInt16LE(8), 795);
   assert.ok(demo.length < 1024 * 1024, "demo GIF must stay below 1 MiB");
 });
+
+test("both READMEs link to the adopter's strict blocker audit", () => {
+  const auditUrl =
+    "https://github.com/lindixu6-hash/ai-content-workflow-skills/actions/runs/31970162918";
+
+  for (const readme of ["README.md", "README.zh-CN.md"]) {
+    const content = fs.readFileSync(path.join(projectRoot, readme), "utf8");
+
+    assert.ok(content.includes(auditUrl));
+    assert.match(content, /3|three/);
+  }
+});

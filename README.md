@@ -118,7 +118,10 @@ blocker gate separately.
 
 - [Content OS Pipeline](https://github.com/lindixu6-hash/ai-content-workflow-skills)
   gates its human-in-the-loop content agent at 10/20 and currently scores
-  12/20 (`prototype`).
+  12/20 (`prototype`). Its
+  [main workflow](https://github.com/lindixu6-hash/ai-content-workflow-skills/actions/runs/31970162918)
+  also runs the strict blocker audit and exposes three unresolved launch
+  blockers without hiding them behind the passing score.
 
 After publishing on GitHub, check repository stars:
 
