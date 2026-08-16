@@ -277,6 +277,12 @@ See [ROADMAP.md](ROADMAP.md).
 
 Repository setup notes live in [PUBLICATION.md](PUBLICATION.md).
 
+If GitHub CLI is authenticated, publish with:
+
+```bash
+scripts/publish-github.sh
+```
+
 ## License
 
 MIT.

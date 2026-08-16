@@ -68,3 +68,17 @@ Default monitoring target:
 ```text
 1,000 stars
 ```
+
+## Publish Command
+
+After GitHub CLI authentication is working:
+
+```bash
+scripts/publish-github.sh
+```
+
+Or choose a different repository name:
+
+```bash
+scripts/publish-github.sh my-repo-name
+```
