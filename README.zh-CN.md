@@ -208,6 +208,10 @@ Agent 不断积累过时或错误假设。
 
 详见 [ROADMAP.md](ROADMAP.md)。
 
+## 发布
+
+GitHub 仓库发布设置见 [PUBLICATION.md](PUBLICATION.md)。
+
 ## 贡献
 
 欢迎提交：

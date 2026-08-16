@@ -273,6 +273,10 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting.
 
 See [ROADMAP.md](ROADMAP.md).
 
+## Publication
+
+Repository setup notes live in [PUBLICATION.md](PUBLICATION.md).
+
 ## License
 
 MIT.
