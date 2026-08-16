@@ -30,7 +30,7 @@ export function readInputs(env = process.env) {
   }
 
   return {
-    card: inputValue(env, "card", "examples/coding-agent.card.json"),
+    card: inputValue(env, "card", "agent-card.json"),
     minScore,
     failBelow: parseBoolean(
       inputValue(env, "fail-below", "true"),

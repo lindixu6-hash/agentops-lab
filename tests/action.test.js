@@ -27,6 +27,14 @@ test("readInputs parses GitHub Action inputs", () => {
   assert.equal(inputs.failBelow, false);
 });
 
+test("readInputs defaults to a consumer-owned Agent Card", () => {
+  const inputs = readInputs({});
+
+  assert.equal(inputs.card, "agent-card.json");
+  assert.equal(inputs.minScore, 15);
+  assert.equal(inputs.failBelow, true);
+});
+
 test("parseBoolean rejects ambiguous input", () => {
   assert.equal(parseBoolean("yes", "flag"), true);
   assert.equal(parseBoolean("off", "flag"), false);

@@ -10,7 +10,7 @@ inputs:
   card:
     description: Path to an Agent Card JSON file.
     required: false
-    default: examples/coding-agent.card.json
+    default: agent-card.json
   min-score:
     description: Minimum accepted score from 0 to 20.
     required: false
