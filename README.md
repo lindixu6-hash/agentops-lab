@@ -42,6 +42,9 @@ Use these first:
   indirect, exfiltration, and benign-control cases against your agent.
 - [Eval Result Contract](evals/prompt-injection/results/README.md): record
   observed actions, violations, and trace evidence against known fixtures.
+- [Executable Reference Adapter](adapters/reference-runtime/README.md): run all
+  eight fixtures through separated trusted/untrusted channels and retain
+  generated results, assertions, and traces.
 - [Risk-Tiered Profiles](profiles/README.md): apply different total, per-area,
   tool-effect, approval, and blocker gates to read-only, draft-only, and
   state-changing Agents.
@@ -95,6 +98,7 @@ npm run score
 npm run badge
 npm run validate:fixtures
 npm run validate:results
+npm run eval:reference
 npm test
 ```
 
@@ -364,7 +368,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting.
 
 ## Roadmap
 
-- Wire fixture packs into real consumer eval runners.
+- Adapt fixture execution to an external open-source Agent runtime.
 - Add external adopters with public CI evidence.
 
 See the evidence-based [ROADMAP.md](ROADMAP.md) for shipped versions and current

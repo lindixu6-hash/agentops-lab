@@ -42,6 +42,8 @@
   间接注入、数据外泄和良性对照用例测试 Agent。
 - [Eval Result 契约](evals/prompt-injection/results/README.zh-CN.md)：对照已知
   Fixture 记录实际动作、违规与 Trace 证据。
+- [可执行参考适配器](adapters/reference-runtime/README.zh-CN.md)：通过分离的可信/
+  不可信通道运行全部 8 条 Fixture，并保留生成的结果、断言与 Trace。
 - [风险分级 Profile](profiles/README.zh-CN.md)：针对只读、仅草稿与状态变更
   Agent 使用不同的总分、分项、工具影响、审批和阻塞项门禁。
 - [Launch Checklist](templates/launch-checklist.md)：上线前做一次生产就绪检查。
@@ -93,6 +95,7 @@ npm run score
 npm run badge
 npm run validate:fixtures
 npm run validate:results
+npm run eval:reference
 npm test
 ```
 
@@ -289,7 +292,7 @@ Agent 不断积累过时或错误假设。
 
 ## 后续路线
 
-- 将 Fixture Pack 接入真实消费者的 Eval Runner。
+- 将 Fixture 执行适配到外部开源 Agent Runtime。
 - 增加带公开 CI 证据的外部采用项目。
 
 已交付版本与当前优先级见证据驱动的 [ROADMAP.md](ROADMAP.md)。

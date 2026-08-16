@@ -15,6 +15,21 @@ jobs:
       - run: npm test
       - run: npm run validate:fixtures
       - run: npm run validate:results
+      - name: Run deterministic reference Agent eval
+        env:
+          SOURCE_DATE_EPOCH: "1786924800"
+        run: npm run eval:reference
+      - name: Validate generated eval results with published v0
+        run: |
+          npm exec --yes \
+            --package=github:lindixu6-hash/awesome-agentic-engineering#v0 \
+            -- agentic-validate-results artifacts/reference-eval/results.jsonl \
+            --fixtures evals/prompt-injection/fixtures.jsonl
+      - name: Upload reference eval evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: reference-eval-evidence
+          path: artifacts/reference-eval
       - name: Test published v0 fixture validator
         run: |
           npm exec --yes \

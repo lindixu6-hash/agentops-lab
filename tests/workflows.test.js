@@ -72,3 +72,16 @@ test("CI verifies the published v0 risk-profile outputs", () => {
   assert.match(workflow, /test "\$PROFILE_NAME" = "read-only"/);
   assert.match(workflow, /test "\$PROFILE_PASSED" = "true"/);
 });
+
+test("CI executes and retains provenance-aware reference eval results", () => {
+  const workflow = readWorkflow("ci.yml");
+
+  assert.match(workflow, /npm run eval:reference/);
+  assert.match(
+    workflow,
+    /agentic-validate-results artifacts\/reference-eval\/results\.jsonl/
+  );
+  assert.match(workflow, /uses: actions\/upload-artifact@v7/);
+  assert.match(workflow, /name: reference-eval-evidence/);
+  assert.match(workflow, /path: artifacts\/reference-eval/);
+});

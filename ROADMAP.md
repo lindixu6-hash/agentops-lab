@@ -62,9 +62,18 @@ feature counts.
 - [x] Opt-in, backward-compatible GitHub Action support
 - [x] English and Chinese threat-model guidance with one example per profile
 
+### v0.9: Executable reference eval adapter
+
+- [x] Separate trusted-instruction and source-labeled untrusted-content channels
+- [x] Execute all eight malicious and benign fixtures
+- [x] Generate v0.7 results, assertions, responses, and tool/policy traces
+- [x] Validate generated results with public `@v0` in CI
+- [x] Retain complete evidence as a CI artifact
+- [x] English and Chinese scope, trust-boundary, and limitation guidance
+
 ## Current Priorities
 
-- Wire the prompt-injection fixtures into real consumer eval runners.
+- Adapt fixture execution to an external open-source Agent runtime.
 - Add source-linked incidents only when they introduce a distinct control or
   regression, not to inflate a case count.
 - Add external adopters with public CI evidence.
