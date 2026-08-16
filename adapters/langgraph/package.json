@@ -1,0 +1,14 @@
+{
+  "name": "awesome-agentic-engineering-langgraph-adapter",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "LangGraph.js adapter for the prompt-injection fixture and Eval Result contracts.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@langchain/langgraph": "1.4.10"
+  }
+}

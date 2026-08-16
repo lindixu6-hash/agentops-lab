@@ -71,9 +71,19 @@ feature counts.
 - [x] Retain complete evidence as a CI artifact
 - [x] English and Chinese scope, trust-boundary, and limitation guidance
 
+### v0.10: LangGraph.js runtime adapter
+
+- [x] Pin LangGraph.js in an isolated, reproducible subpackage
+- [x] Execute all fixtures through a real two-node `StateGraph`
+- [x] Preserve trusted and untrusted values as separate graph-state fields
+- [x] Emit node-linked results, assertions, and tool/policy traces
+- [x] Validate results with public `@v0` and retain a dedicated CI artifact
+- [x] Keep root CLIs zero-dependency and document limits in English and Chinese
+
 ## Current Priorities
 
-- Adapt fixture execution to an external open-source Agent runtime.
+- Add another external runtime or accept a community adapter with public CI
+  evidence.
 - Add source-linked incidents only when they introduce a distinct control or
   regression, not to inflate a case count.
 - Add external adopters with public CI evidence.

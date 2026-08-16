@@ -45,6 +45,9 @@ Use these first:
 - [Executable Reference Adapter](adapters/reference-runtime/README.md): run all
   eight fixtures through separated trusted/untrusted channels and retain
   generated results, assertions, and traces.
+- [LangGraph.js Adapter](adapters/langgraph/README.md): execute the same
+  contract through a pinned external `StateGraph` runtime with node-linked
+  evidence.
 - [Risk-Tiered Profiles](profiles/README.md): apply different total, per-area,
   tool-effect, approval, and blocker gates to read-only, draft-only, and
   state-changing Agents.
@@ -99,6 +102,8 @@ npm run badge
 npm run validate:fixtures
 npm run validate:results
 npm run eval:reference
+npm run install:langgraph
+npm run eval:langgraph
 npm test
 ```
 
@@ -368,7 +373,8 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting.
 
 ## Roadmap
 
-- Adapt fixture execution to an external open-source Agent runtime.
+- Add another external runtime or accept a community adapter with public CI
+  evidence.
 - Add external adopters with public CI evidence.
 
 See the evidence-based [ROADMAP.md](ROADMAP.md) for shipped versions and current

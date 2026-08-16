@@ -85,3 +85,16 @@ test("CI executes and retains provenance-aware reference eval results", () => {
   assert.match(workflow, /name: reference-eval-evidence/);
   assert.match(workflow, /path: artifacts\/reference-eval/);
 });
+
+test("CI installs LangGraph and retains external-runtime eval evidence", () => {
+  const workflow = readWorkflow("ci.yml");
+
+  assert.match(workflow, /npm run install:langgraph/);
+  assert.match(workflow, /npm run eval:langgraph/);
+  assert.match(
+    workflow,
+    /agentic-validate-results artifacts\/langgraph-eval\/results\.jsonl/
+  );
+  assert.match(workflow, /name: langgraph-eval-evidence/);
+  assert.match(workflow, /path: artifacts\/langgraph-eval/);
+});
