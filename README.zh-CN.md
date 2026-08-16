@@ -85,7 +85,7 @@ node bin/agentic-badge.js examples/coding-agent.card.json
 在 CI 中把仓库作为上线门禁：
 
 ```yaml
-- uses: lindixu6-hash/awesome-agentic-engineering@v0.2.1
+- uses: lindixu6-hash/awesome-agentic-engineering@v0
   with:
     card: agent-card.json
     min-score: "15"
@@ -93,6 +93,11 @@ node bin/agentic-badge.js examples/coding-agent.card.json
 ```
 
 Action 会输出 `score`、`rating`、`badge`，并在工作流摘要中生成十项评分表。
+
+## 已采用
+
+- [Content OS Pipeline](https://github.com/lindixu6-hash/ai-content-workflow-skills)
+  使用10/20作为人机协作内容Agent的CI门槛，当前真实得分为12/20（`prototype`）。
 
 发布到 GitHub 后，可以这样检查 star：
 

@@ -86,7 +86,7 @@ node bin/agentic-badge.js examples/coding-agent.card.json
 Use the repository as a CI release gate:
 
 ```yaml
-- uses: lindixu6-hash/awesome-agentic-engineering@v0.2.1
+- uses: lindixu6-hash/awesome-agentic-engineering@v0
   with:
     card: agent-card.json
     min-score: "15"
@@ -95,6 +95,12 @@ Use the repository as a CI release gate:
 
 The Action writes `score`, `rating`, and `badge` outputs and adds a ten-area
 table to the workflow summary.
+
+## Used By
+
+- [Content OS Pipeline](https://github.com/lindixu6-hash/ai-content-workflow-skills)
+  gates its human-in-the-loop content agent at 10/20 and currently scores
+  12/20 (`prototype`).
 
 After publishing on GitHub, check repository stars:
 
