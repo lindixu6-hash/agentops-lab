@@ -342,12 +342,13 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting.
 
 ## Roadmap
 
-- Add 20 real-world agent failure cases
-- Add examples for research and ops agents
-- Add production-readiness badges
-- Add a web scorecard playground
+- [Machine-readable eval result contract](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/11)
+- [Risk-tiered readiness profiles](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/12)
+- Wire fixture packs into real consumer eval runners.
+- Add external adopters with public CI evidence.
 
-See [ROADMAP.md](ROADMAP.md).
+See the evidence-based [ROADMAP.md](ROADMAP.md) for shipped versions and current
+priorities.
 
 ## Publication
 

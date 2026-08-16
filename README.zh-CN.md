@@ -269,12 +269,12 @@ Agent 不断积累过时或错误假设。
 
 ## 后续路线
 
-- 增加 20 个真实 Agent 失败案例
-- 增加 research、ops Agent 示例
-- 增加生产就绪 badge
-- 增加网页评分器
+- [机器可读 Eval Result 契约](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/11)
+- [按风险分级的生产就绪 Profile](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/12)
+- 将 Fixture Pack 接入真实消费者的 Eval Runner。
+- 增加带公开 CI 证据的外部采用项目。
 
-详见 [ROADMAP.md](ROADMAP.md)。
+已交付版本与当前优先级见证据驱动的 [ROADMAP.md](ROADMAP.md)。
 
 ## 发布
 
