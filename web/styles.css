@@ -363,6 +363,10 @@ h1 {
     display: none;
   }
 
+  .topbar-actions > a:nth-of-type(3) {
+    display: none;
+  }
+
   .score-row {
     grid-template-columns: 1fr;
     gap: 10px;

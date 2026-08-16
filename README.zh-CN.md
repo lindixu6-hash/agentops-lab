@@ -45,7 +45,8 @@
 - [可执行参考适配器](adapters/reference-runtime/README.zh-CN.md)：通过分离的可信/
   不可信通道运行全部 8 条 Fixture，并保留生成的结果、断言与 Trace。
 - [LangGraph.js 适配器](adapters/langgraph/README.zh-CN.md)：通过锁定的外部
-  `StateGraph` Runtime 执行同一契约，并保留节点级证据。
+  `StateGraph` Runtime 执行同一契约，并保留节点级证据。也可以直接阅读
+  [在线 LangGraph 提示注入 Eval 指南](https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/langgraph-eval/)。
 - [风险分级 Profile](profiles/README.zh-CN.md)：针对只读、仅草稿与状态变更
   Agent 使用不同的总分、分项、工具影响、审批和阻塞项门禁。
 - [Launch Checklist](templates/launch-checklist.md)：上线前做一次生产就绪检查。

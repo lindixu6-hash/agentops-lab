@@ -47,7 +47,8 @@ Use these first:
   generated results, assertions, and traces.
 - [LangGraph.js Adapter](adapters/langgraph/README.md): execute the same
   contract through a pinned external `StateGraph` runtime with node-linked
-  evidence.
+  evidence. Read the
+  [live LangGraph prompt-injection eval guide](https://lindixu6-hash.github.io/awesome-agentic-engineering/langgraph-eval/).
 - [Risk-Tiered Profiles](profiles/README.md): apply different total, per-area,
   tool-effect, approval, and blocker gates to read-only, draft-only, and
   state-changing Agents.
