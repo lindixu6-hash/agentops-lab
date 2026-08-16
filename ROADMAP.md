@@ -11,7 +11,8 @@
 
 ## v0.2
 
-- 20 real-world failure cases
+- 5 source-linked production incident case studies
+- 15 additional real-world failure cases
 - MCP server safety review checklist
 - More agent examples: research, support, ops, coding
 - [x] Scorecard badge generator

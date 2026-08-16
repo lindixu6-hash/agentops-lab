@@ -34,6 +34,8 @@ Use these first:
 - [Eval Plan](templates/eval-plan.md): turn agent behavior into testable scenarios.
 - [Launch Checklist](templates/launch-checklist.md): review readiness before showing the agent to real users.
 - [Failure Modes](docs/failure-modes.md): common ways production agents break.
+- [Production Incidents](docs/production-incidents.md): source-linked cases
+  converted into regression tests.
 - [MCP Safety Checklist](docs/mcp-safety-checklist.md): review tool servers before giving agents access.
 - [Star Growth Playbook](docs/star-growth-playbook.md): ethical launch and maintenance loop.
 

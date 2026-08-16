@@ -1,5 +1,8 @@
 # AI Agent Failure Modes
 
+For public, source-linked examples and regression tests, see
+[Production Incidents and Regression Tests](production-incidents.md).
+
 Use these as starter cases for evals, incident reviews, and launch checklists.
 
 ## 1. Silent Failure
