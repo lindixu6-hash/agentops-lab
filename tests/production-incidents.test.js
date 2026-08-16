@@ -9,6 +9,10 @@ const document = fs.readFileSync(
   path.join(testDir, "../docs/production-incidents.md"),
   "utf8"
 );
+const chineseDocument = fs.readFileSync(
+  path.join(testDir, "../docs/production-incidents.zh-CN.md"),
+  "utf8"
+);
 
 test("incident library contains five source-linked cases", () => {
   const cases = document.match(/^## \d+\. /gm) || [];
@@ -35,4 +39,21 @@ test("every incident provides regression tests", () => {
     assert.match(section, /When:/);
     assert.match(section, /Then:/);
   }
+});
+
+test("Chinese incident library mirrors five cases and status boundaries", () => {
+  const cases = chineseDocument.match(/^## \d+\. /gm) || [];
+  const sourceSections = chineseDocument.match(/^### 来源$/gm) || [];
+
+  assert.equal(cases.length, 5);
+  assert.equal(sourceSections.length, 5);
+  assert.match(chineseDocument, /已确认事故/);
+  assert.match(chineseDocument, /没有完成 1 美元交易/);
+  assert.match(chineseDocument, /没有公开的在野利用证据/);
+  assert.match(chineseDocument, /研究 PoC/);
+});
+
+test("English and Chinese incident libraries link to each other", () => {
+  assert.match(document, /production-incidents\.zh-CN\.md/);
+  assert.match(chineseDocument, /production-incidents\.md/);
 });

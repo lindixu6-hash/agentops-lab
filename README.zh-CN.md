@@ -34,7 +34,7 @@
 - [Eval Plan](templates/eval-plan.md)：把 Agent 行为变成可测试场景。
 - [Launch Checklist](templates/launch-checklist.md)：上线前做一次生产就绪检查。
 - [Failure Modes](docs/failure-modes.md)：常见生产失败模式。
-- [生产事故案例](docs/production-incidents.md)：将有来源的公开案例转成回归测试。
+- [生产事故案例](docs/production-incidents.zh-CN.md)：将有来源的公开案例转成回归测试。
 - [MCP Safety Checklist](docs/mcp-safety-checklist.md)：给 Agent 接入工具服务器前的安全检查。
 - [Star Growth Playbook](docs/star-growth-playbook.md)：长期真实增长打法。
 
