@@ -1,0 +1,37 @@
+{
+  "name": "Starter Agent",
+  "version": "0.1",
+  "owner": "TODO: team or maintainer",
+  "users": [
+    "TODO: intended user"
+  ],
+  "workflow": "TODO: define one bounded workflow, its input, output, and success condition",
+  "risk_profile": "state-changing",
+  "non_goals": [
+    "TODO: name at least one action this agent must never take"
+  ],
+  "tools": [
+    {
+      "name": "replace_with_state_changing_tool",
+      "purpose": "TODO: describe the external state change and rollback path",
+      "access": "write",
+      "effect": "external_state",
+      "approval_required": true
+    }
+  ],
+  "launch_blockers": [
+    "Starter card: replace every TODO and attach repeatable evidence before release"
+  ],
+  "scorecard": {
+    "goal_clarity": 0,
+    "tool_permissions": 0,
+    "memory": 0,
+    "evals": 0,
+    "failure_handling": 0,
+    "security": 0,
+    "observability": 0,
+    "cost_control": 0,
+    "human_review": 0,
+    "documentation": 0
+  }
+}

@@ -1,0 +1,26 @@
+name: Agent Production Readiness
+
+on:
+  push:
+    paths:
+      - "agent-card.json"
+      - ".github/workflows/agent-readiness.yml"
+  pull_request:
+    paths:
+      - "agent-card.json"
+      - ".github/workflows/agent-readiness.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: lindixu6-hash/awesome-agentic-engineering@v0
+        with:
+          card: agent-card.json
+          profile: "read-only"
+          fail-on-blockers: "true"

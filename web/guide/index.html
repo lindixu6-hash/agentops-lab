@@ -290,6 +290,49 @@
             </p>
           </section>
 
+          <section id="starter-files">
+            <h2>Download a fail-closed starter</h2>
+            <p>
+              No Node.js or npm is required. Choose the smallest risk profile
+              that matches the Agent, then save the JSON as
+              <code>agent-card.json</code> and the YAML as
+              <code>.github/workflows/agent-readiness.yml</code>.
+            </p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Profile</th>
+                    <th>Agent Card</th>
+                    <th>Workflow</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Read-only</td>
+                    <td><a href="../starters/read-only/agent-card.json" download>Download JSON</a></td>
+                    <td><a href="../starters/read-only/agent-readiness.yml" download>Download YAML</a></td>
+                  </tr>
+                  <tr>
+                    <td>Draft-only</td>
+                    <td><a href="../starters/draft-only/agent-card.json" download>Download JSON</a></td>
+                    <td><a href="../starters/draft-only/agent-readiness.yml" download>Download YAML</a></td>
+                  </tr>
+                  <tr>
+                    <td>State-changing</td>
+                    <td><a href="../starters/state-changing/agent-card.json" download>Download JSON</a></td>
+                    <td><a href="../starters/state-changing/agent-readiness.yml" download>Download YAML</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              Every starter begins at 0/20 with one explicit launch blocker.
+              CI checks that these downloads remain byte-equivalent to
+              <code>agentic-init</code> output.
+            </p>
+          </section>
+
           <section id="ci-gate">
             <h2>Turn the review into a CI gate</h2>
             <p>
@@ -378,6 +421,7 @@
           <a href="#ten-gates">The 10 gates</a>
           <a href="#evidence">Required evidence</a>
           <a href="#score">Score interpretation</a>
+          <a href="#starter-files">Starter downloads</a>
           <a href="#ci-gate">CI release gate</a>
           <a href="#incident-regressions">Incident regressions</a>
           <a href="#release-review">Release review</a>

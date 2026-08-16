@@ -81,8 +81,12 @@ npm exec --yes \
 
 The first run intentionally fails at `0/20` with one launch blocker. Replace
 the TODOs, attach evidence, and set honest scores before removing it. Existing
-files are never overwritten unless `--force` is explicit. See the
-[five-minute quickstart](docs/quickstart.md).
+files are never overwritten unless `--force` is explicit. Without Node.js,
+download the fail-closed
+[draft-only Agent Card](https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/draft-only/agent-card.json)
+and
+[workflow](https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/draft-only/agent-readiness.yml).
+See the [five-minute quickstart](docs/quickstart.md) for all three profiles.
 
 ## Quick Score
 

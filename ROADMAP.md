@@ -89,6 +89,14 @@ feature counts.
 - [x] Atomic overwrite protection with explicit `--force`
 - [x] English and Chinese five-minute quickstarts
 
+### v0.12: No-install Starter downloads
+
+- [x] Downloadable Agent Card and GitHub Actions workflow for every risk profile
+- [x] Byte-equivalence checks against `agentic-init` output
+- [x] GitHub Pages hosting with direct JSON and YAML downloads
+- [x] English and Chinese README, Quickstart, and web-guide entry points
+- [x] LLM-readable Starter links and npm package inclusion
+
 ## Current Priorities
 
 - [Add a second external runtime adapter with public CI evidence](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/14).

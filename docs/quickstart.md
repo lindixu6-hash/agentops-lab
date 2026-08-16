@@ -20,6 +20,18 @@ agent-card.json
 .github/workflows/agent-readiness.yml
 ```
 
+No Node.js or npm? Download the two generated files for your profile:
+
+| Profile | Agent Card | Workflow |
+| --- | --- | --- |
+| `read-only` | [Download JSON](https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/read-only/agent-card.json) | [Download YAML](https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/read-only/agent-readiness.yml) |
+| `draft-only` | [Download JSON](https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/draft-only/agent-card.json) | [Download YAML](https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/draft-only/agent-readiness.yml) |
+| `state-changing` | [Download JSON](https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/state-changing/agent-card.json) | [Download YAML](https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/state-changing/agent-readiness.yml) |
+
+Save the selected JSON as `agent-card.json` and the YAML as
+`.github/workflows/agent-readiness.yml`. These downloads are generated from the
+same initializer contract and checked for byte equality in CI.
+
 Choose one profile:
 
 | Profile | Use when |

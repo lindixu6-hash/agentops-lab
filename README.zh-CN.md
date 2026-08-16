@@ -77,7 +77,11 @@ npm exec --yes \
 
 第一次运行会刻意以 `0/20` 和一个上线 blocker 失败。替换所有 TODO、关联证据并
 如实评分后，才能删除 blocker。除非显式传入 `--force`，命令不会覆盖已有文件。
-完整流程见[五分钟 Quickstart](docs/quickstart.zh-CN.md)。
+没有 Node.js 时，可以直接下载 fail-closed 的
+[draft-only Agent Card](https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/draft-only/agent-card.json)
+和
+[工作流](https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/draft-only/agent-readiness.yml)。
+三个 Profile 的完整流程见[中文五分钟 Quickstart](docs/quickstart.zh-CN.md)。
 
 ## 快速评分
 

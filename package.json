@@ -1,6 +1,6 @@
 {
   "name": "awesome-agentic-engineering",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "description": "Production-ready patterns, templates, evals, and scorecards for shipping AI agents.",
   "license": "MIT",
   "type": "module",
@@ -30,6 +30,7 @@
     "schema",
     "scripts",
     "social",
+    "starters",
     "templates",
     "README.md",
     "README.zh-CN.md"

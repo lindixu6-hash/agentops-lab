@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "web/**"
+      - "starters/**"
       - "assets/scorecard.svg"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
@@ -32,6 +33,7 @@ jobs:
         run: |
           mkdir -p _site/assets
           cp -R web/. _site/
+          cp -R starters _site/starters
           cp assets/scorecard.svg assets/social-preview.png _site/assets/
 
       - uses: actions/configure-pages@v6

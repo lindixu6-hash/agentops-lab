@@ -103,6 +103,35 @@ test("generated workflow pins public v0 and fails on blockers", () => {
   }
 });
 
+test("downloadable starters are byte-equivalent to initializer output", () => {
+  for (const profile of PROFILES) {
+    const directory = path.join(projectRoot, "starters", profile);
+    const card = fs.readFileSync(
+      path.join(directory, "agent-card.json"),
+      "utf8"
+    );
+    const workflow = fs.readFileSync(
+      path.join(directory, "agent-readiness.yml"),
+      "utf8"
+    );
+
+    assert.equal(
+      card,
+      `${JSON.stringify(
+        starterCard({ profile, name: "Starter Agent" }),
+        null,
+        2
+      )}\n`
+    );
+    assert.equal(workflow, starterWorkflow({ profile }));
+
+    const parsed = JSON.parse(card);
+    assert.equal(scoreCard(parsed).total, 0);
+    assert.equal(parsed.launch_blockers.length, 1);
+    assert.match(workflow, /fail-on-blockers: "true"/);
+  }
+});
+
 test("initializer writes both files and refuses partial overwrite", () => {
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), "agentic-init-"));
   try {
@@ -150,6 +179,7 @@ test("package and bilingual quickstarts expose the initializer contract", () => 
   );
 
   assert.equal(packageJson.bin["agentic-init"], "./bin/agentic-init.js");
+  assert.ok(packageJson.files.includes("starters"));
   assert.match(english, /quickstart\.zh-CN\.md/);
   assert.match(chinese, /\[English\]\(quickstart\.md\)/);
   assert.match(english, /first CI run should report/i);
@@ -159,6 +189,14 @@ test("package and bilingual quickstarts expose the initializer contract", () => 
   for (const profile of PROFILES) {
     assert.match(english, new RegExp(`\\\`${profile}\\\``));
     assert.match(chinese, new RegExp(`\\\`${profile}\\\``));
+    assert.match(
+      english,
+      new RegExp(`starters/${profile}/agent-card\\.json`)
+    );
+    assert.match(
+      chinese,
+      new RegExp(`starters/${profile}/agent-readiness\\.yml`)
+    );
   }
 });
 

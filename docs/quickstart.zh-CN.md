@@ -19,6 +19,18 @@ agent-card.json
 .github/workflows/agent-readiness.yml
 ```
 
+没有 Node.js 或 npm，也可以直接下载对应 Profile 的两个文件：
+
+| Profile | Agent Card | 工作流 |
+| --- | --- | --- |
+| `read-only` | [下载 JSON](https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/read-only/agent-card.json) | [下载 YAML](https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/read-only/agent-readiness.yml) |
+| `draft-only` | [下载 JSON](https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/draft-only/agent-card.json) | [下载 YAML](https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/draft-only/agent-readiness.yml) |
+| `state-changing` | [下载 JSON](https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/state-changing/agent-card.json) | [下载 YAML](https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/state-changing/agent-readiness.yml) |
+
+将所选 JSON 保存为 `agent-card.json`，将 YAML 保存为
+`.github/workflows/agent-readiness.yml`。这些下载文件与初始化器使用同一契约，
+CI 会逐字节检查二者一致。
+
 选择一个风险 Profile：
 
 | Profile | 适用情况 |

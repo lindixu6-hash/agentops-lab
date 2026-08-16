@@ -276,6 +276,47 @@
             </p>
           </section>
 
+          <section id="starter-files">
+            <h2>下载 fail-closed Starter</h2>
+            <p>
+              不需要 Node.js 或 npm。选择与 Agent 风险相符的最小 Profile，
+              将 JSON 保存为 <code>agent-card.json</code>，将 YAML 保存为
+              <code>.github/workflows/agent-readiness.yml</code>。
+            </p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Profile</th>
+                    <th>Agent Card</th>
+                    <th>工作流</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>只读</td>
+                    <td><a href="../../starters/read-only/agent-card.json" download>下载 JSON</a></td>
+                    <td><a href="../../starters/read-only/agent-readiness.yml" download>下载 YAML</a></td>
+                  </tr>
+                  <tr>
+                    <td>仅草稿</td>
+                    <td><a href="../../starters/draft-only/agent-card.json" download>下载 JSON</a></td>
+                    <td><a href="../../starters/draft-only/agent-readiness.yml" download>下载 YAML</a></td>
+                  </tr>
+                  <tr>
+                    <td>状态变更</td>
+                    <td><a href="../../starters/state-changing/agent-card.json" download>下载 JSON</a></td>
+                    <td><a href="../../starters/state-changing/agent-readiness.yml" download>下载 YAML</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              每套 Starter 都从 0/20 和一个显式上线 blocker 开始。CI 会检查
+              这些下载文件与 <code>agentic-init</code> 输出逐字节一致。
+            </p>
+          </section>
+
           <section id="ci-gate">
             <h2>把评审变成 CI 门禁</h2>
             <p>
@@ -350,6 +391,7 @@
           <a href="#ten-gates">10 项门槛</a>
           <a href="#evidence">证据要求</a>
           <a href="#score">评分解释</a>
+          <a href="#starter-files">Starter 下载</a>
           <a href="#ci-gate">CI 发布门禁</a>
           <a href="#incident-regressions">事故回归</a>
           <a href="#release-review">上线评审</a>

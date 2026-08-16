@@ -17,6 +17,18 @@ Canonical repository: https://github.com/lindixu6-hash/awesome-agentic-engineeri
 - English README: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/README.md
 - 中文 README: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/README.zh-CN.md
 
+## Downloadable Fail-Closed Starters
+
+Each Agent Card starts at 0/20 with one launch blocker. Each workflow enables
+strict blocker failure. CI checks byte equality with agentic-init output.
+
+- Read-only Agent Card: https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/read-only/agent-card.json
+- Read-only workflow: https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/read-only/agent-readiness.yml
+- Draft-only Agent Card: https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/draft-only/agent-card.json
+- Draft-only workflow: https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/draft-only/agent-readiness.yml
+- State-changing Agent Card: https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/state-changing/agent-card.json
+- State-changing workflow: https://lindixu6-hash.github.io/awesome-agentic-engineering/starters/state-changing/agent-readiness.yml
+
 ## Machine-Readable Contracts
 
 - Agent Card JSON Schema: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/schema/agent-card.schema.json

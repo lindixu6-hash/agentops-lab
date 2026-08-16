@@ -113,6 +113,8 @@ test("Pages build copies the complete web tree", () => {
   const workflow = read(".github/workflows/pages.yml");
 
   assert.match(workflow, /cp -R web\/\. _site\//);
+  assert.match(workflow, /cp -R starters _site\/starters/);
+  assert.match(workflow, /- "starters\/\*\*"/);
 });
 
 test("scorecard and guides link to the LangGraph eval pages", () => {
@@ -122,6 +124,32 @@ test("scorecard and guides link to the LangGraph eval pages", () => {
     read("web/zh/guide/index.html"),
     /href="\.\.\/langgraph-eval\/"/
   );
+});
+
+test("bilingual guides expose all fail-closed starter downloads", () => {
+  const english = read("web/guide/index.html");
+  const chinese = read("web/zh/guide/index.html");
+
+  for (const profile of ["read-only", "draft-only", "state-changing"]) {
+    assert.match(
+      english,
+      new RegExp(`\\.\\./starters/${profile}/agent-card\\.json`)
+    );
+    assert.match(
+      english,
+      new RegExp(`\\.\\./starters/${profile}/agent-readiness\\.yml`)
+    );
+    assert.match(
+      chinese,
+      new RegExp(`\\.\\./\\.\\./starters/${profile}/agent-card\\.json`)
+    );
+    assert.match(
+      chinese,
+      new RegExp(`\\.\\./\\.\\./starters/${profile}/agent-readiness\\.yml`)
+    );
+  }
+  assert.match(english, /byte-equivalent to/);
+  assert.match(chinese, /逐字节一致/);
 });
 
 test("public pages advertise the LLM-readable project index", () => {
@@ -148,6 +176,8 @@ test("llms.txt exposes bilingual contracts, evidence, commands, and limits", () 
   assert.match(index, /## Start Here/);
   assert.match(index, /生产就绪指南（简体中文）/);
   assert.match(index, /## Machine-Readable Contracts/);
+  assert.match(index, /## Downloadable Fail-Closed Starters/);
+  assert.match(index, /starters\/state-changing\/agent-card\.json/);
   assert.match(index, /schema\/agent-card\.schema\.json/);
   assert.match(index, /evals\/prompt-injection\/fixtures\.jsonl/);
   assert.match(index, /## Executable Adapters/);
