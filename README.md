@@ -90,6 +90,8 @@ Try the [web scorecard](https://lindixu6-hash.github.io/awesome-agentic-engineer
 share a reproducible score URL, or run the zero-dependency CLI locally.
 For the evidence behind each score, read the
 [10-gate production readiness guide](https://lindixu6-hash.github.io/awesome-agentic-engineering/guide/).
+AI documentation tools can start from the
+[LLM-readable project index](https://lindixu6-hash.github.io/awesome-agentic-engineering/llms.txt).
 
 Run the zero-dependency scorecard CLI against an Agent Card JSON file:
 

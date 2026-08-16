@@ -85,6 +85,9 @@ npm exec --yes \
 生成可复现、可分享的评分链接，也可以在本地运行零依赖 CLI。
 每项分数需要什么证据，见
 [10 项生产就绪门槛指南](https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/guide/)。
+AI 文档工具可以从
+[适合 LLM 读取的项目索引](https://lindixu6-hash.github.io/awesome-agentic-engineering/llms.txt)
+开始。
 
 用零依赖 CLI 检查一个 Agent Card JSON：
 

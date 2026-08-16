@@ -123,3 +123,41 @@ test("scorecard and guides link to the LangGraph eval pages", () => {
     /href="\.\.\/langgraph-eval\/"/
   );
 });
+
+test("public pages advertise the LLM-readable project index", () => {
+  for (const relativePath of [
+    "web/index.html",
+    "web/guide/index.html",
+    "web/zh/guide/index.html",
+    "web/langgraph-eval/index.html",
+    "web/zh/langgraph-eval/index.html"
+  ]) {
+    const html = read(relativePath);
+    assert.match(html, /type="text\/plain"/);
+    assert.match(
+      html,
+      /href="https:\/\/lindixu6-hash\.github\.io\/awesome-agentic-engineering\/llms\.txt"/
+    );
+  }
+});
+
+test("llms.txt exposes bilingual contracts, evidence, commands, and limits", () => {
+  const index = read("web/llms.txt");
+
+  assert.match(index, /^# Awesome Agentic Engineering/m);
+  assert.match(index, /## Start Here/);
+  assert.match(index, /生产就绪指南（简体中文）/);
+  assert.match(index, /## Machine-Readable Contracts/);
+  assert.match(index, /schema\/agent-card\.schema\.json/);
+  assert.match(index, /evals\/prompt-injection\/fixtures\.jsonl/);
+  assert.match(index, /## Executable Adapters/);
+  assert.match(index, /langgraph-eval\//);
+  assert.match(index, /## Evidence/);
+  assert.match(index, /31975175069/);
+  assert.match(index, /31974318431/);
+  assert.match(index, /agentic-init --profile read-only/);
+  assert.match(index, /## Interpretation Limits/);
+  assert.match(index, /not artifact\s+authenticity or agent safety/);
+  assert.match(index, /Do not infer external production adoption/);
+  assert.match(index, /reserved `\.example` domains/);
+});

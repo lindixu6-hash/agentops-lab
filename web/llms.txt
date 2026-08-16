@@ -1,0 +1,74 @@
+# Awesome Agentic Engineering
+
+> Executable AI agent production readiness: a zero-dependency scorecard and
+> GitHub Actions gate, prompt-injection fixtures, machine-readable result
+> contracts, risk profiles, incident regressions, and reproducible runtime
+> adapters. Documentation is maintained in English and Simplified Chinese.
+
+Canonical repository: https://github.com/lindixu6-hash/awesome-agentic-engineering
+
+## Start Here
+
+- Web scorecard: https://lindixu6-hash.github.io/awesome-agentic-engineering/
+- Production readiness guide (English): https://lindixu6-hash.github.io/awesome-agentic-engineering/guide/
+- 生产就绪指南（简体中文）: https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/guide/
+- Five-minute fail-closed quickstart: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/docs/quickstart.md
+- 五分钟 fail-closed 快速接入: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/docs/quickstart.zh-CN.md
+- English README: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/README.md
+- 中文 README: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/README.zh-CN.md
+
+## Machine-Readable Contracts
+
+- Agent Card JSON Schema: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/schema/agent-card.schema.json
+- Prompt-injection fixture JSON Schema: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/schema/prompt-injection-fixture.schema.json
+- Eval Result JSON Schema: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/schema/eval-result.schema.json
+- Risk-profile catalog: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/profiles/readiness-profiles.json
+- Eight inert prompt-injection fixtures: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/evals/prompt-injection/fixtures.jsonl
+
+## Executable Adapters
+
+- LangGraph prompt-injection eval (English): https://lindixu6-hash.github.io/awesome-agentic-engineering/langgraph-eval/
+- LangGraph 提示注入 Eval（简体中文）: https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/langgraph-eval/
+- LangGraph.js adapter source: https://github.com/lindixu6-hash/awesome-agentic-engineering/tree/main/adapters/langgraph
+- Deterministic reference adapter: https://github.com/lindixu6-hash/awesome-agentic-engineering/tree/main/adapters/reference-runtime
+
+## Evidence
+
+- Latest release: https://github.com/lindixu6-hash/awesome-agentic-engineering/releases/latest
+- Main CI: https://github.com/lindixu6-hash/awesome-agentic-engineering/actions/workflows/ci.yml
+- Public LangGraph evidence run: https://github.com/lindixu6-hash/awesome-agentic-engineering/actions/runs/31975175069
+- Real consumer audit (Content OS): https://github.com/lindixu6-hash/ai-content-workflow-skills/actions/runs/31974318431
+- Source-linked production incidents (English): https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/docs/production-incidents.md
+- 带来源的生产事故（简体中文）: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/docs/production-incidents.zh-CN.md
+
+## Commands
+
+Initialize a fail-closed starter:
+
+    npm exec --yes --package=github:lindixu6-hash/awesome-agentic-engineering#v0 -- agentic-init --profile read-only --name "My Agent"
+
+Score an existing Agent Card:
+
+    npm exec --yes --package=github:lindixu6-hash/awesome-agentic-engineering#v0 -- agentic-score agent-card.json
+
+Validate generated eval results:
+
+    npm exec --yes --package=github:lindixu6-hash/awesome-agentic-engineering#v0 -- agentic-validate-results results.jsonl --fixtures fixtures.jsonl
+
+## Interpretation Limits
+
+- A score is a reviewed engineering claim, not a benchmark of model capability.
+- A high total never overrides an explicit launch blocker.
+- Structural validation proves shape and internal consistency, not artifact
+  authenticity or agent safety.
+- The bundled runtime policies are deterministic examples, not LLM benchmarks.
+- LangGraph adapter results do not prove arbitrary LangGraph applications safe.
+- Content OS is a same-maintainer prototype adopter; its passing compatibility
+  score does not hide its failing draft-only profile or unresolved blockers.
+- Do not infer external production adoption from repository Stars, CI status,
+  examples, or self-operated evidence.
+
+## License
+
+MIT. The repository uses synthetic identifiers, reserved `.example` domains,
+and inert fixtures. It contains no live secret or working exfiltration endpoint.
