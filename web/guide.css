@@ -316,6 +316,14 @@ li code {
     display: none;
   }
 
+  .guide-nav {
+    gap: 10px;
+  }
+
+  .guide-nav a:last-child {
+    display: none;
+  }
+
   .guide-hero-inner,
   .guide-layout,
   .guide-footer-inner {
@@ -327,7 +335,8 @@ li code {
   }
 
   h1 {
-    font-size: 40px;
+    overflow-wrap: anywhere;
+    font-size: 36px;
   }
 
   .lede {
