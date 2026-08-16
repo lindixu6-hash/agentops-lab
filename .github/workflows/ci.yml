@@ -12,6 +12,15 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
+      - name: Validate community YAML
+        run: |
+          ruby -e '
+            require "yaml"
+            Dir[".github/ISSUE_TEMPLATE/*.{yml,yaml}"].sort.each do |path|
+              YAML.safe_load(File.read(path), aliases: true)
+              puts "Parsed #{path}"
+            end
+          '
       - run: npm run install:langgraph
       - run: npm test
       - run: npm run validate:fixtures

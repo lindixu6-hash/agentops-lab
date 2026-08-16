@@ -335,5 +335,7 @@ GitHub 仓库发布设置见 [PUBLICATION.md](PUBLICATION.md)。
 - 安全测试样例
 - 成本控制模式
 - MCP server 审查清单
+- [公开 Agent Card 采用证据](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/new?template=agent-card-adoption.yml)
+- [可执行 Runtime 适配器提案](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/new?template=runtime-adapter.yml)
 
-请先阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。
+请先阅读[中文贡献指南](CONTRIBUTING.zh-CN.md)。

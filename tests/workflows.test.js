@@ -53,6 +53,15 @@ test("CI validates local and published eval result contracts", () => {
   assert.match(workflow, /--fixtures evals\/prompt-injection\/fixtures\.jsonl/);
 });
 
+test("CI parses every community YAML form", () => {
+  const workflow = readWorkflow("ci.yml");
+
+  assert.match(workflow, /name: Validate community YAML/);
+  assert.match(workflow, /require "yaml"/);
+  assert.match(workflow, /ISSUE_TEMPLATE\/\*\.\{yml,yaml\}/);
+  assert.match(workflow, /YAML\.safe_load/);
+});
+
 test("CI verifies generated starters fail closed", () => {
   const workflow = readWorkflow("ci.yml");
 

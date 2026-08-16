@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Five-minute quickstart / 五分钟快速接入
+    url: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/docs/quickstart.zh-CN.md
+    about: Generate a fail-closed Agent Card and workflow / 生成 fail-closed Agent Card 与工作流
+  - name: Production readiness evidence guide / 生产就绪证据指南
+    url: https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/guide/
+    about: Understand scores, blockers, profiles, and evidence / 了解分数、blocker、Profile 与证据
+  - name: Security vulnerability / 安全漏洞
+    url: https://github.com/lindixu6-hash/awesome-agentic-engineering/security/policy
+    about: Do not disclose exploitable vulnerabilities in a public issue / 不要在公开 Issue 中披露可利用漏洞

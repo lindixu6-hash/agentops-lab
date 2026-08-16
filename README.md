@@ -388,6 +388,8 @@ High-value contributions:
 - Cost control patterns
 - MCP server review checklists
 - Agent UX examples
+- [Public Agent Card adoption evidence](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/new?template=agent-card-adoption.yml)
+- [Executable runtime adapter proposals](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/new?template=runtime-adapter.yml)
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting.
 

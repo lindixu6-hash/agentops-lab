@@ -1,0 +1,109 @@
+name: Runtime adapter proposal / Runtime 适配器提案
+description: Propose an executable integration with another open-source Agent runtime / 提议接入另一个开源 Agent Runtime
+title: "[Adapter] "
+labels:
+  - enhancement
+  - help wanted
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Propose the runtime and evidence boundary before implementation. Do not submit a wrapper that bypasses the runtime's orchestration primitive.
+
+        实现前先确认 Runtime 与证据边界。不要提交绕过 Runtime 编排原语的包装器。
+
+  - type: input
+    id: runtime
+    attributes:
+      label: Runtime and exact version / Runtime 与精确版本
+      placeholder: OpenAI Agents SDK 0.x.y
+    validations:
+      required: true
+
+  - type: input
+    id: repository
+    attributes:
+      label: Canonical source repository / 官方源码仓库
+      placeholder: https://github.com/owner/runtime
+    validations:
+      required: true
+
+  - type: input
+    id: license
+    attributes:
+      label: License / License
+      description: SPDX identifier and source file / SPDX 标识与来源文件
+      placeholder: MIT — https://github.com/owner/runtime/blob/main/LICENSE
+    validations:
+      required: true
+
+  - type: textarea
+    id: primitive
+    attributes:
+      label: Real orchestration primitive / 真实编排原语
+      description: Identify the public API that every fixture will execute / 说明每条 Fixture 都会执行的公开 API
+      placeholder: Runner.run() with a scripted custom Model implementation
+    validations:
+      required: true
+
+  - type: textarea
+    id: offline
+    attributes:
+      label: Deterministic offline strategy / 确定性离线策略
+      description: Explain how the suite runs without a model API key or network tool / 说明如何在无模型 API Key、无网络工具时运行
+    validations:
+      required: true
+
+  - type: textarea
+    id: trust_boundary
+    attributes:
+      label: Trusted and untrusted channel boundary / 可信与不可信通道边界
+      description: Show how values remain separate in runtime input or state / 说明这些值如何在 Runtime 输入或状态中保持分离
+    validations:
+      required: true
+
+  - type: textarea
+    id: evaluator
+    attributes:
+      label: External evaluator boundary / 外部 Evaluator 边界
+      description: Explain why the Agent cannot rewrite assertions, expected outcomes, or retained evidence / 说明 Agent 为什么不能改写断言、预期结果或保留证据
+    validations:
+      required: true
+
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Result and artifact plan / Result 与 Artifact 计划
+      description: List response, assertion, tool trace, policy trace, result contract, and CI artifact paths / 列出回答、断言、工具 Trace、策略 Trace、Result 契约和 CI Artifact
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependency_isolation
+    attributes:
+      label: Dependency isolation / 依赖隔离
+      description: State the lockfile/environment and how root zero-dependency CLIs stay unchanged / 说明锁文件或环境，以及如何保持根 CLI 零依赖
+    validations:
+      required: true
+
+  - type: textarea
+    id: limitations
+    attributes:
+      label: Scope and limitations / 范围与限制
+      description: State what passing this adapter will not prove / 说明适配器通过不能证明什么
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety confirmation / 安全确认
+      options:
+        - label: The adapter will execute all eight malicious and benign fixtures. / 适配器会执行全部 8 条恶意与良性 Fixture。
+          required: true
+        - label: A negative regression will produce a visible fail result. / 负向回归会产生可见的 fail 结果。
+          required: true
+        - label: No live secret, privileged token, working exfiltration endpoint, or unsafe payload will be used. / 不使用真实 Secret、特权 Token、可工作的外泄端点或危险 Payload。
+          required: true
+        - label: English and Simplified Chinese usage and limitation docs will be included. / 会提供英文与简体中文用法及限制文档。
+          required: true

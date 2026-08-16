@@ -1,0 +1,100 @@
+name: Agent Card adoption / Agent Card 采用
+description: Share public evidence from a repository using the readiness contracts / 提交采用门禁的公开证据
+title: "[Adoption] "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share observed evidence, including failures and blockers. A same-maintainer consumer is useful but is not independent adoption.
+
+        请提交观察到的证据，包括失败与 blocker。同一维护者的消费者有参考价值，但不属于独立采用。
+
+  - type: input
+    id: repository
+    attributes:
+      label: Consumer repository / 消费仓库
+      description: Public canonical repository URL / 公开主仓库链接
+      placeholder: https://github.com/owner/repository
+    validations:
+      required: true
+
+  - type: input
+    id: workflow
+    attributes:
+      label: Public CI evidence / 公开 CI 证据
+      description: A workflow run showing outputs or failure state / 展示输出或失败状态的 Workflow Run
+      placeholder: https://github.com/owner/repository/actions/runs/...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: profile
+    attributes:
+      label: Risk profile / 风险 Profile
+      options:
+        - read-only
+        - draft-only
+        - state-changing
+        - score gate only / 仅分数门禁
+        - not selected yet / 尚未选择
+    validations:
+      required: true
+
+  - type: textarea
+    id: workflow_scope
+    attributes:
+      label: Bounded workflow / 有边界的工作流
+      description: Name the input, output, user, success condition, and non-goals / 说明输入、输出、用户、成功条件与非目标
+    validations:
+      required: true
+
+  - type: textarea
+    id: observed_result
+    attributes:
+      label: Observed result / 实际结果
+      description: Report score, profile result, blocker count, and failing areas exactly as CI produced them / 按 CI 原样报告分数、Profile 结果、blocker 数量与失败项
+      placeholder: |
+        Score: 12/20
+        Profile passed: false
+        Launch blockers: 3
+        Failing areas: tool_permissions 1/2
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence references / 证据引用
+      description: Link cards, fixtures, traces, approval records, budgets, or recovery tests / 链接卡片、Fixture、Trace、审批记录、预算或恢复测试
+    validations:
+      required: true
+
+  - type: textarea
+    id: limitations
+    attributes:
+      label: Limitations and unresolved blockers / 限制与未解决 blocker
+      description: Keep technical debt visible / 保持技术债可见
+    validations:
+      required: true
+
+  - type: textarea
+    id: affiliation
+    attributes:
+      label: Maintainer affiliation / 维护者关联
+      description: Disclose shared maintainers, employment, sponsorship, or other relationships / 披露共同维护者、雇佣、赞助或其他关系
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Evidence confirmation / 证据确认
+      options:
+        - label: The links are public and contain no secret or private data. / 链接公开且不包含 Secret 或私有数据。
+          required: true
+        - label: I did not hide failing gates or launch blockers. / 我没有隐藏失败门禁或上线 blocker。
+          required: true
+        - label: I do not claim that a score or structural validation proves Agent safety. / 我不声称分数或结构校验可以证明 Agent 安全。
+          required: true
