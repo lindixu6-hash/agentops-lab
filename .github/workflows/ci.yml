@@ -19,3 +19,8 @@ jobs:
         with:
           card: examples/coding-agent.card.json
           min-score: "15"
+      - name: Test published v0 Action
+        uses: lindixu6-hash/awesome-agentic-engineering@v0
+        with:
+          card: examples/support-agent.card.json
+          min-score: "0"
