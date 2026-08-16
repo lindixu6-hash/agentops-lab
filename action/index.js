@@ -35,6 +35,10 @@ export function readInputs(env = process.env) {
     failBelow: parseBoolean(
       inputValue(env, "fail-below", "true"),
       "fail-below"
+    ),
+    failOnBlockers: parseBoolean(
+      inputValue(env, "fail-on-blockers", "false"),
+      "fail-on-blockers"
     )
   };
 }
@@ -44,11 +48,36 @@ function appendLines(filePath, lines) {
   fs.appendFileSync(filePath, `${lines.join("\n")}\n`, "utf8");
 }
 
-export function buildSummary(card, result, minScore, badge) {
-  const status = result.total >= minScore ? "PASS" : "FAIL";
+export function launchBlockersFor(card) {
+  if (card.launch_blockers === undefined) return [];
+  if (!Array.isArray(card.launch_blockers)) {
+    throw new Error("launch_blockers must be an array of non-empty strings.");
+  }
+
+  const blockers = card.launch_blockers.map((blocker) => {
+    if (typeof blocker !== "string" || !blocker.trim()) {
+      throw new Error("launch_blockers must be an array of non-empty strings.");
+    }
+    return blocker.trim();
+  });
+  return blockers;
+}
+
+export function buildSummary(card, result, gate, badge) {
+  const scoreStatus = gate.scorePassed ? "PASS" : "FAIL";
+  const blockerStatus = gate.blockersPassed ? "PASS" : "FAIL";
   const rows = result.rows
     .map((row) => `| ${row.label} | ${row.value}/2 |`)
     .join("\n");
+  const blockerRows =
+    gate.blockers.length === 0
+      ? ["", "No launch blockers declared."]
+      : [
+          "",
+          "### Launch blockers",
+          "",
+          ...gate.blockers.map((blocker) => `- ${blocker}`)
+        ];
 
   return [
     "## Agent Production Readiness Gate",
@@ -56,11 +85,15 @@ export function buildSummary(card, result, minScore, badge) {
     badge,
     "",
     `**${card.name || "Unnamed agent"}** scored **${result.total}/${result.max}**`,
-    `with rating **${result.rating}**. Gate: **${status}** (minimum ${minScore}).`,
+    `with rating **${result.rating}**. Overall gate: **${gate.passed ? "PASS" : "FAIL"}**.`,
+    "",
+    `- Score gate: **${scoreStatus}** (minimum ${gate.minScore})`,
+    `- Launch blocker gate: **${blockerStatus}** (${gate.blockers.length} declared, strict mode ${gate.failOnBlockers ? "on" : "off"})`,
     "",
     "| Area | Score |",
     "| --- | ---: |",
-    rows
+    rows,
+    ...blockerRows
   ].join("\n");
 }
 
@@ -78,33 +111,54 @@ export function runAction(options = {}) {
   const card = loadCard(cardPath);
   const result = scoreCard(card);
   const badge = badgeMarkdown(result);
-  const passed = result.total >= inputs.minScore;
+  const blockers = launchBlockersFor(card);
+  const scorePassed = result.total >= inputs.minScore;
+  const blockersPassed = !inputs.failOnBlockers || blockers.length === 0;
+  const passed = scorePassed && blockersPassed;
+  const gate = {
+    passed,
+    scorePassed,
+    blockersPassed,
+    blockers,
+    blockerCount: blockers.length,
+    minScore: inputs.minScore,
+    failOnBlockers: inputs.failOnBlockers
+  };
 
   appendLines(env.GITHUB_OUTPUT, [
     `score=${result.total}`,
     `rating=${result.rating}`,
-    `badge=${badge}`
+    `badge=${badge}`,
+    `passed=${passed}`,
+    `blocker-count=${blockers.length}`,
+    `blockers=${JSON.stringify(blockers)}`
   ]);
-  appendLines(env.GITHUB_STEP_SUMMARY, [
-    buildSummary(card, result, inputs.minScore, badge)
-  ]);
+  appendLines(env.GITHUB_STEP_SUMMARY, [buildSummary(card, result, gate, badge)]);
 
   log(
     `${card.name || "Unnamed agent"}: ${result.total}/${result.max} ` +
-      `(${result.rating}), minimum ${inputs.minScore}: ${passed ? "PASS" : "FAIL"}`
+      `(${result.rating}), score ${scorePassed ? "PASS" : "FAIL"}, ` +
+      `blockers ${blockers.length} (${blockersPassed ? "PASS" : "FAIL"}), ` +
+      `overall ${passed ? "PASS" : "FAIL"}`
   );
 
-  if (!passed && inputs.failBelow) {
-    throw new Error(
-      `Readiness score ${result.total} is below required ${inputs.minScore}.`
+  const failures = [];
+  if (!scorePassed && inputs.failBelow) {
+    failures.push(
+      `readiness score ${result.total} is below required ${inputs.minScore}`
     );
+  }
+  if (!blockersPassed) {
+    failures.push(`${blockers.length} launch blocker(s) remain`);
+  }
+  if (failures.length > 0) {
+    throw new Error(`${failures.join("; ")}.`);
   }
 
   return {
     ...result,
     badge,
-    passed,
-    minScore: inputs.minScore
+    ...gate
   };
 }
 

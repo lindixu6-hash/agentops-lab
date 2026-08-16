@@ -19,6 +19,10 @@ inputs:
     description: Fail the workflow when the score is below min-score.
     required: false
     default: "true"
+  fail-on-blockers:
+    description: Fail the workflow when launch_blockers is not empty.
+    required: false
+    default: "false"
 
 outputs:
   score:
@@ -27,6 +31,12 @@ outputs:
     description: Readiness rating.
   badge:
     description: Markdown for a README-ready score badge.
+  passed:
+    description: Whether the combined score and launch-blocker gates passed.
+  blocker-count:
+    description: Number of declared launch blockers.
+  blockers:
+    description: JSON array of declared launch blockers.
 
 runs:
   using: node24

@@ -19,6 +19,26 @@ jobs:
         with:
           card: examples/coding-agent.card.json
           min-score: "15"
+
+      - name: Test strict launch-blocker gate
+        id: strict-blockers
+        continue-on-error: true
+        uses: ./
+        with:
+          card: examples/coding-agent.card.json
+          min-score: "15"
+          fail-on-blockers: "true"
+
+      - name: Verify strict launch-blocker result
+        env:
+          STEP_OUTCOME: ${{ steps.strict-blockers.outcome }}
+          PASSED: ${{ steps.strict-blockers.outputs.passed }}
+          BLOCKER_COUNT: ${{ steps.strict-blockers.outputs.blocker-count }}
+        run: |
+          test "$STEP_OUTCOME" = "failure"
+          test "$PASSED" = "false"
+          test "$BLOCKER_COUNT" = "2"
+
       - name: Test published v0 Action
         uses: lindixu6-hash/awesome-agentic-engineering@v0
         with:

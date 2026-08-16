@@ -103,9 +103,14 @@ node bin/agentic-badge.js examples/coding-agent.card.json
     card: agent-card.json
     min-score: "15"
     fail-below: "true"
+    fail-on-blockers: "true"
 ```
 
-Action 会输出 `score`、`rating`、`badge`，并在工作流摘要中生成十项评分表。
+为保持向后兼容，`fail-on-blockers` 需要显式开启。开启后，即使总分达标，
+只要 `launch_blockers` 非空，门禁仍会失败。
+
+Action 会输出 `score`、`rating`、`badge`、`passed`、`blocker-count` 和
+`blockers`，并在工作流摘要中分别展示分数门禁与阻塞项门禁。
 
 ## 已采用
 

@@ -278,9 +278,10 @@
   with:
     card: agent-card.json
     min-score: "15"
-    fail-below: "true"</code></pre>
+    fail-below: "true"
+    fail-on-blockers: "true"</code></pre>
             <p>
-              Action 会输出数值得分、评级和徽章，并在 Workflow Summary 中生成十项评分表。整个过程不调用模型 API，也不需要外部 Key。
+              为保持向后兼容，严格阻塞项模式需要显式开启。Action 会输出数值得分、评级、徽章、综合门禁结果、阻塞项数量和阻塞项列表，并在 Workflow Summary 中分别展示两类门禁。整个过程不调用模型 API，也不需要外部 Key。
             </p>
             <p>无需 clone，也可以直接在本地运行：</p>
             <pre><code>npm exec --yes \

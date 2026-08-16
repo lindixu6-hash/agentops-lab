@@ -293,11 +293,14 @@
   with:
     card: agent-card.json
     min-score: "15"
-    fail-below: "true"</code></pre>
+    fail-below: "true"
+    fail-on-blockers: "true"</code></pre>
             <p>
-              The Action writes the numeric score, rating, and badge as outputs
-              and adds the ten-area result to the workflow summary. It uses no
-              model API and requires no external key.
+              Strict blocker mode is opt-in for backward compatibility. The
+              Action writes the numeric score, rating, badge, combined pass
+              result, blocker count, and blocker list as outputs. It adds both
+              gates to the workflow summary, uses no model API, and requires no
+              external key.
             </p>
             <p>
               For a local check without cloning this project:

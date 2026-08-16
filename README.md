@@ -104,10 +104,15 @@ Use the repository as a CI release gate:
     card: agent-card.json
     min-score: "15"
     fail-below: "true"
+    fail-on-blockers: "true"
 ```
 
-The Action writes `score`, `rating`, and `badge` outputs and adds a ten-area
-table to the workflow summary.
+`fail-on-blockers` is opt-in for backward compatibility. When enabled, any
+non-empty `launch_blockers` array fails the gate even if the score passes.
+
+The Action writes `score`, `rating`, `badge`, `passed`, `blocker-count`, and
+`blockers` outputs. The workflow summary reports the score gate and launch
+blocker gate separately.
 
 ## Used By
 

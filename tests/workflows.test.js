@@ -31,3 +31,14 @@ test("Star Watch keeps the scheduled 1000-star monitor enabled", () => {
   assert.match(workflow, /workflow_dispatch:/);
   assert.match(workflow, /--target 1000/);
 });
+
+test("Action manifest exposes independent score and blocker gates", () => {
+  const manifest = fs.readFileSync(path.join(projectRoot, "action.yml"), "utf8");
+
+  assert.match(manifest, /fail-below:/);
+  assert.match(manifest, /fail-on-blockers:/);
+  assert.match(manifest, /default: "false"/);
+  assert.match(manifest, /blocker-count:/);
+  assert.match(manifest, /blockers:/);
+  assert.match(manifest, /passed:/);
+});
