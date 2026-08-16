@@ -14,3 +14,8 @@ jobs:
           node-version: 20
       - run: npm test
       - run: npm run score
+      - name: Test readiness Action
+        uses: ./
+        with:
+          card: examples/coding-agent.card.json
+          min-score: "15"

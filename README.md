@@ -83,6 +83,19 @@ node bin/agentic-badge.js examples/coding-agent.card.json
 ![Agent production readiness](https://img.shields.io/badge/agent%20readiness-16%2F20%20limited%20beta-287a50?style=flat-square)
 ```
 
+Use the repository as a CI release gate:
+
+```yaml
+- uses: lindixu6-hash/awesome-agentic-engineering@v0.2.0
+  with:
+    card: agent-card.json
+    min-score: "15"
+    fail-below: "true"
+```
+
+The Action writes `score`, `rating`, and `badge` outputs and adds a ten-area
+table to the workflow summary.
+
 After publishing on GitHub, check repository stars:
 
 ```bash

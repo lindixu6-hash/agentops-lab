@@ -82,6 +82,18 @@ node bin/agentic-badge.js examples/coding-agent.card.json
 ![Agent production readiness](https://img.shields.io/badge/agent%20readiness-16%2F20%20limited%20beta-287a50?style=flat-square)
 ```
 
+在 CI 中把仓库作为上线门禁：
+
+```yaml
+- uses: lindixu6-hash/awesome-agentic-engineering@v0.2.0
+  with:
+    card: agent-card.json
+    min-score: "15"
+    fail-below: "true"
+```
+
+Action 会输出 `score`、`rating`、`badge`，并在工作流摘要中生成十项评分表。
+
 发布到 GitHub 后，可以这样检查 star：
 
 ```bash

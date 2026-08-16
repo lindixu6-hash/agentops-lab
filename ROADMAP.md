@@ -16,6 +16,7 @@
 - MCP server safety review checklist
 - More agent examples: research, support, ops, coding
 - [x] Scorecard badge generator
+- [x] Reusable GitHub Action readiness gate
 
 ## v0.3
 
