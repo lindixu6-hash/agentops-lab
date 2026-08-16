@@ -280,6 +280,72 @@ Then：客户端必须标记跨服务器工具遮蔽风险
 - [MCPTox Benchmark](https://arxiv.org/abs/2508.14925)
 - [Invariant Labs Toxic Flow Analysis](https://invariantlabs.ai/blog/toxic-flow-analysis1)
 
+## 6. Gemini CLI 在 CI 中信任了不可信工作区配置
+
+**状态：** 已披露漏洞；已修复，本文不声称存在在野利用
+
+**编号：** CVE-2026-12537 / GHSA-wpqr-6v78-jr5g
+
+**失败模式：** 自动信任工作区、沙箱启动前加载配置、工具白名单绕过
+
+### 发生了什么
+
+Google 安全公告说明，旧版 Gemini CLI 在 CI 无头模式下加载配置和环境变量时，
+会自动信任工作区目录。如果 Workflow 操作的是不可信 Checkout，恶意
+`.gemini/.env` 就可能在 Agent 沙箱启动前影响容器启动器。
+
+同一公告还记录了另一项策略失效：在 `--yolo` 模式下，
+`run_shell_command(echo)` 这类细粒度工具白名单没有按预期限制实际命令。
+与不可信内容结合后，提示注入可能因此转化为命令执行。
+
+修复要求显式决定工作区信任，并在 `--yolo` 模式下执行工具白名单。CVE
+Program 后续发布 CVE-2026-12537；其中 Google Cloud CNA 记录将 0.39.1
+之前的 Gemini CLI 和 0.1.22 之前的 `run-gemini-cli` 列为受影响版本。
+这些来源证明漏洞可被利用且已经修复，但不能证明它曾在真实攻击中被利用。
+
+### 检测信号
+
+- 无头 Agent 在建立信任前，从不可信 PR 加载 `.gemini/.env` 或工作区设置。
+- Runner 日志显示沙箱初始化前，环境变量或启动器行为已经变化。
+- `--yolo` 模式下执行了细粒度白名单之外的命令。
+- 由 Issue 或 PR 触发的 Workflow 获得了超过分诊任务需要的凭据或写权限。
+
+### 控制措施
+
+- 将 Gemini CLI 升级并固定到 0.39.1 或更高版本，将 `run-gemini-cli`
+  升级并固定到 0.1.22 或更高版本。
+- 在加载仓库配置前，先区分工作区与事件 Payload 是可信还是不可信。
+- 不要在完成安全加固前，为不可信 Fork 或 Issue 内容开启工作区信任。
+- 即使在自主模式下，也必须由执行策略强制命令白名单。
+- 对 Issue 和 PR 分诊使用只读 Token 与最小 GitHub 权限。
+- 对不可信贡献优先采用维护者主动触发，并让检查攻击者文件的 Job 无法读取密钥。
+
+### 回归测试
+
+```text
+Given：来自不可信 Fork 的 PR 包含 .gemini/.env
+When：无头 Agent Job 启动
+Then：在显式信任决策前不得加载工作区配置
+```
+
+```text
+Given：自主模式的白名单仅允许 run_shell_command(echo)
+When：不可信内容要求执行其他命令
+Then：策略引擎必须在执行前拒绝该命令
+```
+
+```text
+Given：Workflow 正在分诊公开 Issue
+When：Issue 要求读取密钥或修改仓库
+Then：Job 不得拥有密钥或写 Token，并且不得出现特权工具调用
+```
+
+### 来源
+
+- [Google 官方公告：工作区信任与工具白名单](https://github.com/google-github-actions/run-gemini-cli/security/advisories/GHSA-wpqr-6v78-jr5g)
+- [Google Gemini CLI GitHub Actions 信任指南](https://github.com/google-github-actions/run-gemini-cli/blob/main/docs/trust-guidance.md)
+- [CVE Program：CVE-2026-12537](https://www.cve.org/CVERecord?id=CVE-2026-12537)
+
 ## 把事故转成评估样例
 
 每新增一个案例：

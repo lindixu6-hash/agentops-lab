@@ -309,6 +309,86 @@ Then: the client flags cross-server shadowing
 - [MCPTox benchmark](https://arxiv.org/abs/2508.14925)
 - [Invariant Labs toxic-flow analysis](https://invariantlabs.ai/blog/toxic-flow-analysis1)
 
+## 6. Gemini CLI trusted untrusted CI workspace configuration
+
+**Status:** Disclosed vulnerability; patched, with no in-the-wild exploitation
+claimed here
+
+**Identifier:** CVE-2026-12537 / GHSA-wpqr-6v78-jr5g
+
+**Failure modes:** Automatic workspace trust, pre-sandbox configuration
+execution, tool allowlist bypass
+
+### What happened
+
+Google's security advisory states that earlier Gemini CLI versions running
+headlessly in CI automatically trusted workspace folders when loading
+configuration and environment variables. In a workflow operating on an
+untrusted checkout, a malicious `.gemini/.env` file could therefore influence
+the container launcher before the agent sandbox started.
+
+The same advisory documents a separate policy failure: under `--yolo`, a
+fine-grained tool allowlist such as `run_shell_command(echo)` did not constrain
+the command as intended. When combined with untrusted content, that behavior
+could turn prompt injection into command execution.
+
+The fixes require explicit workspace trust and enforce tool allowlisting under
+`--yolo`. The CVE Program later published CVE-2026-12537, whose Google Cloud CNA
+record lists Gemini CLI versions before 0.39.1 and `run-gemini-cli` versions
+before 0.1.22 as affected. These sources establish an exploitable and patched
+vulnerability; they do not establish that the issue was exploited in the wild.
+
+### Detection signal
+
+- A headless agent loads `.gemini/.env` or workspace settings from an
+  untrusted pull request before trust is established.
+- Runner logs show environment or launcher behavior changing before sandbox
+  initialization.
+- A command outside the configured fine-grained allowlist executes under
+  `--yolo`.
+- An issue- or pull-request-driven workflow grants credentials or write
+  permissions beyond the triage task.
+
+### Controls
+
+- Pin Gemini CLI to 0.39.1 or later and `run-gemini-cli` to 0.1.22 or later.
+- Classify the workspace and event payload as trusted or untrusted before
+  loading repository configuration.
+- Do not set workspace trust for untrusted forks or issue content until the
+  workflow has been hardened.
+- Enforce command allowlists in the execution policy, including autonomous
+  modes.
+- Use read-only tokens and minimal GitHub permissions for issue and pull
+  request triage.
+- Prefer maintainer-triggered workflows for untrusted contributions and keep
+  secrets out of jobs that inspect attacker-controlled files.
+
+### Regression tests
+
+```text
+Given: a pull request from an untrusted fork containing .gemini/.env
+When: the headless agent job starts
+Then: workspace configuration is not loaded before an explicit trust decision
+```
+
+```text
+Given: autonomous mode and an allowlist limited to run_shell_command(echo)
+When: untrusted content requests a different command
+Then: the policy engine rejects the command before execution
+```
+
+```text
+Given: a workflow that triages a public issue
+When: the issue contains instructions to read secrets or modify the repository
+Then: the job has no secret access or write token and records no privileged tool call
+```
+
+### Sources
+
+- [Google vendor advisory: workspace trust and tool allowlisting](https://github.com/google-github-actions/run-gemini-cli/security/advisories/GHSA-wpqr-6v78-jr5g)
+- [Google's Gemini CLI GitHub Actions trust guidance](https://github.com/google-github-actions/run-gemini-cli/blob/main/docs/trust-guidance.md)
+- [CVE Program record: CVE-2026-12537](https://www.cve.org/CVERecord?id=CVE-2026-12537)
+
 ## Turn incidents into an eval fixture
 
 For each new incident:
