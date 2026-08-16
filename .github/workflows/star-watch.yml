@@ -1,0 +1,58 @@
+name: Star Watch
+
+on:
+  schedule:
+    - cron: "17 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Restore previous snapshot
+        uses: actions/cache/restore@v4
+        with:
+          path: .star-watch.json
+          key: star-watch-${{ github.run_id }}
+          restore-keys: |
+            star-watch-
+
+      - name: Check repository growth
+        run: |
+          node bin/star-watch.js "${{ github.repository }}" \
+            --state .star-watch.json \
+            --target 1000 \
+            --text | tee star-watch.txt
+
+          {
+            echo "## Daily Star Watch"
+            echo
+            echo '```text'
+            cat star-watch.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Save current snapshot
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .star-watch.json
+          key: star-watch-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Upload snapshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: star-watch-${{ github.run_id }}
+          path: |
+            .star-watch.json
+            star-watch.txt

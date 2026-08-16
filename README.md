@@ -65,6 +65,9 @@ After publishing on GitHub, check repository stars:
 node bin/star-watch.js owner/repo --state .star-watch.json --target 1000 --text
 ```
 
+The scheduled [Star Watch workflow](.github/workflows/star-watch.yml) runs the
+same check daily and stores its snapshot as a workflow artifact.
+
 ## Production Agent Scorecard
 
 Score each item from 0 to 2.

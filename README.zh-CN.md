@@ -65,6 +65,9 @@ npm test
 node bin/star-watch.js owner/repo --state .star-watch.json --target 1000 --text
 ```
 
+仓库内置的 [Star Watch 工作流](.github/workflows/star-watch.yml) 每天执行同一检查，
+并将快照保存为 GitHub Actions artifact。
+
 ## 生产级 Agent 评分卡
 
 每项 0-2 分。

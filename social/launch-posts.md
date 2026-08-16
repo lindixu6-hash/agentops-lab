@@ -6,7 +6,7 @@ Most AI agent demos fail in production for boring reasons: tool permissions, mem
 
 I made an open-source field guide for shipping agents that survive real users:
 
-<repo-url>
+https://github.com/lindixu6-hash/awesome-agentic-engineering
 
 It includes templates, a production-readiness scorecard, failure modes, and a tiny CLI.
 
@@ -35,7 +35,7 @@ It includes:
 - MCP safety checklist
 - Zero-dependency CLI score tool
 
-Repo: <repo-url>
+Repo: https://github.com/lindixu6-hash/awesome-agentic-engineering
 
 ## Chinese Short
 
@@ -45,7 +45,7 @@ Repo: <repo-url>
 
 里面有 Agent Card、Eval Plan、上线检查清单、失败模式库和评分 CLI：
 
-<repo-url>
+https://github.com/lindixu6-hash/awesome-agentic-engineering
 
 ## Chinese Long
 
@@ -74,4 +74,4 @@ Repo: <repo-url>
 - MCP 安全检查清单
 - 零依赖评分 CLI
 
-Repo: <repo-url>
+Repo: https://github.com/lindixu6-hash/awesome-agentic-engineering

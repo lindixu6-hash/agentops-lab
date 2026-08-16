@@ -104,7 +104,7 @@ Message 20 builders who have shipped LLM apps or agents.
 Short message:
 
 ```text
-I am collecting real-world AI agent failure modes and production patterns here: <repo-url>
+I am collecting real-world AI agent failure modes and production patterns here: https://github.com/lindixu6-hash/awesome-agentic-engineering
 
 If you have a painful lesson from building agents, I would love to include it with attribution.
 ```

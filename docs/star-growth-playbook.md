@@ -72,7 +72,7 @@ I am collecting practical production patterns for AI agents: evals, tool permiss
 
 If you have a real failure story or checklist item, I would love to include it with attribution:
 
-<repo-url>
+https://github.com/lindixu6-hash/awesome-agentic-engineering
 ```
 
 Do not ask for stars directly. Ask for feedback, examples, and corrections.
