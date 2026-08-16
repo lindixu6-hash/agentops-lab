@@ -1,5 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import {
   AREAS,
@@ -10,6 +13,12 @@ import {
   encodeScores,
   ratingFor
 } from "../web/scorecard.js";
+
+const testDir = path.dirname(fileURLToPath(import.meta.url));
+const pageHtml = fs.readFileSync(
+  path.join(testDir, "../web/index.html"),
+  "utf8"
+);
 
 test("web scorecard exposes all ten production areas", () => {
   assert.equal(AREAS.length, 10);
@@ -61,4 +70,10 @@ test("web scorecard builds English and Chinese share copy", () => {
   assert.match(buildShareText(result, "en"), /16\/20/);
   assert.match(buildShareText(result, "zh"), /16\/20/);
   assert.match(buildShareText(result, "zh"), /有限 Beta/);
+});
+
+test("web scorecard exposes social preview metadata", () => {
+  assert.match(pageHtml, /property="og:image"/);
+  assert.match(pageHtml, /name="twitter:card" content="summary_large_image"/);
+  assert.match(pageHtml, /assets\/social-preview\.png/);
 });
