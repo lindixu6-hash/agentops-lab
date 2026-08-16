@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 
 import { loadCard, scoreCard } from "../bin/agentic-score.js";
 import { badgeMarkdown } from "../bin/agentic-badge.js";
+import { evaluateProfile, loadProfile } from "./profiles.js";
 
 function inputValue(env, name, fallback = "") {
   const keys = [
@@ -31,6 +32,7 @@ export function readInputs(env = process.env) {
 
   return {
     card: inputValue(env, "card", "agent-card.json"),
+    profile: inputValue(env, "profile", ""),
     minScore,
     failBelow: parseBoolean(
       inputValue(env, "fail-below", "true"),
@@ -78,6 +80,20 @@ export function buildSummary(card, result, gate, badge) {
           "",
           ...gate.blockers.map((blocker) => `- ${blocker}`)
         ];
+  const profileRows = gate.profile
+    ? [
+        "",
+        "### Risk profile",
+        "",
+        `- Profile: **${gate.profile.title}** (\`${gate.profile.name}\`)`,
+        `- Profile gate: **${gate.profile.passed ? "PASS" : "FAIL"}**`,
+        `- Profile minimum total: **${gate.profile.minimumTotal}**`,
+        `- Per-area failures: **${gate.profile.areaFailures.length}**`,
+        `- Disallowed tool effects: **${gate.profile.effectFailures.length}**`,
+        `- Missing required tool effects: **${gate.profile.missingEffects.length}**`,
+        `- Missing approvals: **${gate.profile.approvalFailures.length}**`
+      ]
+    : [];
 
   return [
     "## Agent Production Readiness Gate",
@@ -89,10 +105,14 @@ export function buildSummary(card, result, gate, badge) {
     "",
     `- Score gate: **${scoreStatus}** (minimum ${gate.minScore})`,
     `- Launch blocker gate: **${blockerStatus}** (${gate.blockers.length} declared, strict mode ${gate.failOnBlockers ? "on" : "off"})`,
+    ...(gate.profile
+      ? [`- Risk profile gate: **${gate.profile.passed ? "PASS" : "FAIL"}**`]
+      : []),
     "",
     "| Area | Score |",
     "| --- | ---: |",
     rows,
+    ...profileRows,
     ...blockerRows
   ].join("\n");
 }
@@ -112,17 +132,38 @@ export function runAction(options = {}) {
   const result = scoreCard(card);
   const badge = badgeMarkdown(result);
   const blockers = launchBlockersFor(card);
-  const scorePassed = result.total >= inputs.minScore;
-  const blockersPassed = !inputs.failOnBlockers || blockers.length === 0;
-  const passed = scorePassed && blockersPassed;
+  const profileEvaluation = inputs.profile
+    ? evaluateProfile(
+        card,
+        result,
+        inputs.profile,
+        loadProfile(inputs.profile, options.profileCatalogPath)
+      )
+    : null;
+  const minScore = profileEvaluation
+    ? profileEvaluation.minimumTotal
+    : inputs.minScore;
+  const scorePassed = result.total >= minScore;
+  const failOnBlockers =
+    inputs.failOnBlockers || profileEvaluation?.blockerPolicy === "fail";
+  const blockersPassed = !failOnBlockers || blockers.length === 0;
+  const profile = profileEvaluation
+    ? {
+        ...profileEvaluation,
+        passed: profileEvaluation.passed && blockersPassed
+      }
+    : null;
+  const profilePassed = profile ? profile.passed : true;
+  const passed = scorePassed && blockersPassed && profilePassed;
   const gate = {
     passed,
     scorePassed,
     blockersPassed,
     blockers,
     blockerCount: blockers.length,
-    minScore: inputs.minScore,
-    failOnBlockers: inputs.failOnBlockers
+    minScore,
+    failOnBlockers,
+    profile
   };
 
   appendLines(env.GITHUB_OUTPUT, [
@@ -130,6 +171,8 @@ export function runAction(options = {}) {
     `rating=${result.rating}`,
     `badge=${badge}`,
     `passed=${passed}`,
+    `profile=${profile?.name || ""}`,
+    `profile-passed=${profilePassed}`,
     `blocker-count=${blockers.length}`,
     `blockers=${JSON.stringify(blockers)}`
   ]);
@@ -138,14 +181,41 @@ export function runAction(options = {}) {
   log(
     `${card.name || "Unnamed agent"}: ${result.total}/${result.max} ` +
       `(${result.rating}), score ${scorePassed ? "PASS" : "FAIL"}, ` +
+      `profile ${profile ? `${profile.name} (${profilePassed ? "PASS" : "FAIL"})` : "off"}, ` +
       `blockers ${blockers.length} (${blockersPassed ? "PASS" : "FAIL"}), ` +
       `overall ${passed ? "PASS" : "FAIL"}`
   );
 
   const failures = [];
-  if (!scorePassed && inputs.failBelow) {
+  if (!scorePassed && (inputs.failBelow || profile)) {
     failures.push(
-      `readiness score ${result.total} is below required ${inputs.minScore}`
+      `readiness score ${result.total} is below required ${minScore}`
+    );
+  }
+  if (profile && profile.areaFailures.length > 0) {
+    failures.push(
+      `profile ${profile.name} area minimums failed: ` +
+        profile.areaFailures
+          .map((failure) => `${failure.area} ${failure.actual}/${failure.minimum}`)
+          .join(", ")
+    );
+  }
+  if (profile && profile.effectFailures.length > 0) {
+    failures.push(
+      `profile ${profile.name} disallows tool effect(s): ` +
+        profile.effectFailures.join(", ")
+    );
+  }
+  if (profile && profile.missingEffects.length > 0) {
+    failures.push(
+      `profile ${profile.name} requires tool effect(s): ` +
+        profile.missingEffects.join(", ")
+    );
+  }
+  if (profile && profile.approvalFailures.length > 0) {
+    failures.push(
+      `profile ${profile.name} requires approval for: ` +
+        profile.approvalFailures.join(", ")
     );
   }
   if (!blockersPassed) {

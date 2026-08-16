@@ -54,9 +54,16 @@ feature counts.
 - [x] Fixture-reference, duplicate-ID, and result-consistency checks
 - [x] Inert pass/fail examples and English/Chinese adapter guidance
 
+### v0.8: Risk-tiered readiness profiles
+
+- [x] Read-only, draft-only, and state-changing machine-readable profiles
+- [x] Total and per-area minimums, tool-effect boundaries, and approval rules
+- [x] Profile-specific launch-blocker policies
+- [x] Opt-in, backward-compatible GitHub Action support
+- [x] English and Chinese threat-model guidance with one example per profile
+
 ## Current Priorities
 
-- [Risk-tiered readiness profiles](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/12)
 - Wire the prompt-injection fixtures into real consumer eval runners.
 - Add source-linked incidents only when they introduce a distinct control or
   regression, not to inflate a case count.

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/readiness-profiles.schema.json",
+  "title": "Agent Readiness Profile Catalog",
+  "type": "object",
+  "required": ["version", "profiles"],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "profiles": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/profile"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "profile": {
+      "type": "object",
+      "required": [
+        "title",
+        "minimum_total",
+        "minimum_areas",
+        "allowed_tool_effects",
+        "required_tool_effects",
+        "approval_requirement",
+        "launch_blocker_policy"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minimum_total": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "minimum_areas": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "enum": [
+              "goal_clarity",
+              "tool_permissions",
+              "memory",
+              "evals",
+              "failure_handling",
+              "security",
+              "observability",
+              "cost_control",
+              "human_review",
+              "documentation"
+            ]
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+          }
+        },
+        "allowed_tool_effects": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": ["read_only", "draft", "external_state"]
+          }
+        },
+        "required_tool_effects": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": ["read_only", "draft", "external_state"]
+          }
+        },
+        "approval_requirement": {
+          "enum": ["none", "external_state"]
+        },
+        "launch_blocker_policy": {
+          "enum": ["allow", "fail"]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

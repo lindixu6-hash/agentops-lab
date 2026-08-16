@@ -37,10 +37,12 @@ test("Action manifest exposes independent score and blocker gates", () => {
 
   assert.match(manifest, /fail-below:/);
   assert.match(manifest, /fail-on-blockers:/);
+  assert.match(manifest, /profile:/);
   assert.match(manifest, /default: "false"/);
   assert.match(manifest, /blocker-count:/);
   assert.match(manifest, /blockers:/);
   assert.match(manifest, /passed:/);
+  assert.match(manifest, /profile-passed:/);
 });
 
 test("CI validates local and published eval result contracts", () => {
@@ -49,4 +51,11 @@ test("CI validates local and published eval result contracts", () => {
   assert.match(workflow, /npm run validate:results/);
   assert.match(workflow, /agentic-validate-results/);
   assert.match(workflow, /--fixtures evals\/prompt-injection\/fixtures\.jsonl/);
+});
+
+test("CI exercises the local risk-profile gate", () => {
+  const workflow = readWorkflow("ci.yml");
+
+  assert.match(workflow, /card: examples\/read-only-agent\.card\.json/);
+  assert.match(workflow, /profile: "read-only"/);
 });

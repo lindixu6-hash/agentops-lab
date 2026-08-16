@@ -24,6 +24,9 @@
     "workflow": {
       "type": "string"
     },
+    "risk_profile": {
+      "enum": ["read-only", "draft-only", "state-changing"]
+    },
     "non_goals": {
       "type": "array",
       "items": {
@@ -44,6 +47,9 @@
           },
           "access": {
             "enum": ["read", "write", "read_write"]
+          },
+          "effect": {
+            "enum": ["read_only", "draft", "external_state"]
           },
           "approval_required": {
             "type": "boolean"

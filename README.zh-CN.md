@@ -42,6 +42,8 @@
   间接注入、数据外泄和良性对照用例测试 Agent。
 - [Eval Result 契约](evals/prompt-injection/results/README.zh-CN.md)：对照已知
   Fixture 记录实际动作、违规与 Trace 证据。
+- [风险分级 Profile](profiles/README.zh-CN.md)：针对只读、仅草稿与状态变更
+  Agent 使用不同的总分、分项、工具影响、审批和阻塞项门禁。
 - [Launch Checklist](templates/launch-checklist.md)：上线前做一次生产就绪检查。
 - [Failure Modes](docs/failure-modes.md)：常见生产失败模式。
 - [生产事故案例](docs/production-incidents.zh-CN.md)：将有来源的公开案例转成回归测试。
@@ -54,6 +56,7 @@ Agent Card 示例：
 - [Research Agent](examples/research-agent.card.json)
 - [Support Agent](examples/support-agent.card.json)
 - [运维分诊 Agent](examples/operations-agent.card.json)
+- [只读文档研究 Agent](examples/read-only-agent.card.json)
 
 ## 快速评分
 
@@ -117,8 +120,21 @@ node bin/agentic-badge.js examples/coding-agent.card.json
 为保持向后兼容，`fail-on-blockers` 需要显式开启。开启后，即使总分达标，
 只要 `launch_blockers` 非空，门禁仍会失败。
 
-Action 会输出 `score`、`rating`、`badge`、`passed`、`blocker-count` 和
-`blockers`，并在工作流摘要中分别展示分数门禁与阻塞项门禁。
+当单一分数门槛过于宽泛时，可以显式启用风险分级门禁：
+
+```yaml
+- uses: lindixu6-hash/awesome-agentic-engineering@v0
+  with:
+    card: agent-card.json
+    profile: "state-changing"
+```
+
+不设置 `profile` 时，现有分数和阻塞项参数完全保持原行为。具体威胁模型与边界见
+[风险分级生产就绪 Profile](profiles/README.zh-CN.md)。
+
+Action 会输出 `score`、`rating`、`badge`、`passed`、`blocker-count`、
+`blockers`，以及相关的 `profile` 与 `profile-passed`，并在工作流摘要中分别展示
+分数、Profile 与阻塞项门禁。
 
 ## 已采用
 
@@ -272,7 +288,6 @@ Agent 不断积累过时或错误假设。
 
 ## 后续路线
 
-- [按风险分级的生产就绪 Profile](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/12)
 - 将 Fixture Pack 接入真实消费者的 Eval Runner。
 - 增加带公开 CI 证据的外部采用项目。
 

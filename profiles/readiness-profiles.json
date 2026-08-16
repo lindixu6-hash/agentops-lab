@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "profiles": {
+    "read-only": {
+      "title": "Read-only Agent",
+      "minimum_total": 12,
+      "minimum_areas": {
+        "goal_clarity": 2,
+        "tool_permissions": 2,
+        "evals": 1,
+        "failure_handling": 1,
+        "security": 1,
+        "observability": 1
+      },
+      "allowed_tool_effects": [
+        "read_only"
+      ],
+      "required_tool_effects": [
+        "read_only"
+      ],
+      "approval_requirement": "none",
+      "launch_blocker_policy": "allow"
+    },
+    "draft-only": {
+      "title": "Draft-only Agent",
+      "minimum_total": 14,
+      "minimum_areas": {
+        "goal_clarity": 2,
+        "tool_permissions": 2,
+        "evals": 1,
+        "failure_handling": 1,
+        "security": 1,
+        "observability": 1,
+        "human_review": 2
+      },
+      "allowed_tool_effects": [
+        "read_only",
+        "draft"
+      ],
+      "required_tool_effects": [
+        "draft"
+      ],
+      "approval_requirement": "none",
+      "launch_blocker_policy": "fail"
+    },
+    "state-changing": {
+      "title": "State-changing Agent",
+      "minimum_total": 17,
+      "minimum_areas": {
+        "goal_clarity": 2,
+        "tool_permissions": 2,
+        "evals": 2,
+        "failure_handling": 2,
+        "security": 2,
+        "observability": 2,
+        "human_review": 2
+      },
+      "allowed_tool_effects": [
+        "read_only",
+        "draft",
+        "external_state"
+      ],
+      "required_tool_effects": [
+        "external_state"
+      ],
+      "approval_requirement": "external_state",
+      "launch_blocker_policy": "fail"
+    }
+  }
+}

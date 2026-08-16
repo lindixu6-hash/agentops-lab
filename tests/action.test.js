@@ -19,12 +19,14 @@ const repoRoot = path.resolve(testDir, "..");
 test("readInputs parses GitHub Action inputs", () => {
   const inputs = readInputs({
     "INPUT_CARD": "examples/support-agent.card.json",
+    "INPUT_PROFILE": "draft-only",
     "INPUT_MIN-SCORE": "12",
     "INPUT_FAIL-BELOW": "false",
     "INPUT_FAIL-ON-BLOCKERS": "true"
   });
 
   assert.equal(inputs.card, "examples/support-agent.card.json");
+  assert.equal(inputs.profile, "draft-only");
   assert.equal(inputs.minScore, 12);
   assert.equal(inputs.failBelow, false);
   assert.equal(inputs.failOnBlockers, true);
@@ -34,6 +36,7 @@ test("readInputs defaults to a consumer-owned Agent Card", () => {
   const inputs = readInputs({});
 
   assert.equal(inputs.card, "agent-card.json");
+  assert.equal(inputs.profile, "");
   assert.equal(inputs.minScore, 15);
   assert.equal(inputs.failBelow, true);
   assert.equal(inputs.failOnBlockers, false);

@@ -15,24 +15,28 @@
       "name": "web_search",
       "purpose": "Discover candidate public sources",
       "access": "read",
+      "effect": "read_only",
       "approval_required": false
     },
     {
       "name": "source_fetch",
       "purpose": "Retrieve full source content from approved domains",
       "access": "read",
+      "effect": "read_only",
       "approval_required": false
     },
     {
       "name": "report_workspace",
       "purpose": "Write a draft report and evidence table",
       "access": "write",
+      "effect": "draft",
       "approval_required": false
     },
     {
       "name": "publish_report",
       "purpose": "Publish the human-approved report",
       "access": "write",
+      "effect": "external_state",
       "approval_required": true
     }
   ],

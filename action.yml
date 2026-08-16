@@ -11,6 +11,10 @@ inputs:
     description: Path to an Agent Card JSON file.
     required: false
     default: agent-card.json
+  profile:
+    description: Optional built-in risk profile (read-only, draft-only, or state-changing).
+    required: false
+    default: ""
   min-score:
     description: Minimum accepted score from 0 to 20.
     required: false
@@ -33,6 +37,10 @@ outputs:
     description: Markdown for a README-ready score badge.
   passed:
     description: Whether the combined score and launch-blocker gates passed.
+  profile:
+    description: Selected risk profile, or an empty string.
+  profile-passed:
+    description: Whether all selected risk-profile requirements passed.
   blocker-count:
     description: Number of declared launch blockers.
   blockers:

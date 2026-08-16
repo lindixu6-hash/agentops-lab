@@ -28,6 +28,11 @@ jobs:
             --fixtures evals/prompt-injection/fixtures.jsonl
       - run: npm run score
       - run: npm run score:operations
+      - name: Test read-only risk profile
+        uses: ./
+        with:
+          card: examples/read-only-agent.card.json
+          profile: "read-only"
       - name: Test readiness Action
         uses: ./
         with:

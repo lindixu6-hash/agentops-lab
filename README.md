@@ -42,6 +42,9 @@ Use these first:
   indirect, exfiltration, and benign-control cases against your agent.
 - [Eval Result Contract](evals/prompt-injection/results/README.md): record
   observed actions, violations, and trace evidence against known fixtures.
+- [Risk-Tiered Profiles](profiles/README.md): apply different total, per-area,
+  tool-effect, approval, and blocker gates to read-only, draft-only, and
+  state-changing Agents.
 - [Launch Checklist](templates/launch-checklist.md): review readiness before showing the agent to real users.
 - [Failure Modes](docs/failure-modes.md): common ways production agents break.
 - [Production Incidents](docs/production-incidents.md): source-linked cases
@@ -55,6 +58,7 @@ Example Agent Cards:
 - [Research agent](examples/research-agent.card.json)
 - [Support agent](examples/support-agent.card.json)
 - [Operations triage agent](examples/operations-agent.card.json)
+- [Read-only documentation agent](examples/read-only-agent.card.json)
 
 ## Quick Score
 
@@ -118,9 +122,23 @@ Use the repository as a CI release gate:
 `fail-on-blockers` is opt-in for backward compatibility. When enabled, any
 non-empty `launch_blockers` array fails the gate even if the score passes.
 
+Opt into a risk-tiered gate when a single score threshold is too broad:
+
+```yaml
+- uses: lindixu6-hash/awesome-agentic-engineering@v0
+  with:
+    card: agent-card.json
+    profile: "state-changing"
+```
+
+Without `profile`, all existing score and blocker inputs keep their original
+behavior. Profile rationale and boundaries are documented in
+[Risk-Tiered Readiness Profiles](profiles/README.md).
+
 The Action writes `score`, `rating`, `badge`, `passed`, `blocker-count`, and
-`blockers` outputs. The workflow summary reports the score gate and launch
-blocker gate separately.
+`blockers` outputs, plus `profile` and `profile-passed` when relevant. The
+workflow summary reports the score, profile, and launch blocker gates
+separately.
 
 ## Used By
 
@@ -345,7 +363,6 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting.
 
 ## Roadmap
 
-- [Risk-tiered readiness profiles](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/12)
 - Wire fixture packs into real consumer eval runners.
 - Add external adopters with public CI evidence.
 

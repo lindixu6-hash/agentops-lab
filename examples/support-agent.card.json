@@ -4,6 +4,7 @@
   "owner": "Customer support",
   "users": ["support agents", "success managers"],
   "workflow": "Given a customer ticket, the agent gathers account context and drafts a reply for human approval.",
+  "risk_profile": "draft-only",
   "non_goals": [
     "Send customer messages without approval",
     "Offer refunds or credits",
@@ -14,18 +15,21 @@
       "name": "ticket_read",
       "purpose": "Read support ticket details",
       "access": "read",
+      "effect": "read_only",
       "approval_required": false
     },
     {
       "name": "account_lookup",
       "purpose": "Read plan, usage, and status data",
       "access": "read",
+      "effect": "read_only",
       "approval_required": false
     },
     {
       "name": "draft_reply",
       "purpose": "Create a draft response",
       "access": "write",
+      "effect": "draft",
       "approval_required": true
     }
   ],

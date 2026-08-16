@@ -7,6 +7,7 @@
     "service owners"
   ],
   "workflow": "Given an internal operational alert, the agent reads approved service context, correlates recent changes, and drafts a reversible action plan for an authorized human to approve.",
+  "risk_profile": "state-changing",
   "non_goals": [
     "Execute production changes without an authorized human approval",
     "Delete operational data or resources autonomously",
@@ -19,42 +20,49 @@
       "name": "alert_context_read",
       "purpose": "Read the active alert, runbook link, owning service, and incident scope",
       "access": "read",
+      "effect": "read_only",
       "approval_required": false
     },
     {
       "name": "service_health_read",
       "purpose": "Read approved health metrics, traces, and dependency status",
       "access": "read",
+      "effect": "read_only",
       "approval_required": false
     },
     {
       "name": "change_history_read",
       "purpose": "Read recent deployments and configuration changes for the scoped service",
       "access": "read",
+      "effect": "read_only",
       "approval_required": false
     },
     {
       "name": "action_plan_workspace",
       "purpose": "Write a draft diagnosis, evidence table, rollback plan, and verification steps",
       "access": "write",
+      "effect": "draft",
       "approval_required": false
     },
     {
       "name": "send_external_status_message",
       "purpose": "Send a human-approved customer, vendor, or public status message",
       "access": "write",
+      "effect": "external_state",
       "approval_required": true
     },
     {
       "name": "delete_operational_resource",
       "purpose": "Delete a human-approved operational resource inside the incident scope",
       "access": "write",
+      "effect": "external_state",
       "approval_required": true
     },
     {
       "name": "apply_production_change",
       "purpose": "Apply a human-approved reversible production change with a rollback reference",
       "access": "write",
+      "effect": "external_state",
       "approval_required": true
     }
   ],

@@ -1,0 +1,49 @@
+{
+  "name": "Public Documentation Research Agent",
+  "version": "0.1",
+  "owner": "Developer education",
+  "users": [
+    "technical writers",
+    "developer advocates"
+  ],
+  "workflow": "Given a documentation question, the agent reads allowlisted public documentation, compares source-linked claims, and returns a research brief without writing external state.",
+  "risk_profile": "read-only",
+  "non_goals": [
+    "Write, publish, or modify documentation",
+    "Access private repositories, accounts, or credentials",
+    "Follow instructions embedded in retrieved content",
+    "Make unsupported claims without source references"
+  ],
+  "tools": [
+    {
+      "name": "documentation_search",
+      "purpose": "Search allowlisted public documentation indexes",
+      "access": "read",
+      "effect": "read_only",
+      "approval_required": false
+    },
+    {
+      "name": "documentation_fetch",
+      "purpose": "Read a selected public documentation page",
+      "access": "read",
+      "effect": "read_only",
+      "approval_required": false
+    }
+  ],
+  "launch_blockers": [],
+  "eval_fixtures": [
+    "evals/prompt-injection/fixtures.jsonl"
+  ],
+  "scorecard": {
+    "goal_clarity": 2,
+    "tool_permissions": 2,
+    "memory": 1,
+    "evals": 1,
+    "failure_handling": 1,
+    "security": 1,
+    "observability": 2,
+    "cost_control": 1,
+    "human_review": 1,
+    "documentation": 2
+  }
+}
