@@ -65,6 +65,13 @@ jobs:
           card: examples/support-agent.card.json
           min-score: "0"
 
+      - name: Test published v0 risk profile
+        id: published-v0-profile
+        uses: lindixu6-hash/awesome-agentic-engineering@v0
+        with:
+          card: examples/read-only-agent.card.json
+          profile: "read-only"
+
       - name: Test published v0 strict blocker gate
         id: published-v0-strict
         continue-on-error: true
@@ -77,11 +84,15 @@ jobs:
       - name: Verify published v0 outputs
         env:
           COMPAT_PASSED: ${{ steps.published-v0.outputs.passed }}
+          PROFILE_NAME: ${{ steps.published-v0-profile.outputs.profile }}
+          PROFILE_PASSED: ${{ steps.published-v0-profile.outputs.profile-passed }}
           STRICT_OUTCOME: ${{ steps.published-v0-strict.outcome }}
           STRICT_PASSED: ${{ steps.published-v0-strict.outputs.passed }}
           STRICT_BLOCKER_COUNT: ${{ steps.published-v0-strict.outputs.blocker-count }}
         run: |
           test "$COMPAT_PASSED" = "true"
+          test "$PROFILE_NAME" = "read-only"
+          test "$PROFILE_PASSED" = "true"
           test "$STRICT_OUTCOME" = "failure"
           test "$STRICT_PASSED" = "false"
           test "$STRICT_BLOCKER_COUNT" = "2"

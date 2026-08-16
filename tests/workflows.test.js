@@ -59,3 +59,16 @@ test("CI exercises the local risk-profile gate", () => {
   assert.match(workflow, /card: examples\/read-only-agent\.card\.json/);
   assert.match(workflow, /profile: "read-only"/);
 });
+
+test("CI verifies the published v0 risk-profile outputs", () => {
+  const workflow = readWorkflow("ci.yml");
+
+  assert.match(
+    workflow,
+    /uses: lindixu6-hash\/awesome-agentic-engineering@v0/
+  );
+  assert.match(workflow, /PROFILE_NAME:/);
+  assert.match(workflow, /PROFILE_PASSED:/);
+  assert.match(workflow, /test "\$PROFILE_NAME" = "read-only"/);
+  assert.match(workflow, /test "\$PROFILE_PASSED" = "true"/);
+});
