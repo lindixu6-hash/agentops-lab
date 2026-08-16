@@ -1,5 +1,45 @@
 # Launch Posts
 
+## English Action Launch
+
+Your AI agent can pass unit tests and still be unsafe to ship.
+
+I made a zero-key GitHub Action that scores 10 production-readiness areas and
+blocks CI below your threshold:
+
+```yaml
+- uses: lindixu6-hash/awesome-agentic-engineering@v0
+  with:
+    card: agent-card.json
+    min-score: "15"
+```
+
+It checks permissions, memory, evals, recovery, security, observability, cost,
+human review, and documentation.
+
+Open source, Node 24, no external API:
+
+https://github.com/lindixu6-hash/awesome-agentic-engineering
+
+## Chinese Action Launch
+
+Agent 能通过单测，不代表它适合上线。
+
+我把10项生产就绪检查做成了零API Key的GitHub Action，低于自定义分数可以直接阻断CI：
+
+```yaml
+- uses: lindixu6-hash/awesome-agentic-engineering@v0
+  with:
+    card: agent-card.json
+    min-score: "15"
+```
+
+覆盖权限、记忆、评估、失败恢复、安全、可观测性、成本、人工审核和文档。
+
+开源、Node 24、无外部模型调用：
+
+https://github.com/lindixu6-hash/awesome-agentic-engineering
+
 ## English Score Challenge
 
 I scored a coding agent against 10 production-readiness checks.
