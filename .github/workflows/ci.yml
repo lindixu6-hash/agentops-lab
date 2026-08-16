@@ -20,6 +20,12 @@ jobs:
           npm exec --yes \
             --package=github:lindixu6-hash/awesome-agentic-engineering#v0 \
             -- agentic-validate-fixtures evals/prompt-injection/fixtures.jsonl
+      - name: Test published v0 eval result validator
+        run: |
+          npm exec --yes \
+            --package=github:lindixu6-hash/awesome-agentic-engineering#v0 \
+            -- agentic-validate-results examples/eval-results/pass.json \
+            --fixtures evals/prompt-injection/fixtures.jsonl
       - run: npm run score
       - run: npm run score:operations
       - name: Test readiness Action
