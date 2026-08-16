@@ -80,6 +80,15 @@ feature counts.
 - [x] Validate results with public `@v0` and retain a dedicated CI artifact
 - [x] Keep root CLIs zero-dependency and document limits in English and Chinese
 
+### v0.11: Fail-closed project initializer
+
+- [x] Zero-dependency `agentic-init` CLI
+- [x] Read-only, draft-only, and state-changing starter cards
+- [x] Generated GitHub Actions workflow pinned to public `@v0`
+- [x] Zero scores, TODO fields, and an explicit starter blocker by default
+- [x] Atomic overwrite protection with explicit `--force`
+- [x] English and Chinese five-minute quickstarts
+
 ## Current Priorities
 
 - [Add a second external runtime adapter with public CI evidence](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/14).

@@ -16,6 +16,34 @@ jobs:
       - run: npm test
       - run: npm run validate:fixtures
       - run: npm run validate:results
+      - name: Generate fail-closed starter
+        run: |
+          mkdir .tmp-init
+          cd .tmp-init
+          node "$GITHUB_WORKSPACE/bin/agentic-init.js" \
+            --profile draft-only \
+            --name "CI Starter Agent"
+          test -f agent-card.json
+          test -f .github/workflows/agent-readiness.yml
+      - name: Test generated starter gate
+        id: starter-gate
+        continue-on-error: true
+        uses: ./
+        with:
+          card: .tmp-init/agent-card.json
+          profile: "draft-only"
+          fail-on-blockers: "true"
+      - name: Verify generated starter fails closed
+        env:
+          STEP_OUTCOME: ${{ steps.starter-gate.outcome }}
+          SCORE: ${{ steps.starter-gate.outputs.score }}
+          PROFILE_PASSED: ${{ steps.starter-gate.outputs.profile-passed }}
+          BLOCKER_COUNT: ${{ steps.starter-gate.outputs.blocker-count }}
+        run: |
+          test "$STEP_OUTCOME" = "failure"
+          test "$SCORE" = "0"
+          test "$PROFILE_PASSED" = "false"
+          test "$BLOCKER_COUNT" = "1"
       - name: Run deterministic reference Agent eval
         env:
           SOURCE_DATE_EPOCH: "1786924800"

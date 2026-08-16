@@ -67,6 +67,23 @@ Example Agent Cards:
 - [Operations triage agent](examples/operations-agent.card.json)
 - [Read-only documentation agent](examples/read-only-agent.card.json)
 
+## Five-Minute CI Gate
+
+Generate a fail-closed Agent Card and workflow without cloning:
+
+```bash
+npm exec --yes \
+  --package=github:lindixu6-hash/awesome-agentic-engineering#v0 \
+  -- agentic-init \
+  --profile draft-only \
+  --name "Support Drafting Agent"
+```
+
+The first run intentionally fails at `0/20` with one launch blocker. Replace
+the TODOs, attach evidence, and set honest scores before removing it. Existing
+files are never overwritten unless `--force` is explicit. See the
+[five-minute quickstart](docs/quickstart.md).
+
 ## Quick Score
 
 Try the [web scorecard](https://lindixu6-hash.github.io/awesome-agentic-engineering/),

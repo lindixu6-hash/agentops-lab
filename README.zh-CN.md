@@ -63,6 +63,22 @@ Agent Card 示例：
 - [运维分诊 Agent](examples/operations-agent.card.json)
 - [只读文档研究 Agent](examples/read-only-agent.card.json)
 
+## 五分钟接入 CI 门禁
+
+无需 clone，一条命令生成 fail-closed 的 Agent Card 与工作流：
+
+```bash
+npm exec --yes \
+  --package=github:lindixu6-hash/awesome-agentic-engineering#v0 \
+  -- agentic-init \
+  --profile draft-only \
+  --name "Support Drafting Agent"
+```
+
+第一次运行会刻意以 `0/20` 和一个上线 blocker 失败。替换所有 TODO、关联证据并
+如实评分后，才能删除 blocker。除非显式传入 `--force`，命令不会覆盖已有文件。
+完整流程见[五分钟 Quickstart](docs/quickstart.zh-CN.md)。
+
 ## 快速评分
 
 直接打开[在线评分器](https://lindixu6-hash.github.io/awesome-agentic-engineering/)，

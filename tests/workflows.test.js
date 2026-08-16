@@ -53,6 +53,18 @@ test("CI validates local and published eval result contracts", () => {
   assert.match(workflow, /--fixtures evals\/prompt-injection\/fixtures\.jsonl/);
 });
 
+test("CI verifies generated starters fail closed", () => {
+  const workflow = readWorkflow("ci.yml");
+
+  assert.match(workflow, /bin\/agentic-init\.js/);
+  assert.match(workflow, /card: \.tmp-init\/agent-card\.json/);
+  assert.match(workflow, /id: starter-gate/);
+  assert.match(workflow, /test "\$STEP_OUTCOME" = "failure"/);
+  assert.match(workflow, /test "\$SCORE" = "0"/);
+  assert.match(workflow, /test "\$PROFILE_PASSED" = "false"/);
+  assert.match(workflow, /test "\$BLOCKER_COUNT" = "1"/);
+});
+
 test("CI exercises the local risk-profile gate", () => {
   const workflow = readWorkflow("ci.yml");
 
