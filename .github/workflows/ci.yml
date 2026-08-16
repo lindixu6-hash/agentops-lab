@@ -14,6 +14,11 @@ jobs:
           node-version: 24
       - run: npm test
       - run: npm run validate:fixtures
+      - name: Test published v0 fixture validator
+        run: |
+          npm exec --yes \
+            --package=github:lindixu6-hash/awesome-agentic-engineering#v0 \
+            -- agentic-validate-fixtures evals/prompt-injection/fixtures.jsonl
       - run: npm run score
       - name: Test readiness Action
         uses: ./
