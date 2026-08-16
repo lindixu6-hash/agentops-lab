@@ -29,5 +29,5 @@ outputs:
     description: Markdown for a README-ready score badge.
 
 runs:
-  using: node20
+  using: node24
   main: action/index.js

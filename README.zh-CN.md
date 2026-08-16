@@ -85,7 +85,7 @@ node bin/agentic-badge.js examples/coding-agent.card.json
 在 CI 中把仓库作为上线门禁：
 
 ```yaml
-- uses: lindixu6-hash/awesome-agentic-engineering@v0.2.0
+- uses: lindixu6-hash/awesome-agentic-engineering@v0.2.1
   with:
     card: agent-card.json
     min-score: "15"

@@ -86,7 +86,7 @@ node bin/agentic-badge.js examples/coding-agent.card.json
 Use the repository as a CI release gate:
 
 ```yaml
-- uses: lindixu6-hash/awesome-agentic-engineering@v0.2.0
+- uses: lindixu6-hash/awesome-agentic-engineering@v0.2.1
   with:
     card: agent-card.json
     min-score: "15"
