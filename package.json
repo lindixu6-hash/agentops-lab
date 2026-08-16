@@ -5,7 +5,8 @@
   "license": "MIT",
   "type": "module",
   "bin": {
-    "agentic-score": "./bin/agentic-score.js"
+    "agentic-score": "./bin/agentic-score.js",
+    "agentic-badge": "./bin/agentic-badge.js"
   },
   "files": [
     "assets",
@@ -23,6 +24,7 @@
   "scripts": {
     "check:stars": "node bin/star-watch.js",
     "check:stars:text": "node bin/star-watch.js --text",
+    "badge": "node bin/agentic-badge.js examples/coding-agent.card.json",
     "score": "node bin/agentic-score.js examples/coding-agent.card.json",
     "test": "node --test tests/*.test.js"
   },

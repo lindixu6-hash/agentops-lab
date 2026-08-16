@@ -61,7 +61,18 @@ clone 后也可以直接运行：
 
 ```bash
 npm run score
+npm run badge
 npm test
+```
+
+使用同一份 Agent Card 生成可直接放进 README 的徽章：
+
+```bash
+node bin/agentic-badge.js examples/coding-agent.card.json
+```
+
+```markdown
+![Agent production readiness](https://img.shields.io/badge/agent%20readiness-16%2F20%20limited%20beta-287a50?style=flat-square)
 ```
 
 发布到 GitHub 后，可以这样检查 star：

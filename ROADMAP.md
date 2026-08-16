@@ -14,7 +14,7 @@
 - 20 real-world failure cases
 - MCP server safety review checklist
 - More agent examples: research, support, ops, coding
-- Scorecard badge generator
+- [x] Scorecard badge generator
 
 ## v0.3
 

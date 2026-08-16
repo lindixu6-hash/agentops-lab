@@ -61,7 +61,18 @@ You can also use the npm scripts after cloning:
 
 ```bash
 npm run score
+npm run badge
 npm test
+```
+
+Generate a README-ready badge from the same Agent Card:
+
+```bash
+node bin/agentic-badge.js examples/coding-agent.card.json
+```
+
+```markdown
+![Agent production readiness](https://img.shields.io/badge/agent%20readiness-16%2F20%20limited%20beta-287a50?style=flat-square)
 ```
 
 After publishing on GitHub, check repository stars:
