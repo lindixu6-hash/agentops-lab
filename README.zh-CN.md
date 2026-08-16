@@ -62,7 +62,7 @@ npm test
 发布到 GitHub 后，可以这样检查 star：
 
 ```bash
-node bin/star-watch.js owner/repo
+node bin/star-watch.js owner/repo --state .star-watch.json --target 1000 --text
 ```
 
 ## 生产级 Agent 评分卡

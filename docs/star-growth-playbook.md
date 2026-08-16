@@ -124,7 +124,7 @@ Actions:
 Check daily:
 
 ```bash
-node bin/star-watch.js owner/repo
+node bin/star-watch.js owner/repo --state .star-watch.json --target 1000 --text
 ```
 
 Track:

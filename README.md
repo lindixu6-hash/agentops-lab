@@ -62,7 +62,7 @@ npm test
 After publishing on GitHub, check repository stars:
 
 ```bash
-node bin/star-watch.js owner/repo
+node bin/star-watch.js owner/repo --state .star-watch.json --target 1000 --text
 ```
 
 ## Production Agent Scorecard

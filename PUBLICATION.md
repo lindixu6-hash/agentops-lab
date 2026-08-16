@@ -48,13 +48,13 @@ ai-engineering
 - [ ] Confirm README renders correctly.
 - [ ] Confirm `assets/scorecard.svg` appears near the top.
 - [ ] Confirm GitHub Actions CI starts.
-- [ ] Add the topics above.
+- [ ] Add the topics above. The publish script tries to do this automatically.
 - [ ] Pin the repository on the GitHub profile.
 - [ ] Create the first three issues:
   - Add real-world production failure cases
   - Add research-agent example
   - Add scorecard badge generator
-- [ ] Start star monitoring automation.
+- [ ] Start star monitoring automation. The publish script writes `.star-watch.json` as the first local snapshot.
 
 ## Star Milestones
 
@@ -82,3 +82,11 @@ Or choose a different repository name:
 ```bash
 scripts/publish-github.sh my-repo-name
 ```
+
+The script also:
+
+- pushes `main`
+- applies recommended topics
+- creates starter labels
+- creates three starter issues if they do not already exist
+- records the initial star snapshot with `bin/star-watch.js`
