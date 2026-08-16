@@ -37,6 +37,12 @@
 - [MCP Safety Checklist](docs/mcp-safety-checklist.md)：给 Agent 接入工具服务器前的安全检查。
 - [Star Growth Playbook](docs/star-growth-playbook.md)：长期真实增长打法。
 
+Agent Card 示例：
+
+- [Coding Agent](examples/coding-agent.card.json)
+- [Research Agent](examples/research-agent.card.json)
+- [Support Agent](examples/support-agent.card.json)
+
 ## 快速评分
 
 直接打开[在线评分器](https://lindixu6-hash.github.io/awesome-agentic-engineering/)，

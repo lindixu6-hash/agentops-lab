@@ -37,6 +37,12 @@ Use these first:
 - [MCP Safety Checklist](docs/mcp-safety-checklist.md): review tool servers before giving agents access.
 - [Star Growth Playbook](docs/star-growth-playbook.md): ethical launch and maintenance loop.
 
+Example Agent Cards:
+
+- [Coding agent](examples/coding-agent.card.json)
+- [Research agent](examples/research-agent.card.json)
+- [Support agent](examples/support-agent.card.json)
+
 ## Quick Score
 
 Try the [web scorecard](https://lindixu6-hash.github.io/awesome-agentic-engineering/)

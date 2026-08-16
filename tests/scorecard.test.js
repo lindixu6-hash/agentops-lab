@@ -1,7 +1,16 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-import { formatReport, ratingFor, scoreCard } from "../bin/agentic-score.js";
+import {
+  formatReport,
+  loadCard,
+  ratingFor,
+  scoreCard
+} from "../bin/agentic-score.js";
+
+const testDir = path.dirname(fileURLToPath(import.meta.url));
 
 test("ratingFor maps score ranges", () => {
   assert.equal(ratingFor(0), "demo only");
@@ -64,4 +73,19 @@ test("formatReport includes blockers", () => {
   assert.match(report, /Test Agent/);
   assert.match(report, /Score: 20\/20/);
   assert.match(report, /Needs evals/);
+});
+
+test("research agent example is a valid, source-grounded card", () => {
+  const card = loadCard(
+    path.join(testDir, "../examples/research-agent.card.json")
+  );
+  const result = scoreCard(card);
+
+  assert.equal(card.name, "Source-Grounded Research Agent");
+  assert.equal(result.total, 15);
+  assert.equal(result.rating, "limited beta");
+  assert.match(card.workflow, /source-linked report/);
+  assert.ok(
+    card.non_goals.some((item) => item.includes("embedded in retrieved"))
+  );
 });

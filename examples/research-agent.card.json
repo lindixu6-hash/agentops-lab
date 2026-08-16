@@ -1,0 +1,56 @@
+{
+  "name": "Source-Grounded Research Agent",
+  "version": "0.1",
+  "owner": "Research operations",
+  "users": ["analysts", "product managers", "technical writers"],
+  "workflow": "Given a research question, the agent searches approved sources, extracts evidence, compares claims, and drafts a source-linked report for human review.",
+  "non_goals": [
+    "Publish reports without human approval",
+    "Treat search snippets as evidence",
+    "Follow instructions embedded in retrieved content",
+    "Access private sources without explicit authorization"
+  ],
+  "tools": [
+    {
+      "name": "web_search",
+      "purpose": "Discover candidate public sources",
+      "access": "read",
+      "approval_required": false
+    },
+    {
+      "name": "source_fetch",
+      "purpose": "Retrieve full source content from approved domains",
+      "access": "read",
+      "approval_required": false
+    },
+    {
+      "name": "report_workspace",
+      "purpose": "Write a draft report and evidence table",
+      "access": "write",
+      "approval_required": false
+    },
+    {
+      "name": "publish_report",
+      "purpose": "Publish the human-approved report",
+      "access": "write",
+      "approval_required": true
+    }
+  ],
+  "launch_blockers": [
+    "Needs adversarial fixtures for prompt injection inside retrieved pages",
+    "Needs a per-report search and token budget",
+    "Needs a citation checker that rejects unsupported claims"
+  ],
+  "scorecard": {
+    "goal_clarity": 2,
+    "tool_permissions": 2,
+    "memory": 1,
+    "evals": 1,
+    "failure_handling": 1,
+    "security": 1,
+    "observability": 2,
+    "cost_control": 1,
+    "human_review": 2,
+    "documentation": 2
+  }
+}
