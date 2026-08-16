@@ -9,7 +9,7 @@
 
 Production-ready patterns, templates, evals, and failure cases for shipping AI agents that survive real users.
 
-![Production Agent Scorecard](assets/scorecard.svg)
+[![Score an AI agent from 0/20 to production candidate](assets/readiness-scorecard-demo.gif)](https://lindixu6-hash.github.io/awesome-agentic-engineering/)
 
 Most AI agent demos look impressive for five minutes. Production agents fail in quieter ways: vague goals, brittle tool use, memory drift, hidden costs, missing evals, prompt injection, and no recovery path.
 

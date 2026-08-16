@@ -9,7 +9,7 @@
 
 一个面向真实业务落地的 AI Agent 工程化手册：模板、评估、架构模式、失败案例和发布清单。
 
-![Production Agent Scorecard](assets/scorecard.svg)
+[![将 AI Agent 从 0/20 评到生产候选](assets/readiness-scorecard-demo.gif)](https://lindixu6-hash.github.io/awesome-agentic-engineering/)
 
 大多数 AI Agent demo 能惊艳 5 分钟，但很难进入生产。真正的问题通常不是模型不够强，而是目标模糊、工具权限过大、记忆漂移、没有评估、成本失控、提示注入、失败不可见。
 
