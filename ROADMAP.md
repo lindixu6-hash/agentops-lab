@@ -82,8 +82,7 @@ feature counts.
 
 ## Current Priorities
 
-- Add another external runtime or accept a community adapter with public CI
-  evidence.
+- [Add a second external runtime adapter with public CI evidence](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/14).
 - Add source-linked incidents only when they introduce a distinct control or
   regression, not to inflate a case count.
 - Add external adopters with public CI evidence.

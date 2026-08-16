@@ -62,3 +62,9 @@ test("completed product surfaces are not listed as future README work", () => {
   assert.doesNotMatch(futureChinese, /增加网页评分器/);
   assert.doesNotMatch(futureChinese, /增加生产就绪 badge/);
 });
+
+test("roadmap and bilingual READMEs expose the next runtime contribution", () => {
+  for (const document of [roadmap, readme, chineseReadme]) {
+    assert.match(document, /issues\/14/);
+  }
+});

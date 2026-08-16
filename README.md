@@ -373,8 +373,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting.
 
 ## Roadmap
 
-- Add another external runtime or accept a community adapter with public CI
-  evidence.
+- [Add a second external runtime adapter with public CI evidence](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/14).
 - Add external adopters with public CI evidence.
 
 See the evidence-based [ROADMAP.md](ROADMAP.md) for shipped versions and current

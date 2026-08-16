@@ -296,7 +296,7 @@ Agent 不断积累过时或错误假设。
 
 ## 后续路线
 
-- 增加另一个外部 Runtime，或接收带公开 CI 证据的社区适配器。
+- [增加第二个带公开 CI 证据的外部 Runtime 适配器](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/14)。
 - 增加带公开 CI 证据的外部采用项目。
 
 已交付版本与当前优先级见证据驱动的 [ROADMAP.md](ROADMAP.md)。
