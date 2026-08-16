@@ -51,6 +51,7 @@ Agent Card 示例：
 - [Coding Agent](examples/coding-agent.card.json)
 - [Research Agent](examples/research-agent.card.json)
 - [Support Agent](examples/support-agent.card.json)
+- [运维分诊 Agent](examples/operations-agent.card.json)
 
 ## 快速评分
 

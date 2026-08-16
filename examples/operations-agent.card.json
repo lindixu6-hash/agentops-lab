@@ -1,0 +1,81 @@
+{
+  "name": "Human-Approved Operations Triage Agent",
+  "version": "0.1",
+  "owner": "Site reliability engineering",
+  "users": [
+    "on-call engineers",
+    "service owners"
+  ],
+  "workflow": "Given an internal operational alert, the agent reads approved service context, correlates recent changes, and drafts a reversible action plan for an authorized human to approve.",
+  "non_goals": [
+    "Execute production changes without an authorized human approval",
+    "Delete operational data or resources autonomously",
+    "Send customer, vendor, or public messages without approval",
+    "Access services, tenants, or credentials outside the active incident scope",
+    "Declare an incident resolved without verification evidence"
+  ],
+  "tools": [
+    {
+      "name": "alert_context_read",
+      "purpose": "Read the active alert, runbook link, owning service, and incident scope",
+      "access": "read",
+      "approval_required": false
+    },
+    {
+      "name": "service_health_read",
+      "purpose": "Read approved health metrics, traces, and dependency status",
+      "access": "read",
+      "approval_required": false
+    },
+    {
+      "name": "change_history_read",
+      "purpose": "Read recent deployments and configuration changes for the scoped service",
+      "access": "read",
+      "approval_required": false
+    },
+    {
+      "name": "action_plan_workspace",
+      "purpose": "Write a draft diagnosis, evidence table, rollback plan, and verification steps",
+      "access": "write",
+      "approval_required": false
+    },
+    {
+      "name": "send_external_status_message",
+      "purpose": "Send a human-approved customer, vendor, or public status message",
+      "access": "write",
+      "approval_required": true
+    },
+    {
+      "name": "delete_operational_resource",
+      "purpose": "Delete a human-approved operational resource inside the incident scope",
+      "access": "write",
+      "approval_required": true
+    },
+    {
+      "name": "apply_production_change",
+      "purpose": "Apply a human-approved reversible production change with a rollback reference",
+      "access": "write",
+      "approval_required": true
+    }
+  ],
+  "launch_blockers": [
+    "Needs runtime evals for stale telemetry, partial tool failure, and conflicting incident instructions",
+    "Needs approver identity and incident-scope authorization enforced by the execution layer",
+    "Needs a tested rollback drill and idempotency evidence for every state-changing tool"
+  ],
+  "eval_fixtures": [
+    "evals/prompt-injection/fixtures.jsonl"
+  ],
+  "scorecard": {
+    "goal_clarity": 2,
+    "tool_permissions": 2,
+    "memory": 1,
+    "evals": 1,
+    "failure_handling": 1,
+    "security": 1,
+    "observability": 2,
+    "cost_control": 1,
+    "human_review": 2,
+    "documentation": 2
+  }
+}

@@ -52,6 +52,7 @@ Example Agent Cards:
 - [Coding agent](examples/coding-agent.card.json)
 - [Research agent](examples/research-agent.card.json)
 - [Support agent](examples/support-agent.card.json)
+- [Operations triage agent](examples/operations-agent.card.json)
 
 ## Quick Score
 
