@@ -60,6 +60,12 @@ Agent Card 示例：
 node bin/agentic-score.js examples/coding-agent.card.json
 ```
 
+无需 clone，直接从 GitHub 运行：
+
+```bash
+npm exec --yes --package=github:lindixu6-hash/awesome-agentic-engineering#v0 -- agentic-score agent-card.json
+```
+
 预期输出：
 
 ```text

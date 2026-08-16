@@ -131,7 +131,9 @@ export function main(argv = process.argv) {
   return 0;
 }
 
-const isCli = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+const isCli =
+  process.argv[1] &&
+  fs.realpathSync(process.argv[1]) === fileURLToPath(import.meta.url);
 
 if (isCli) {
   try {

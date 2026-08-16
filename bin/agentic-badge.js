@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -126,7 +127,7 @@ export function main(argv = process.argv) {
 
 const isCli =
   process.argv[1] &&
-  path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+  fs.realpathSync(process.argv[1]) === fileURLToPath(import.meta.url);
 
 if (isCli) {
   try {

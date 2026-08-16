@@ -61,6 +61,12 @@ Run the zero-dependency scorecard CLI against an Agent Card JSON file:
 node bin/agentic-score.js examples/coding-agent.card.json
 ```
 
+Run it without cloning the repository:
+
+```bash
+npm exec --yes --package=github:lindixu6-hash/awesome-agentic-engineering#v0 -- agentic-score agent-card.json
+```
+
 Expected output:
 
 ```text
