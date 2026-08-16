@@ -3,8 +3,11 @@ import assert from "node:assert/strict";
 
 import {
   AREAS,
+  buildShareText,
   buildAgentCard,
   calculateScore,
+  decodeScores,
+  encodeScores,
   ratingFor
 } from "../web/scorecard.js";
 
@@ -39,4 +42,23 @@ test("web scorecard rating boundaries match the CLI", () => {
   assert.equal(ratingFor(8), "prototype");
   assert.equal(ratingFor(15), "limited beta");
   assert.equal(ratingFor(19), "production candidate");
+});
+
+test("web scorecard encodes and restores shareable scores", () => {
+  const scores = Object.fromEntries(
+    AREAS.map((area, index) => [area.id, index % 3])
+  );
+  const encoded = encodeScores(scores);
+
+  assert.equal(encoded.length, 10);
+  assert.deepEqual(decodeScores(encoded), scores);
+  assert.equal(decodeScores("220bad"), null);
+});
+
+test("web scorecard builds English and Chinese share copy", () => {
+  const result = { total: 16, max: 20, rating: "limited beta" };
+
+  assert.match(buildShareText(result, "en"), /16\/20/);
+  assert.match(buildShareText(result, "zh"), /16\/20/);
+  assert.match(buildShareText(result, "zh"), /有限 Beta/);
 });

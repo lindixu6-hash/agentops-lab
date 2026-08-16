@@ -80,9 +80,13 @@ const COPY = {
     blockers: "Priority gaps",
     copy: "Copy JSON",
     download: "Download",
+    share: "Share",
     resetTitle: "Reset scorecard",
     copied: "Agent Card JSON copied.",
     downloaded: "Agent Card JSON downloaded.",
+    shared: "Share link copied.",
+    copyFailed: "Clipboard unavailable. Download the JSON instead.",
+    shareFailed: "Clipboard unavailable. Copy the URL from the address bar.",
     empty: "All areas scored at production-candidate level.",
     levels: ["Missing", "Partial", "Ready"],
     ratings: {
@@ -100,9 +104,13 @@ const COPY = {
     blockers: "优先补齐",
     copy: "复制 JSON",
     download: "下载",
+    share: "分享",
     resetTitle: "重置评分",
     copied: "已复制 Agent Card JSON。",
     downloaded: "已下载 Agent Card JSON。",
+    shared: "评分链接已复制。",
+    copyFailed: "剪贴板不可用，请改为下载 JSON。",
+    shareFailed: "剪贴板不可用，请复制地址栏中的评分链接。",
     empty: "所有维度均达到生产候选标准。",
     levels: ["缺失", "部分", "就绪"],
     ratings: {
@@ -149,6 +157,24 @@ export function buildAgentCard(scores) {
   };
 }
 
+export function encodeScores(scores) {
+  return AREAS.map((area) => Number(scores[area.id] ?? 0)).join("");
+}
+
+export function decodeScores(value) {
+  if (!/^[0-2]{10}$/.test(value || "")) return null;
+  return Object.fromEntries(
+    AREAS.map((area, index) => [area.id, Number(value[index])])
+  );
+}
+
+export function buildShareText(result, language = "en") {
+  if (language === "zh") {
+    return `我的 AI Agent 生产就绪评分是 ${result.total}/${result.max}（${COPY.zh.ratings[result.rating]}）。你的 Agent 能拿多少分？`;
+  }
+  return `My AI agent scored ${result.total}/${result.max} (${result.rating}) for production readiness. How ready is yours?`;
+}
+
 function createRow(area, scores, language, onChange) {
   const row = document.createElement("article");
   row.className = "score-row";
@@ -188,7 +214,10 @@ function createRow(area, scores, language, onChange) {
 }
 
 function bootstrap() {
-  const scores = Object.fromEntries(AREAS.map((area) => [area.id, 0]));
+  const params = new URLSearchParams(window.location.search);
+  const sharedScores = decodeScores(params.get("scores"));
+  const scores =
+    sharedScores || Object.fromEntries(AREAS.map((area) => [area.id, 0]));
   let language = "en";
 
   const rows = document.querySelector("#scorecard-rows");
@@ -209,6 +238,7 @@ function bootstrap() {
     document.querySelector("#blockers-title").textContent = copy.blockers;
     document.querySelector("#copy-button").textContent = copy.copy;
     document.querySelector("#download-button").textContent = copy.download;
+    document.querySelector("#share-button").textContent = copy.share;
     document.querySelector("#reset-button").title = copy.resetTitle;
     document.querySelector("#language-toggle").textContent =
       language === "en" ? "中" : "EN";
@@ -219,6 +249,9 @@ function bootstrap() {
     total.textContent = String(result.total);
     rating.textContent = copy.ratings[result.rating];
     progress.style.width = `${(result.total / result.max) * 100}%`;
+    const url = new URL(window.location.href);
+    url.searchParams.set("scores", encodeScores(scores));
+    window.history.replaceState({}, "", url);
 
     blockerList.replaceChildren();
     if (result.gaps.length === 0) {
@@ -251,10 +284,14 @@ function bootstrap() {
   });
 
   document.querySelector("#copy-button").addEventListener("click", async () => {
-    await navigator.clipboard.writeText(
-      JSON.stringify(buildAgentCard(scores), null, 2)
-    );
-    status.textContent = COPY[language].copied;
+    try {
+      await navigator.clipboard.writeText(
+        JSON.stringify(buildAgentCard(scores), null, 2)
+      );
+      status.textContent = COPY[language].copied;
+    } catch {
+      status.textContent = COPY[language].copyFailed;
+    }
   });
 
   document.querySelector("#download-button").addEventListener("click", () => {
@@ -267,6 +304,33 @@ function bootstrap() {
     link.click();
     URL.revokeObjectURL(link.href);
     status.textContent = COPY[language].downloaded;
+  });
+
+  document.querySelector("#share-button").addEventListener("click", async () => {
+    const result = calculateScore(scores);
+    const shareUrl = window.location.href;
+    const shareData = {
+      title: COPY[language].title,
+      text: buildShareText(result, language),
+      url: shareUrl
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        status.textContent = COPY[language].shared;
+        return;
+      } catch (error) {
+        if (error?.name === "AbortError") return;
+      }
+    }
+
+    try {
+      await navigator.clipboard.writeText(`${shareData.text}\n${shareUrl}`);
+      status.textContent = COPY[language].shared;
+    } catch {
+      status.textContent = COPY[language].shareFailed;
+    }
   });
 
   render();

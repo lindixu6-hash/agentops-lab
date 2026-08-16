@@ -296,7 +296,7 @@ h1 {
 
 .commands {
   display: grid;
-  grid-template-columns: 1fr 1fr 40px;
+  grid-template-columns: 1.1fr 1fr 0.8fr 40px;
   gap: 8px;
   padding: 18px 22px 10px;
   border-top: 1px solid var(--line);
@@ -371,6 +371,12 @@ h1 {
 
   .score-summary {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .commands {
+    grid-template-columns: 1fr 1fr 1fr 40px;
+    padding-right: 14px;
+    padding-left: 14px;
   }
 }
 
