@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/awesome-agentic-engineering/agent-card.schema.json",
+  "title": "Agent Card",
+  "type": "object",
+  "required": ["name", "owner", "workflow", "scorecard"],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "users": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "workflow": {
+      "type": "string"
+    },
+    "non_goals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "purpose", "access", "approval_required"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "purpose": {
+            "type": "string"
+          },
+          "access": {
+            "enum": ["read", "write", "read_write"]
+          },
+          "approval_required": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "launch_blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "scorecard": {
+      "type": "object",
+      "required": [
+        "goal_clarity",
+        "tool_permissions",
+        "memory",
+        "evals",
+        "failure_handling",
+        "security",
+        "observability",
+        "cost_control",
+        "human_review",
+        "documentation"
+      ],
+      "properties": {
+        "goal_clarity": {
+          "$ref": "#/$defs/score"
+        },
+        "tool_permissions": {
+          "$ref": "#/$defs/score"
+        },
+        "memory": {
+          "$ref": "#/$defs/score"
+        },
+        "evals": {
+          "$ref": "#/$defs/score"
+        },
+        "failure_handling": {
+          "$ref": "#/$defs/score"
+        },
+        "security": {
+          "$ref": "#/$defs/score"
+        },
+        "observability": {
+          "$ref": "#/$defs/score"
+        },
+        "cost_control": {
+          "$ref": "#/$defs/score"
+        },
+        "human_review": {
+          "$ref": "#/$defs/score"
+        },
+        "documentation": {
+          "$ref": "#/$defs/score"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2
+    }
+  }
+}

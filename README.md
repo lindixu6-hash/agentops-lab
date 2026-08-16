@@ -1,0 +1,278 @@
+# Awesome Agentic Engineering
+
+Production-ready patterns, templates, evals, and failure cases for shipping AI agents that survive real users.
+
+![Production Agent Scorecard](assets/scorecard.svg)
+
+Most AI agent demos look impressive for five minutes. Production agents fail in quieter ways: vague goals, brittle tool use, memory drift, hidden costs, missing evals, prompt injection, and no recovery path.
+
+This repository is a practical field guide for building agents that can be tested, reviewed, deployed, monitored, and improved.
+
+## Why Star This
+
+- You are building agents and want a production-readiness checklist.
+- You need templates for agent specs, eval plans, and launch reviews.
+- You want concrete failure modes to turn into regression tests.
+- You review MCP servers, tool permissions, or agent workflows.
+
+## Start Here
+
+Use this repo if you are building:
+
+- Coding agents
+- Research agents
+- Customer support agents
+- Internal workflow agents
+- MCP-based tools
+- LLM apps with planning, tool use, memory, or multi-step execution
+
+Use these first:
+
+- [Agent Card](templates/agent-card.md): define what the agent does, what it must never do, and how it fails safely.
+- [Eval Plan](templates/eval-plan.md): turn agent behavior into testable scenarios.
+- [Launch Checklist](templates/launch-checklist.md): review readiness before showing the agent to real users.
+- [Failure Modes](docs/failure-modes.md): common ways production agents break.
+- [MCP Safety Checklist](docs/mcp-safety-checklist.md): review tool servers before giving agents access.
+- [Star Growth Playbook](docs/star-growth-playbook.md): ethical launch and maintenance loop.
+
+## Quick Score
+
+Run the zero-dependency scorecard CLI against an Agent Card JSON file:
+
+```bash
+node bin/agentic-score.js examples/coding-agent.card.json
+```
+
+Expected output:
+
+```text
+Issue-to-PR Coding Agent v0.1
+
+Score: 16/20
+Rating: limited beta
+```
+
+You can also use the npm scripts after cloning:
+
+```bash
+npm run score
+npm test
+```
+
+After publishing on GitHub, check repository stars:
+
+```bash
+node bin/star-watch.js owner/repo
+```
+
+## Production Agent Scorecard
+
+Score each item from 0 to 2.
+
+| Area | 0 | 1 | 2 |
+| --- | --- | --- | --- |
+| Goal clarity | Vague prompt | Defined task | Defined task, users, and success metric |
+| Tool permissions | Unlimited | Some restrictions | Least-privilege tool access |
+| Memory | Implicit or messy | Basic state | Scoped, inspectable, erasable memory |
+| Evals | None | Manual examples | Repeatable scenario tests |
+| Failure handling | Crashes or hides errors | Basic retry | Clear fallback and user recovery |
+| Security | Not considered | Basic filtering | Prompt injection and data boundaries tested |
+| Observability | Logs missing | Request logs | Trace, cost, latency, and outcome tracking |
+| Cost control | Unknown | Estimated | Budgeted with alerts and limits |
+| Human review | None | Optional review | Required review for risky actions |
+| Documentation | Demo only | Setup guide | Setup, architecture, threat model, and examples |
+
+Suggested interpretation:
+
+- 0-7: demo only
+- 8-14: prototype
+- 15-18: limited beta
+- 19-20: production candidate
+
+## Core Patterns
+
+### 1. Narrow Agent, Strong Workflow
+
+Do not start with a general agent. Start with a narrow workflow where success can be judged.
+
+Good:
+
+- "Given a GitHub issue, propose a patch and open a pull request with tests."
+- "Given a support ticket, gather account context and draft a reply for human review."
+
+Weak:
+
+- "Be an autonomous software engineer."
+- "Handle all customer operations."
+
+### 2. Tool Use As A Contract
+
+Every tool should have:
+
+- A clear purpose
+- Input and output schema
+- Permission boundary
+- Error contract
+- Logging behavior
+
+If a tool can modify external state, require one of:
+
+- Human approval
+- Dry-run mode
+- Reversible operation
+- Narrow allowlist
+
+### 3. Evals Before Autonomy
+
+Before increasing autonomy, write scenario tests.
+
+Good evals include:
+
+- Normal task
+- Ambiguous task
+- Missing data
+- Tool failure
+- Malicious instruction
+- Cost-heavy request
+- Long-running task
+
+### 4. Memory With Expiration
+
+Agent memory should be scoped and reviewable.
+
+Avoid:
+
+- Global memory for everything
+- Hidden state users cannot inspect
+- Permanent memory without deletion
+
+Prefer:
+
+- Project memory
+- User-approved facts
+- Expiring summaries
+- Source-linked notes
+
+### 5. Human Review For Irreversible Actions
+
+Require human review for:
+
+- Money movement
+- Public posting
+- Deleting data
+- Sending external messages
+- Security-sensitive changes
+- Production deployments
+
+## Failure Modes
+
+### Silent Failure
+
+The agent returns a confident answer while skipping a required step.
+
+Mitigation:
+
+- Use checklists
+- Log tool calls
+- Require evidence for claims
+- Add "done means" criteria
+
+### Tool Abuse
+
+The agent calls expensive or dangerous tools too often.
+
+Mitigation:
+
+- Rate limits
+- Tool budgets
+- Permission tiers
+- Dry-run defaults
+
+### Memory Drift
+
+The agent accumulates stale or wrong assumptions.
+
+Mitigation:
+
+- Memory review
+- Expiration
+- Source links
+- User-confirmed facts only
+
+### Prompt Injection
+
+External content tells the agent to ignore rules, reveal data, or perform unsafe actions.
+
+Mitigation:
+
+- Treat external content as untrusted
+- Separate instructions from data
+- Add action approval
+- Test with adversarial fixtures
+
+### Cost Explosion
+
+The agent loops, over-searches, or uses large models unnecessarily.
+
+Mitigation:
+
+- Per-task budget
+- Max tool calls
+- Model routing
+- Early stop criteria
+
+## Repository Structure
+
+```text
+assets/
+  scorecard.svg
+bin/
+  agentic-score.js
+docs/
+  failure-modes.md
+  mcp-safety-checklist.md
+  star-growth-playbook.md
+examples/
+  coding-agent.card.json
+  support-agent.card.json
+schema/
+  agent-card.schema.json
+templates/
+  agent-card.md
+  eval-plan.md
+  launch-checklist.md
+launch/
+  14-day-plan.md
+social/
+  launch-posts.md
+  hn-post.md
+README.zh-CN.md
+CONTRIBUTING.md
+```
+
+## Contribution Ideas
+
+High-value contributions:
+
+- Real production failure stories
+- Before/after agent architectures
+- Eval datasets for common workflows
+- Security test cases
+- Cost control patterns
+- MCP server review checklists
+- Agent UX examples
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting.
+
+## Roadmap
+
+- Add 20 real-world agent failure cases
+- Add examples for research and ops agents
+- Add production-readiness badges
+- Add a web scorecard playground
+
+See [ROADMAP.md](ROADMAP.md).
+
+## License
+
+MIT.

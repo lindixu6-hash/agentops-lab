@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Production Agent Scorecard</title>
+  <desc id="desc">A scorecard for checking whether an AI agent is ready for production.</desc>
+  <rect width="1200" height="630" fill="#101820"/>
+  <rect x="64" y="58" width="1072" height="514" rx="16" fill="#f7f4ea"/>
+  <text x="104" y="128" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="800" fill="#101820">Is your AI agent production ready?</text>
+  <text x="106" y="174" font-family="Inter, Arial, sans-serif" font-size="24" fill="#38505c">10 checks before real users touch it</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="24" fill="#101820">
+    <text x="114" y="246">Goal clarity</text>
+    <text x="114" y="296">Tool permissions</text>
+    <text x="114" y="346">Memory boundaries</text>
+    <text x="114" y="396">Repeatable evals</text>
+    <text x="114" y="446">Failure recovery</text>
+    <text x="620" y="246">Security tests</text>
+    <text x="620" y="296">Observability</text>
+    <text x="620" y="346">Cost control</text>
+    <text x="620" y="396">Human review</text>
+    <text x="620" y="446">Documentation</text>
+  </g>
+  <g fill="#19a974">
+    <circle cx="84" cy="238" r="10"/>
+    <circle cx="84" cy="288" r="10"/>
+    <circle cx="84" cy="338" r="10"/>
+    <circle cx="84" cy="388" r="10"/>
+    <circle cx="84" cy="438" r="10"/>
+    <circle cx="590" cy="238" r="10"/>
+    <circle cx="590" cy="288" r="10"/>
+    <circle cx="590" cy="338" r="10"/>
+    <circle cx="590" cy="388" r="10"/>
+    <circle cx="590" cy="438" r="10"/>
+  </g>
+  <rect x="104" y="500" width="992" height="1" fill="#d7d0bd"/>
+  <text x="104" y="540" font-family="Inter, Arial, sans-serif" font-size="22" fill="#38505c">Awesome Agentic Engineering</text>
+  <text x="728" y="540" font-family="Inter, Arial, sans-serif" font-size="22" fill="#38505c">templates · evals · failure modes · CLI</text>
+</svg>

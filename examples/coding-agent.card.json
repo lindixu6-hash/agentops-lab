@@ -1,0 +1,48 @@
+{
+  "name": "Issue-to-PR Coding Agent",
+  "version": "0.1",
+  "owner": "Engineering productivity",
+  "users": ["software engineers", "maintainers"],
+  "workflow": "Given a GitHub issue, the agent proposes a patch, runs tests, and drafts a pull request for human review.",
+  "non_goals": [
+    "Merge pull requests without human approval",
+    "Modify secrets or production infrastructure",
+    "Rewrite unrelated files"
+  ],
+  "tools": [
+    {
+      "name": "repository_read",
+      "purpose": "Inspect source files and tests",
+      "access": "read",
+      "approval_required": false
+    },
+    {
+      "name": "patch_workspace",
+      "purpose": "Edit files in a temporary branch",
+      "access": "write",
+      "approval_required": false
+    },
+    {
+      "name": "create_pull_request",
+      "purpose": "Open a pull request after tests pass",
+      "access": "write",
+      "approval_required": true
+    }
+  ],
+  "launch_blockers": [
+    "Needs prompt injection fixtures for issue comments",
+    "Needs cost budget alert for long debugging sessions"
+  ],
+  "scorecard": {
+    "goal_clarity": 2,
+    "tool_permissions": 2,
+    "memory": 1,
+    "evals": 2,
+    "failure_handling": 1,
+    "security": 1,
+    "observability": 2,
+    "cost_control": 1,
+    "human_review": 2,
+    "documentation": 2
+  }
+}

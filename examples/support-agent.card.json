@@ -1,0 +1,48 @@
+{
+  "name": "Support Drafting Agent",
+  "version": "0.1",
+  "owner": "Customer support",
+  "users": ["support agents", "success managers"],
+  "workflow": "Given a customer ticket, the agent gathers account context and drafts a reply for human approval.",
+  "non_goals": [
+    "Send customer messages without approval",
+    "Offer refunds or credits",
+    "Expose internal notes to customers"
+  ],
+  "tools": [
+    {
+      "name": "ticket_read",
+      "purpose": "Read support ticket details",
+      "access": "read",
+      "approval_required": false
+    },
+    {
+      "name": "account_lookup",
+      "purpose": "Read plan, usage, and status data",
+      "access": "read",
+      "approval_required": false
+    },
+    {
+      "name": "draft_reply",
+      "purpose": "Create a draft response",
+      "access": "write",
+      "approval_required": true
+    }
+  ],
+  "launch_blockers": [
+    "Needs PII redaction tests",
+    "Needs escalation policy for angry or legal-risk tickets"
+  ],
+  "scorecard": {
+    "goal_clarity": 2,
+    "tool_permissions": 1,
+    "memory": 1,
+    "evals": 1,
+    "failure_handling": 1,
+    "security": 1,
+    "observability": 1,
+    "cost_control": 1,
+    "human_review": 2,
+    "documentation": 1
+  }
+}
