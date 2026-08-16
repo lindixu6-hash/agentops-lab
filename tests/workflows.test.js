@@ -65,6 +65,19 @@ test("CI verifies generated starters fail closed", () => {
   assert.match(workflow, /test "\$BLOCKER_COUNT" = "1"/);
 });
 
+test("CI smoke tests the published v0 initializer", () => {
+  const workflow = readWorkflow("ci.yml");
+
+  assert.match(workflow, /name: Test published v0 initializer/);
+  assert.match(workflow, /agentic-init/);
+  assert.match(
+    workflow,
+    /--package=github:lindixu6-hash\/awesome-agentic-engineering#v0/
+  );
+  assert.match(workflow, /card\.risk_profile !== "read-only"/);
+  assert.match(workflow, /card\.launch_blockers\.length !== 1/);
+});
+
 test("CI exercises the local risk-profile gate", () => {
   const workflow = readWorkflow("ci.yml");
 

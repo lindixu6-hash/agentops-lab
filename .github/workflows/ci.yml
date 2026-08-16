@@ -44,6 +44,28 @@ jobs:
           test "$SCORE" = "0"
           test "$PROFILE_PASSED" = "false"
           test "$BLOCKER_COUNT" = "1"
+      - name: Test published v0 initializer
+        run: |
+          starter_dir="$(mktemp -d)"
+          cd "$starter_dir"
+          npm exec --yes \
+            --package=github:lindixu6-hash/awesome-agentic-engineering#v0 \
+            -- agentic-init \
+            --profile read-only \
+            --name "Published v0 Starter"
+          test -f agent-card.json
+          test -f .github/workflows/agent-readiness.yml
+          node -e '
+            const card = require("./agent-card.json");
+            if (card.name !== "Published v0 Starter") process.exit(1);
+            if (card.risk_profile !== "read-only") process.exit(1);
+            if (Object.values(card.scorecard).some((score) => score !== 0)) {
+              process.exit(1);
+            }
+            if (card.launch_blockers.length !== 1) process.exit(1);
+          '
+          grep -q 'uses: lindixu6-hash/awesome-agentic-engineering@v0' \
+            .github/workflows/agent-readiness.yml
       - name: Run deterministic reference Agent eval
         env:
           SOURCE_DATE_EPOCH: "1786924800"
