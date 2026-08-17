@@ -1,0 +1,120 @@
+name: Verify Attested Eval Evidence
+
+on:
+  workflow_call:
+
+permissions:
+  actions: read
+  attestations: read
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out immutable verifier
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: lindixu6-hash/awesome-agentic-engineering
+          ref: 34b12355a27a647adfb5b09578234a19ee076f0f
+          path: trusted-verifier
+          persist-credentials: false
+
+      - name: Download producer bundle
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: openai-agents-provenance-bundle
+          path: downloaded
+
+      - name: Require exactly one expected bundle
+        run: |
+          test -f downloaded/openai-agents-evidence.tar.gz
+          test "$(find downloaded -type f | wc -l)" = "1"
+
+      - name: Verify GitHub artifact attestation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p verification
+          gh attestation verify \
+            downloaded/openai-agents-evidence.tar.gz \
+            --repo "$GITHUB_REPOSITORY" \
+            --signer-workflow \
+              "github.com/$GITHUB_REPOSITORY/.github/workflows/provenance-eval.yml" \
+            --signer-digest "$GITHUB_SHA" \
+            --source-digest "$GITHUB_SHA" \
+            --source-ref "$GITHUB_REF" \
+            --deny-self-hosted-runners \
+            --format json \
+            > verification/attestation-verification.json
+
+      - name: Prove tampered bundle and wrong identity fail
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp downloaded/openai-agents-evidence.tar.gz /tmp/tampered.tar.gz
+          printf '\0' >> /tmp/tampered.tar.gz
+          if gh attestation verify \
+            /tmp/tampered.tar.gz \
+            --repo "$GITHUB_REPOSITORY" \
+            --signer-workflow \
+              "github.com/$GITHUB_REPOSITORY/.github/workflows/provenance-eval.yml" \
+            --source-digest "$GITHUB_SHA" \
+            --source-ref "$GITHUB_REF" \
+            --deny-self-hosted-runners; then
+            echo "Tampered bundle unexpectedly verified." >&2
+            exit 1
+          fi
+
+          if gh attestation verify \
+            downloaded/openai-agents-evidence.tar.gz \
+            --repo "$GITHUB_REPOSITORY" \
+            --signer-workflow \
+              "github.com/$GITHUB_REPOSITORY/.github/workflows/provenance-eval.yml" \
+            --source-digest \
+              "0000000000000000000000000000000000000000" \
+            --source-ref "$GITHUB_REF" \
+            --deny-self-hosted-runners; then
+            echo "Wrong source digest unexpectedly verified." >&2
+            exit 1
+          fi
+
+      - name: Extract bundle without unsafe paths
+        run: |
+          tar -tzf downloaded/openai-agents-evidence.tar.gz \
+            > verification/archive-entries.txt
+          if awk '
+            /^\// || /(^|\/)\.\.(\/|$)/ { unsafe = 1 }
+            END { exit unsafe ? 0 : 1 }
+          ' verification/archive-entries.txt; then
+            echo "Archive contains an unsafe path." >&2
+            exit 1
+          fi
+          mkdir extracted
+          tar -xzf downloaded/openai-agents-evidence.tar.gz -C extracted
+          test -d extracted/openai-agents-eval
+
+      - name: Verify pinned manifest and Eval Results
+        env:
+          PROVENANCE_REPOSITORY: ${{ github.repository }}
+          PROVENANCE_COMMIT_SHA: ${{ github.sha }}
+          PROVENANCE_REF: ${{ github.ref }}
+          PROVENANCE_WORKFLOW_REF: ${{ github.workflow_ref }}
+          PROVENANCE_WORKFLOW_SHA: ${{ github.sha }}
+        run: |
+          node trusted-verifier/scripts/eval-evidence-provenance.js \
+            verify \
+            extracted/openai-agents-eval \
+            trusted-verifier \
+            | tee verification/manifest-verification.txt
+          sha256sum downloaded/openai-agents-evidence.tar.gz \
+            > verification/bundle.sha256
+          cp extracted/openai-agents-eval/provenance-manifest.json \
+            verification/provenance-manifest.json
+
+      - name: Upload verifier evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: openai-agents-verification-evidence
+          path: verification
+          retention-days: 14

@@ -146,3 +146,34 @@ test("CI installs OpenAI Agents and retains offline Runner evidence", () => {
   assert.match(workflow, /name: openai-agents-eval-evidence/);
   assert.match(workflow, /path: artifacts\/openai-agents-eval/);
 });
+
+test("reusable verifier pins code, actions, identity, and negative checks", () => {
+  const workflow = readWorkflow("verify-eval-evidence.yml");
+
+  assert.match(workflow, /workflow_call:/);
+  assert.match(
+    workflow,
+    /ref: 34b12355a27a647adfb5b09578234a19ee076f0f/
+  );
+  assert.match(
+    workflow,
+    /actions\/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09/
+  );
+  assert.match(
+    workflow,
+    /actions\/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c/
+  );
+  assert.match(
+    workflow,
+    /actions\/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a/
+  );
+  assert.match(workflow, /--signer-workflow/);
+  assert.match(workflow, /--signer-digest "\$GITHUB_SHA"/);
+  assert.match(workflow, /--source-digest "\$GITHUB_SHA"/);
+  assert.match(workflow, /--source-ref "\$GITHUB_REF"/);
+  assert.match(workflow, /--deny-self-hosted-runners/);
+  assert.match(workflow, /Tampered bundle unexpectedly verified/);
+  assert.match(workflow, /Wrong source digest unexpectedly verified/);
+  assert.match(workflow, /eval-evidence-provenance\.js/);
+  assert.doesNotMatch(workflow, /uses: [^\n]+@v\d/);
+});
