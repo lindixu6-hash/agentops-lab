@@ -23,6 +23,10 @@ test("English and Chinese contribution guides expose reciprocal paths", () => {
   assert.match(chinese, /Agent Card 采用表单/);
   assert.match(english, /runtime-adapter\.yml/);
   assert.match(chinese, /runtime-adapter\.yml/);
+  assert.match(english, /issues\/16/);
+  assert.match(chinese, /issues\/16/);
+  assert.doesNotMatch(english, /issues\/14/);
+  assert.doesNotMatch(chinese, /issues\/14/);
   assert.match(english, /English and Simplified Chinese/);
   assert.match(chinese, /中英文同步/);
   assert.match(english, /Do not infer production adoption/);

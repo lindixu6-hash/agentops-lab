@@ -26,7 +26,7 @@
 ### 增加 Runtime 适配器
 
 实现前先在
-[Runtime Adapter Issue](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/14)
+[开放的 CrewAI 适配 Issue](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/16)
 留言，或使用
 [Runtime 适配器提案表单](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/new?template=runtime-adapter.yml)。
 

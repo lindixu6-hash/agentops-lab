@@ -28,7 +28,7 @@ evidence than a hand-edited green badge.
 ### Add a runtime adapter
 
 Comment on
-[the runtime adapter issue](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/14)
+[the open CrewAI adapter issue](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/16)
 before implementation, or use the
 [runtime adapter proposal form](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/new?template=runtime-adapter.yml).
 
