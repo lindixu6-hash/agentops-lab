@@ -1,20 +1,40 @@
-# Awesome Agentic Engineering：AI Agent 生产就绪门禁
+# AgentOps Lab：本地 AI Agent 评测与运营工作台
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-[![CI](https://github.com/lindixu6-hash/awesome-agentic-engineering/actions/workflows/ci.yml/badge.svg)](https://github.com/lindixu6-hash/awesome-agentic-engineering/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/lindixu6-hash/awesome-agentic-engineering?style=flat-square)](https://github.com/lindixu6-hash/awesome-agentic-engineering/releases/latest)
-[![License](https://img.shields.io/github/license/lindixu6-hash/awesome-agentic-engineering?style=flat-square)](LICENSE)
-[![使用此模板](https://img.shields.io/badge/使用此仓库-创建模板-0969da?style=flat-square)](https://github.com/new?template_name=awesome-agentic-engineering&template_owner=lindixu6-hash)
+[![CI](https://github.com/lindixu6-hash/agentops-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/lindixu6-hash/agentops-lab/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/lindixu6-hash/agentops-lab?style=flat-square)](LICENSE)
 
-这不是另一份资源清单，而是一套可执行的 AI Agent 评分卡与 GitHub Actions
-上线门禁。
+导入 CSV 或 JSON Agent 运行日志，在本机完成成功率、失败类型、版本回归、
+延迟、成本和人工接管分析，并生成可复现的运营复盘报告。
 
-[![将 AI Agent 从 0/20 评到生产候选](assets/readiness-scorecard-demo.gif)](https://lindixu6-hash.github.io/awesome-agentic-engineering/)
+**默认保护隐私：**浏览器 MVP 不上传原始日志；`local-agentops` Skill 通过
+OpenVINO GenAI 调用本地 Qwen 模型，禁止回退到云端模型。
 
-大多数 AI Agent demo 能惊艳 5 分钟，但很难进入生产。真正的问题通常不是模型不够强，而是目标模糊、工具权限过大、记忆漂移、没有评估、成本失控、提示注入、失败不可见。
+本比赛项目与
+[Awesome Agentic Engineering](https://github.com/lindixu6-hash/awesome-agentic-engineering)
+完全隔离开发。它复用原项目的生产就绪 Schema 和评测基础，但不会修改原仓库、
+Release 或公开链接。
 
-这个仓库的目标是帮助开发者把 Agent 做到可测试、可审查、可部署、可观测、可迭代。
+[打开 AgentOps Lab Web 工作台](https://lindixu6-hash.github.io/agentops-lab/agentops/)
+
+## AgentOps MVP
+
+- [打开本地优先的 Web 工作台](https://lindixu6-hash.github.io/agentops-lab/agentops/)
+- [阅读一页 PRD](docs/agentops-lab-prd.zh-CN.md)
+- [使用首轮 5 位用户测试脚本](research/first-5-users.md)
+- [查看本地 OpenVINO Skill](skills/local-agentops/SKILL.md)
+
+无需安装依赖即可生成确定性报告：
+
+```bash
+node bin/agentops-report.js examples/agentops-sample.csv \
+  --output agentops-report.md \
+  --json agentops-metrics.json
+```
+
+下方继续保留从原项目继承的生产就绪门禁、提示注入 fixtures、运行时适配器和
+Agent Card Schema。
 
 ## 为什么值得 star
 

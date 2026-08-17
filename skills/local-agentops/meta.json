@@ -1,0 +1,15 @@
+{
+  "display_name": "本地 Agent 评测与运营复盘",
+  "display_description": "离线分析 Agent 日志、比较版本并生成可执行评测报告",
+  "detail_describe": "基于 OpenVINO GenAI 和本地 Qwen 模型处理聚合后的 Agent 运营指标，支持 CSV/JSON 导入、失败归因、版本对比、成本延迟分析与 Markdown/JSON 报告。",
+  "name": "local-agentops",
+  "icon": "https://raw.githubusercontent.com/lindixu6-hash/awesome-agentic-engineering/main/assets/social-preview.png",
+  "use_cases": [
+    "分析导出的 Agent 运行日志并生成复盘报告",
+    "比较两个 Prompt 或 Agent 版本是否出现回归",
+    "定位最高频失败类型并生成迭代优先级",
+    "在不上传业务日志的前提下完成隐私评测"
+  ],
+  "author": "lindixu6-hash",
+  "version": "0.1.0"
+}

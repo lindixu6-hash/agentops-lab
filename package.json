@@ -1,7 +1,7 @@
 {
-  "name": "awesome-agentic-engineering",
-  "version": "0.17.0",
-  "description": "Production-ready patterns, templates, evals, and scorecards for shipping AI agents.",
+  "name": "agentops-lab",
+  "version": "0.1.0",
+  "description": "Local-first AI Agent evaluation, failure analysis, version comparison, and operations reports.",
   "license": "MIT",
   "type": "module",
   "bin": {
@@ -9,7 +9,8 @@
     "agentic-score": "./bin/agentic-score.js",
     "agentic-badge": "./bin/agentic-badge.js",
     "agentic-validate-fixtures": "./bin/validate-prompt-injection-fixtures.js",
-    "agentic-validate-results": "./bin/validate-eval-results.js"
+    "agentic-validate-results": "./bin/validate-eval-results.js",
+    "agentops-report": "./bin/agentops-report.js"
   },
   "files": [
     "assets",
@@ -31,12 +32,16 @@
     "evals",
     "examples",
     "launch",
+    "lib",
     "profiles",
+    "research",
     "schema",
     "scripts",
+    "skills",
     "social",
     "starters",
     "templates",
+    "web",
     "README.md",
     "README.zh-CN.md"
   ],
@@ -46,6 +51,7 @@
     "badge": "node bin/agentic-badge.js examples/coding-agent.card.json",
     "score": "node bin/agentic-score.js examples/coding-agent.card.json",
     "score:operations": "node bin/agentic-score.js examples/operations-agent.card.json",
+    "report:agentops": "node bin/agentops-report.js examples/agentops-sample.csv --output artifacts/agentops-report.md --json artifacts/agentops-metrics.json",
     "install:langgraph": "npm ci --prefix adapters/langgraph --ignore-scripts",
     "install:openai-agents": "npm ci --prefix adapters/openai-agents --ignore-scripts",
     "eval:langgraph": "node adapters/langgraph/run.js evals/prompt-injection/fixtures.jsonl artifacts/langgraph-eval",

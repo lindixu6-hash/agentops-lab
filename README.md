@@ -1,20 +1,42 @@
-# Awesome Agentic Engineering: Production Readiness Gate
+# AgentOps Lab: Local AI Agent Evaluation and Operations
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-[![CI](https://github.com/lindixu6-hash/awesome-agentic-engineering/actions/workflows/ci.yml/badge.svg)](https://github.com/lindixu6-hash/awesome-agentic-engineering/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/lindixu6-hash/awesome-agentic-engineering?style=flat-square)](https://github.com/lindixu6-hash/awesome-agentic-engineering/releases/latest)
-[![License](https://img.shields.io/github/license/lindixu6-hash/awesome-agentic-engineering?style=flat-square)](LICENSE)
-[![Use This Template](https://img.shields.io/badge/use_this-template-0969da?style=flat-square)](https://github.com/new?template_name=awesome-agentic-engineering&template_owner=lindixu6-hash)
+[![CI](https://github.com/lindixu6-hash/agentops-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/lindixu6-hash/agentops-lab/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/lindixu6-hash/agentops-lab?style=flat-square)](LICENSE)
 
-Not another resource list: an executable AI agent readiness scorecard and
-GitHub Actions gate for shipping systems that survive real users.
+Import CSV or JSON Agent run logs, analyze them entirely on-device, and turn
+success rate, failure types, version regressions, latency, cost, and human
+handoffs into a reproducible operations report.
 
-[![Score an AI agent from 0/20 to production candidate](assets/readiness-scorecard-demo.gif)](https://lindixu6-hash.github.io/awesome-agentic-engineering/)
+**Private by default:** the browser MVP does not upload raw logs. The
+`local-agentops` skill uses a local Qwen model through OpenVINO GenAI and never
+falls back to a cloud model.
 
-Most AI agent demos look impressive for five minutes. Production agents fail in quieter ways: vague goals, brittle tool use, memory drift, hidden costs, missing evals, prompt injection, and no recovery path.
+This competition project is developed independently from
+[Awesome Agentic Engineering](https://github.com/lindixu6-hash/awesome-agentic-engineering).
+It reuses that project's production-readiness schemas and eval foundations
+while keeping its repository and release history unchanged.
 
-This repository is a practical field guide for building agents that can be tested, reviewed, deployed, monitored, and improved.
+[Open the AgentOps Lab web workspace](https://lindixu6-hash.github.io/agentops-lab/agentops/)
+
+## AgentOps MVP
+
+- [Open the local-first web workspace](https://lindixu6-hash.github.io/agentops-lab/agentops/)
+- [Read the one-page PRD](docs/agentops-lab-prd.zh-CN.md)
+- [Use the first-five-user test script](research/first-5-users.md)
+- [Inspect the local OpenVINO skill](skills/local-agentops/SKILL.md)
+
+Generate a deterministic report without installing dependencies:
+
+```bash
+node bin/agentops-report.js examples/agentops-sample.csv \
+  --output agentops-report.md \
+  --json agentops-metrics.json
+```
+
+The inherited production-readiness gate, prompt-injection fixtures, runtime
+adapters, and Agent Card schemas remain available below.
 
 ## Why Star This
 

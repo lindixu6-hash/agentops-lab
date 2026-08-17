@@ -6,6 +6,11 @@ on:
       - main
     paths:
       - "web/**"
+      - "lib/**"
+      - "examples/agentops-sample.csv"
+      - "docs/agentops-lab-prd.zh-CN.md"
+      - "research/**"
+      - "skills/local-agentops/**"
       - "starters/**"
       - "schema/**"
       - "assets/scorecard.svg"
@@ -34,6 +39,7 @@ jobs:
         run: |
           mkdir -p _site/assets _site/schema
           cp -R web/. _site/
+          cp -R lib examples docs research skills _site/
           cp -R starters _site/starters
           cp schema/*.json _site/schema/
           cp assets/scorecard.svg assets/social-preview.png _site/assets/

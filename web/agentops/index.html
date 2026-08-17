@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="AgentOps Lab 在浏览器本地分析 AI Agent 日志并生成评测报告。"
+    >
+    <title>AgentOps Lab · 本地评测与运营工作台</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../">
+        <span class="brand-mark" aria-hidden="true">AO</span>
+        <span>AgentOps Lab</span>
+      </a>
+      <nav aria-label="主要导航">
+        <a href="../docs/agentops-lab-prd.zh-CN.md">PRD</a>
+        <a href="https://github.com/lindixu6-hash/agentops-lab">
+          GitHub
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">LOCAL-FIRST AGENT EVALUATION</p>
+          <h1 id="page-title">从运行日志到可执行复盘</h1>
+          <p class="lede">
+            导入 CSV 或 JSON，在浏览器本地完成成功率、失败类型、版本、成本与延迟分析。
+            原始文件不会上传。
+          </p>
+        </div>
+        <div class="privacy-note">
+          <strong>隐私边界</strong>
+          <span>本地解析 · 不保存原始内容 · 不调用云端模型</span>
+        </div>
+      </section>
+
+      <section class="import-band" aria-labelledby="import-title">
+        <div>
+          <h2 id="import-title">导入运行日志</h2>
+          <p>必需字段：<code>success</code>；其余常用字段会自动识别。</p>
+        </div>
+        <div class="import-actions">
+          <label class="file-command" for="file-input">
+            <span>选择 CSV / JSON</span>
+            <input id="file-input" type="file" accept=".csv,.json,text/csv,application/json">
+          </label>
+          <button id="sample-button" type="button">加载示例</button>
+        </div>
+        <p id="import-status" class="status" role="status">
+          尚未导入数据。可先加载 30 条合成示例。
+        </p>
+      </section>
+
+      <section id="workspace" class="workspace" hidden>
+        <section class="metrics-section" aria-labelledby="metrics-title">
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">OVERVIEW</p>
+              <h2 id="metrics-title">运营指标</h2>
+            </div>
+            <span id="sample-size" class="sample-size"></span>
+          </div>
+          <div id="metric-grid" class="metric-grid"></div>
+        </section>
+
+        <section class="analysis-grid">
+          <section aria-labelledby="failures-title">
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">FAILURE TAXONOMY</p>
+                <h2 id="failures-title">失败类型</h2>
+              </div>
+            </div>
+            <div id="failure-list" class="bar-list"></div>
+          </section>
+
+          <section aria-labelledby="versions-title">
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">VERSION REVIEW</p>
+                <h2 id="versions-title">版本对比</h2>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>版本</th>
+                    <th>样本</th>
+                    <th>成功率</th>
+                    <th>平均延迟</th>
+                    <th>平均成本</th>
+                  </tr>
+                </thead>
+                <tbody id="version-body"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <section class="recommendations" aria-labelledby="recommendations-title">
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">DECISION QUEUE</p>
+              <h2 id="recommendations-title">迭代优先级</h2>
+            </div>
+            <div class="report-actions">
+              <button id="download-markdown" type="button">下载 Markdown</button>
+              <button id="download-json" type="button">下载 JSON</button>
+            </div>
+          </div>
+          <ol id="recommendation-list"></ol>
+        </section>
+
+        <section class="feedback-band" aria-labelledby="feedback-title">
+          <div>
+            <p class="eyebrow">FIRST 5 USERS</p>
+            <h2 id="feedback-title">首轮用户测试</h2>
+            <p>
+              完成“导入、判断回归、定位失败、下载报告”四项任务后，记录匿名耗时和反馈。
+            </p>
+          </div>
+          <a href="../research/first-5-users.md">打开测试脚本</a>
+        </section>
+      </section>
+    </main>
+
+    <template id="metric-template">
+      <article class="metric">
+        <span></span>
+        <strong></strong>
+        <small></small>
+      </article>
+    </template>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

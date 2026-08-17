@@ -1,0 +1,15 @@
+{
+  "venv_name": "agentops",
+  "python_version": "3.11",
+  "mem_need_gb": 3.5,
+  "server_alive_timeout": 300,
+  "models": [
+    {
+      "model_id": "Qwen/Qwen2.5-1.5B-Instruct-GGUF",
+      "dir_name": "Qwen2.5-1.5B-Instruct-GGUF",
+      "required_files": [
+        "qwen2.5-1.5b-instruct-q4_k_m.gguf"
+      ]
+    }
+  ]
+}

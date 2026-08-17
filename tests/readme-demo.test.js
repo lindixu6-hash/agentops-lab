@@ -13,21 +13,20 @@ const demoPath = path.join(
   "assets",
   "readiness-scorecard-demo.gif"
 );
-const scorecardUrl =
-  "https://lindixu6-hash.github.io/awesome-agentic-engineering/";
+const agentopsUrl =
+  "https://lindixu6-hash.github.io/agentops-lab/agentops/";
 
 test("English and Chinese READMEs show the product demo above the fold", () => {
   for (const readme of ["README.md", "README.zh-CN.md"]) {
     const content = fs.readFileSync(path.join(projectRoot, readme), "utf8");
-    const demoIndex = content.indexOf("assets/readiness-scorecard-demo.gif");
+    const demoIndex = content.indexOf(agentopsUrl);
     const firstSectionIndex = content.indexOf("\n## ");
 
-    assert.ok(demoIndex > 0, `${readme} must reference the demo GIF`);
+    assert.ok(demoIndex > 0, `${readme} must reference the AgentOps demo`);
     assert.ok(
       demoIndex < firstSectionIndex,
       `${readme} must show the demo before its first section`
     );
-    assert.ok(content.includes(`](${scorecardUrl})`));
   }
 });
 
@@ -53,18 +52,15 @@ test("both READMEs link to the adopter's risk-profile audit", () => {
   }
 });
 
-test("both READMEs distinguish the project from similarly named resource lists", () => {
+test("both READMEs distinguish AgentOps Lab from its unchanged upstream", () => {
   const english = fs.readFileSync(path.join(projectRoot, "README.md"), "utf8");
   const chinese = fs.readFileSync(
     path.join(projectRoot, "README.zh-CN.md"),
     "utf8"
   );
 
-  assert.match(
-    english,
-    /^# Awesome Agentic Engineering: Production Readiness Gate/m
-  );
-  assert.match(english, /Not another resource list/);
-  assert.match(chinese, /^# Awesome Agentic Engineering：AI Agent 生产就绪门禁/m);
-  assert.match(chinese, /不是另一份资源清单/);
+  assert.match(english, /^# AgentOps Lab: Local AI Agent Evaluation and Operations/m);
+  assert.match(english, /keeping its repository and release history unchanged/);
+  assert.match(chinese, /^# AgentOps Lab：本地 AI Agent 评测与运营工作台/m);
+  assert.match(chinese, /不会修改原仓库/);
 });
