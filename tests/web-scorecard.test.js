@@ -5,6 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import {
+  AGENT_CARD_SCHEMA_URL,
   AREAS,
   buildShareText,
   buildAgentCard,
@@ -37,13 +38,25 @@ test("web scorecard calculates rating and priority gaps", () => {
   assert.equal(result.gaps[0].id, "security");
 });
 
-test("web scorecard exports CLI-compatible scorecard JSON", () => {
+test("web scorecard exports a schema-valid fail-closed Agent Card", () => {
   const scores = Object.fromEntries(AREAS.map((area) => [area.id, 1]));
   const card = buildAgentCard(scores);
+  const schema = JSON.parse(
+    fs.readFileSync(
+      path.join(testDir, "../schema/agent-card.schema.json"),
+      "utf8"
+    )
+  );
 
+  assert.equal(card.$schema, AGENT_CARD_SCHEMA_URL);
   assert.equal(card.name, "My AI Agent");
+  for (const field of schema.required) {
+    assert.ok(Object.hasOwn(card, field), `missing schema field: ${field}`);
+  }
   assert.equal(Object.keys(card.scorecard).length, 10);
   assert.equal(card.scorecard.evals, 1);
+  assert.match(JSON.stringify(card), /TODO/);
+  assert.equal(card.launch_blockers.length, 1);
 });
 
 test("web scorecard rating boundaries match the CLI", () => {

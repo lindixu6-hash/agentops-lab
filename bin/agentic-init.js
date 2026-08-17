@@ -6,6 +6,8 @@ import { fileURLToPath } from "node:url";
 
 import { SCORE_AREAS } from "./agentic-score.js";
 
+export const AGENT_CARD_SCHEMA_URL =
+  "https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/agent-card.schema.json";
 export const PROFILES = ["read-only", "draft-only", "state-changing"];
 
 const TOOL_BY_PROFILE = {
@@ -75,6 +77,7 @@ export function parseArgs(argv = process.argv) {
 
 export function starterCard(options) {
   return {
+    $schema: AGENT_CARD_SCHEMA_URL,
     name: options.name,
     version: "0.1",
     owner: "TODO: team or maintainer",

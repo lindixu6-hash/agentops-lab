@@ -31,9 +31,12 @@ strict blocker failure. CI checks byte equality with agentic-init output.
 
 ## Machine-Readable Contracts
 
-- Agent Card JSON Schema: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/schema/agent-card.schema.json
-- Prompt-injection fixture JSON Schema: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/schema/prompt-injection-fixture.schema.json
-- Eval Result JSON Schema: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/schema/eval-result.schema.json
+- Schema usage and pinning guide: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/schema/README.md
+- Schema 使用与版本锁定指南: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/schema/README.zh-CN.md
+- Agent Card JSON Schema: https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/agent-card.schema.json
+- Prompt-injection fixture JSON Schema: https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/prompt-injection-fixture.schema.json
+- Eval Result JSON Schema: https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/eval-result.schema.json
+- Readiness profile JSON Schema: https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/readiness-profiles.schema.json
 - Risk-profile catalog: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/profiles/readiness-profiles.json
 - Eight inert prompt-injection fixtures: https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/evals/prompt-injection/fixtures.jsonl
 

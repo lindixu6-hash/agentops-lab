@@ -7,6 +7,7 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 import {
+  AGENT_CARD_SCHEMA_URL,
   PROFILES,
   initStarter,
   parseArgs,
@@ -74,6 +75,7 @@ test("every profile creates a zero-score card with matching capability", () => {
   for (const profile of PROFILES) {
     const card = starterCard({ profile, name: `${profile} starter` });
 
+    assert.equal(card.$schema, AGENT_CARD_SCHEMA_URL);
     assert.equal(card.risk_profile, profile);
     assert.equal(card.tools.length, 1);
     assert.equal(card.tools[0].effect, expectedEffect[profile]);

@@ -29,7 +29,9 @@ agent-card.json
 
 将所选 JSON 保存为 `agent-card.json`，将 YAML 保存为
 `.github/workflows/agent-readiness.yml`。这些下载文件与初始化器使用同一契约，
-CI 会逐字节检查二者一致。
+CI 会逐字节检查二者一致。每份生成 Card 还会声明
+[Canonical Agent Card Schema](https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/agent-card.schema.json)，
+供编辑器与 CI 校验。
 
 选择一个风险 Profile：
 

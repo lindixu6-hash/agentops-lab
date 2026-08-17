@@ -1,10 +1,14 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/awesome-agentic-engineering/agent-card.schema.json",
+  "$id": "https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/agent-card.schema.json",
   "title": "Agent Card",
   "type": "object",
   "required": ["name", "owner", "workflow", "scorecard"],
   "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri"
+    },
     "name": {
       "type": "string"
     },

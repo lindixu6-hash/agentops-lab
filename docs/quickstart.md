@@ -30,7 +30,10 @@ No Node.js or npm? Download the two generated files for your profile:
 
 Save the selected JSON as `agent-card.json` and the YAML as
 `.github/workflows/agent-readiness.yml`. These downloads are generated from the
-same initializer contract and checked for byte equality in CI.
+same initializer contract and checked for byte equality in CI. Every generated
+card also declares the
+[canonical Agent Card Schema](https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/agent-card.schema.json)
+for editor and CI validation.
 
 Choose one profile:
 

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/agent-card.schema.json",
   "name": "Starter Agent",
   "version": "0.1",
   "owner": "TODO: team or maintainer",

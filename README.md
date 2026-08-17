@@ -37,6 +37,9 @@ Use this repo if you are building:
 Use these first:
 
 - [Agent Card](templates/agent-card.md): define what the agent does, what it must never do, and how it fails safely.
+- [Agent Card JSON Schema](https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/agent-card.schema.json):
+  validate repository-owned cards in editors and CI. External adopters should
+  follow the [schema pinning guide](schema/README.md).
 - [Eval Plan](templates/eval-plan.md): turn agent behavior into testable scenarios.
 - [Prompt Injection Fixtures](evals/prompt-injection/README.md): run eight direct,
   indirect, exfiltration, and benign-control cases against your agent.

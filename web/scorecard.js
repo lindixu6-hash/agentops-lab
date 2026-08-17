@@ -71,6 +71,9 @@ export const AREAS = [
   }
 ];
 
+export const AGENT_CARD_SCHEMA_URL =
+  "https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/agent-card.schema.json";
+
 const COPY = {
   en: {
     title: "Production Readiness Scorecard",
@@ -149,8 +152,19 @@ export function calculateScore(scores) {
 
 export function buildAgentCard(scores) {
   return {
+    $schema: AGENT_CARD_SCHEMA_URL,
     name: "My AI Agent",
     version: "0.1",
+    owner: "TODO: team or maintainer",
+    users: ["TODO: intended user"],
+    workflow:
+      "TODO: define one bounded workflow, its input, output, and success condition",
+    non_goals: [
+      "TODO: name at least one action this agent must never take"
+    ],
+    launch_blockers: [
+      "Scorecard export: replace every TODO and attach repeatable evidence before release"
+    ],
     scorecard: Object.fromEntries(
       AREAS.map((area) => [area.id, Number(scores[area.id] ?? 0)])
     )

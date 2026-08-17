@@ -116,6 +116,14 @@ feature counts.
 - [x] Reject modified bundles, wrong source identity, and failing Eval Results
 - [x] Publish complete English and Chinese provenance boundaries
 
+### v0.15: Public schema distribution
+
+- [x] Replace the Agent Card placeholder identity with a canonical Pages URL
+- [x] Publish all four JSON Schemas through GitHub Pages
+- [x] Add canonical `$schema` declarations to generated and downloadable cards
+- [x] Make web scorecard exports schema-valid and fail closed by default
+- [x] Document mutable canonical and immutable release URLs in English and Chinese
+
 ## Current Priorities
 
 - Add source-linked incidents only when they introduce a distinct control or

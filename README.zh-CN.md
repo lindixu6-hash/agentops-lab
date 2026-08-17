@@ -37,6 +37,9 @@
 建议先看：
 
 - [Agent Card](templates/agent-card.md)：定义 Agent 做什么、不做什么、怎么安全失败。
+- [Agent Card JSON Schema](https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/agent-card.schema.json)：
+  在编辑器与 CI 中校验仓库自有 Card。外部采用应遵循
+  [Schema 版本锁定指南](schema/README.zh-CN.md)。
 - [Eval Plan](templates/eval-plan.md)：把 Agent 行为变成可测试场景。
 - [提示注入评估数据集](evals/prompt-injection/README.zh-CN.md)：用 8 个直接注入、
   间接注入、数据外泄和良性对照用例测试 Agent。
