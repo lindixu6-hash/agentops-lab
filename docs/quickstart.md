@@ -35,6 +35,12 @@ card also declares the
 [canonical Agent Card Schema](https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/agent-card.schema.json)
 for editor and CI validation.
 
+The generated workflow pins the third-party `actions/checkout` step to the
+reviewed v7.0.1 commit SHA. The readiness gate uses this project's moving
+`@v0` stable channel so compatible fixes can reach existing consumers; pin
+that step to a release tag or commit SHA if your repository requires fully
+immutable dependencies.
+
 Choose one profile:
 
 | Profile | Use when |

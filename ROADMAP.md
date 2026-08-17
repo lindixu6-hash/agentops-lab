@@ -124,6 +124,14 @@ feature counts.
 - [x] Make web scorecard exports schema-valid and fail closed by default
 - [x] Document mutable canonical and immutable release URLs in English and Chinese
 
+### v0.16: Starter workflow supply-chain hardening
+
+- [x] Pin `actions/checkout` in every generated workflow to a reviewed commit SHA
+- [x] Keep downloadable workflows byte-equivalent to initializer output
+- [x] Test that generated workflows cannot regress to a mutable checkout tag
+- [x] Document the third-party SHA pin and the deliberate moving `@v0` channel
+- [x] Preserve the same guidance in English and Simplified Chinese
+
 ## Current Priorities
 
 - Add source-linked incidents only when they introduce a distinct control or

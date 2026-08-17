@@ -33,6 +33,11 @@ CI 会逐字节检查二者一致。每份生成 Card 还会声明
 [Canonical Agent Card Schema](https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/agent-card.schema.json)，
 供编辑器与 CI 校验。
 
+生成的工作流会将第三方 `actions/checkout` 固定到已审核的 v7.0.1 Commit
+SHA。生产就绪门禁使用本项目可移动的 `@v0` 稳定通道，让兼容修复可以到达已有
+消费者；如果你的仓库要求依赖完全不可变，请将该步骤固定到 Release Tag 或
+Commit SHA。
+
 选择一个风险 Profile：
 
 | Profile | 适用情况 |

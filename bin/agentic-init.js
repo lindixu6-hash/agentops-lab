@@ -8,6 +8,8 @@ import { SCORE_AREAS } from "./agentic-score.js";
 
 export const AGENT_CARD_SCHEMA_URL =
   "https://lindixu6-hash.github.io/awesome-agentic-engineering/schema/agent-card.schema.json";
+export const CHECKOUT_ACTION_SHA =
+  "3d3c42e5aac5ba805825da76410c181273ba90b1";
 export const PROFILES = ["read-only", "draft-only", "state-changing"];
 
 const TOOL_BY_PROFILE = {
@@ -117,7 +119,7 @@ jobs:
   readiness:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@${CHECKOUT_ACTION_SHA} # v7.0.1
       - uses: lindixu6-hash/awesome-agentic-engineering@v0
         with:
           card: agent-card.json

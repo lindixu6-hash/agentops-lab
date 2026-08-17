@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 
 import {
   AGENT_CARD_SCHEMA_URL,
+  CHECKOUT_ACTION_SHA,
   PROFILES,
   initStarter,
   parseArgs,
@@ -98,6 +99,11 @@ test("generated workflow pins public v0 and fails on blockers", () => {
       workflow,
       /uses: lindixu6-hash\/awesome-agentic-engineering@v0/
     );
+    assert.match(
+      workflow,
+      new RegExp(`uses: actions/checkout@${CHECKOUT_ACTION_SHA} # v7\\.0\\.1`)
+    );
+    assert.doesNotMatch(workflow, /uses: actions\/checkout@v\d/);
     assert.match(workflow, new RegExp(`profile: "${profile}"`));
     assert.match(workflow, /fail-on-blockers: "true"/);
     assert.match(workflow, /permissions:\n  contents: read/);
@@ -188,6 +194,10 @@ test("package and bilingual quickstarts expose the initializer contract", () => 
   assert.match(chinese, /第一次 CI 应报告/);
   assert.match(english, /without modifying either file/);
   assert.match(chinese, /两个文件都不会被修改/);
+  assert.match(english, /pins the third-party `actions\/checkout`/);
+  assert.match(chinese, /第三方 `actions\/checkout` 固定/);
+  assert.match(english, /moving\n`@v0` stable channel/);
+  assert.match(chinese, /可移动的 `@v0` 稳定通道/);
   for (const profile of PROFILES) {
     assert.match(english, new RegExp(`\\\`${profile}\\\``));
     assert.match(chinese, new RegExp(`\\\`${profile}\\\``));
