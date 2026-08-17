@@ -125,7 +125,7 @@
             >
               Open the adapter
             </a>
-            <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering/actions/runs/31980983499">
+            <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering/actions/runs/31981738763">
               Inspect CI evidence
             </a>
           </div>
@@ -146,7 +146,7 @@
             <div class="metric-grid" aria-label="Verified run summary">
               <div class="metric"><strong>8/8</strong><span>fixtures executed</span></div>
               <div class="metric"><strong>34</strong><span>evidence files generated</span></div>
-              <div class="metric"><strong>134</strong><span>deterministic tests</span></div>
+              <div class="metric"><strong>2</strong><span>separate verification jobs</span></div>
               <div class="metric"><strong>0</strong><span>provider calls required</span></div>
             </div>
             <p>
@@ -156,6 +156,42 @@
               replaces provider network access with a function that always
               throws; the suite still completes.
             </p>
+          </section>
+
+          <section id="provenance">
+            <h2>Attested producer/verifier boundary</h2>
+            <p>
+              The runtime producer signs one deterministic evidence bundle with
+              GitHub OIDC and Sigstore. A reusable workflow pinned to
+              <code>8d4b435</code> downloads that bundle and checks out
+              verifier code pinned to <code>34b1235</code>.
+            </p>
+            <pre><code>bundle sha256
+81671c0e9589e65413e13b7ca7a19d3453166ae783cb5ae3feb4b46565256521
+
+source / signer sha
+225554029a583c014f1ea8f0e45a25267638bd8a
+
+workflow
+.github/workflows/provenance-eval.yml@refs/heads/main</code></pre>
+            <p>
+              The verifier enforces signer workflow, signer digest, source
+              digest/ref, repository identity, and a GitHub-hosted runner. It
+              then checks all 34 file hashes, five trusted-input hashes, and
+              8/8 Eval Results. A modified bundle and an all-zero source digest
+              must both fail.
+            </p>
+            <div class="callout">
+              <p>
+                <strong>Governance limit:</strong> <code>main</code> was not
+                branch-protected for this run. The attestation proves workflow,
+                commit, runner, and artifact identity; it does not prove
+                independent code review or general Agent safety. Read the
+                <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/docs/evidence-provenance.md">
+                  full provenance boundary
+                </a>.
+              </p>
+            </div>
           </section>
 
           <section id="runner">
@@ -318,6 +354,7 @@ node bin/validate-eval-results.js \
         <aside class="guide-toc" aria-label="On this page">
           <strong>On this page</strong>
           <a href="#evidence">Public evidence</a>
+          <a href="#provenance">Attested provenance</a>
           <a href="#runner">Runner loop</a>
           <a href="#boundary">Trust boundary</a>
           <a href="#coverage">Fixture coverage</a>

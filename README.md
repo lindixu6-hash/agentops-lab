@@ -54,6 +54,9 @@ Use these first:
   including Zod-validated read-only tool calls and provider-network-disabled
   tests. Read the
   [live OpenAI Agents SDK prompt-injection eval guide](https://lindixu6-hash.github.io/awesome-agentic-engineering/openai-agents-eval/).
+- [Attested Evidence Provenance](docs/evidence-provenance.md): separate
+  production and SHA-pinned verification jobs, bind source and evidence
+  digests, verify GitHub/Sigstore identity, and retain negative tamper checks.
 - [Risk-Tiered Profiles](profiles/README.md): apply different total, per-area,
   tool-effect, approval, and blocker gates to read-only, draft-only, and
   state-changing Agents.

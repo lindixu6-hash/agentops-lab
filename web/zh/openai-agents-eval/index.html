@@ -124,7 +124,7 @@
             >
               查看适配器
             </a>
-            <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering/actions/runs/31980983499">
+            <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering/actions/runs/31981738763">
               检查 CI 证据
             </a>
           </div>
@@ -145,7 +145,7 @@
             <div class="metric-grid" aria-label="已验证运行摘要">
               <div class="metric"><strong>8/8</strong><span>Fixture 已执行</span></div>
               <div class="metric"><strong>34</strong><span>证据文件已生成</span></div>
-              <div class="metric"><strong>134</strong><span>确定性测试</span></div>
+              <div class="metric"><strong>2</strong><span>相互分离的验证 Job</span></div>
               <div class="metric"><strong>0</strong><span>所需 Provider 调用</span></div>
             </div>
             <p>
@@ -154,6 +154,39 @@
               <code>openai-agents-eval-evidence</code>。测试会把 Provider 网络访问
               替换成一个永远抛错的函数，套件仍能完整运行。
             </p>
+          </section>
+
+          <section id="provenance">
+            <h2>带 Attestation 的 Producer/Verifier 边界</h2>
+            <p>
+              Runtime Producer 使用 GitHub OIDC 与 Sigstore 对一个确定性证据 Bundle
+              签名。锁定到 <code>8d4b435</code> 的 Reusable Workflow 下载该
+              Bundle，并检出锁定到 <code>34b1235</code> 的 Verifier 代码。
+            </p>
+            <pre><code>Bundle SHA-256
+81671c0e9589e65413e13b7ca7a19d3453166ae783cb5ae3feb4b46565256521
+
+Source / Signer SHA
+225554029a583c014f1ea8f0e45a25267638bd8a
+
+Workflow
+.github/workflows/provenance-eval.yml@refs/heads/main</code></pre>
+            <p>
+              Verifier 会约束签名 Workflow、Signer Digest、Source Digest/ref、仓库
+              身份与 GitHub 托管 Runner，再检查全部 34 个文件 Hash、5 个可信输入
+              Hash 与 8/8 Eval Result。被修改的 Bundle 与全零 Source Digest 都
+              必须验证失败。
+            </p>
+            <div class="callout">
+              <p>
+                <strong>治理限制：</strong>本次运行时 <code>main</code> 没有
+                Branch Protection。Attestation 能证明 Workflow、Commit、Runner 与
+                Artifact 身份，但不能证明独立代码审核或 Agent 普遍安全。请阅读
+                <a href="https://github.com/lindixu6-hash/awesome-agentic-engineering/blob/main/docs/evidence-provenance.zh-CN.md">
+                  完整 Provenance 边界
+                </a>。
+              </p>
+            </div>
           </section>
 
           <section id="runner">
@@ -311,6 +344,7 @@ node bin/validate-eval-results.js \
         <aside class="guide-toc" aria-label="本页目录">
           <strong>本页目录</strong>
           <a href="#evidence">公开证据</a>
+          <a href="#provenance">Attestation 溯源</a>
           <a href="#runner">Runner 循环</a>
           <a href="#boundary">信任边界</a>
           <a href="#coverage">Fixture 覆盖</a>

@@ -51,6 +51,9 @@
   通过真实 `Agent` 与离线自定义 Model 的 `Runner.run()` 循环执行同一契约，
   包含经 Zod 校验的只读工具调用与禁用 Provider 网络后的测试。也可以阅读
   [在线 OpenAI Agents SDK 提示注入 Eval 指南](https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/openai-agents-eval/)。
+- [带 Attestation 的证据溯源](docs/evidence-provenance.zh-CN.md)：分离
+  Producer 与 SHA 锁定的 Verifier Job，绑定源码与证据 Digest，验证
+  GitHub/Sigstore 身份，并保留负向篡改检查。
 - [风险分级 Profile](profiles/README.zh-CN.md)：针对只读、仅草稿与状态变更
   Agent 使用不同的总分、分项、工具影响、审批和阻塞项门禁。
 - [Launch Checklist](templates/launch-checklist.md)：上线前做一次生产就绪检查。

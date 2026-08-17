@@ -164,3 +164,30 @@ test("verifier preserves and rejects a failing Eval Result", async (t) => {
     fs.rmSync(output, { recursive: true, force: true });
   }
 });
+
+test("bilingual provenance docs expose evidence and governance limits", () => {
+  const english = fs.readFileSync(
+    path.join(projectRoot, "docs/evidence-provenance.md"),
+    "utf8"
+  );
+  const chinese = fs.readFileSync(
+    path.join(projectRoot, "docs/evidence-provenance.zh-CN.md"),
+    "utf8"
+  );
+
+  for (const document of [english, chinese]) {
+    assert.match(document, /31981738763/);
+    assert.match(
+      document,
+      /81671c0e9589e65413e13b7ca7a19d3453166ae783cb5ae3feb4b46565256521/
+    );
+    assert.match(document, /34b12355a27a647adfb5b09578234a19ee076f0f/);
+    assert.match(document, /8d4b435f66f58a570b65dd8b4952bf7e1e2dd62f/);
+  }
+  assert.match(english, /main.*was not protected/is);
+  assert.match(english, /not a SLSA level claim/i);
+  assert.match(chinese, /main.*没有 Branch Protection/is);
+  assert.match(chinese, /不是 SLSA 等级声明/);
+  assert.match(english, /evidence-provenance\.zh-CN\.md/);
+  assert.match(chinese, /\[English\]\(evidence-provenance\.md\)/);
+});

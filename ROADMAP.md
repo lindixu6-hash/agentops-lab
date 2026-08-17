@@ -107,6 +107,15 @@ feature counts.
 - [x] Retain CI evidence and validate results with public `@v0`
 - [x] Publish English and Chinese technical guides with explicit limitations
 
+### v0.14: Attested evidence provenance
+
+- [x] Bind source, workflow, trusted inputs, and every evidence file in a manifest
+- [x] Split runtime production from SHA-pinned reusable verification
+- [x] Sign the deterministic evidence bundle with GitHub OIDC and Sigstore
+- [x] Verify signer workflow, signer/source digest, ref, and hosted runner
+- [x] Reject modified bundles, wrong source identity, and failing Eval Results
+- [x] Publish complete English and Chinese provenance boundaries
+
 ## Current Priorities
 
 - Add source-linked incidents only when they introduce a distinct control or
