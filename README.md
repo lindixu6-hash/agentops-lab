@@ -27,6 +27,7 @@ while keeping its repository and release history unchanged.
 - [Use the first-five-user test script](research/first-5-users.md)
 - [Inspect the local OpenVINO skill](skills/local-agentops/SKILL.md)
 - [Review the reproducible OpenVINO validation](docs/openvino-validation.zh-CN.md)
+- [Review the verified outcome and resume evidence ledger](docs/outcome-ledger.zh-CN.md)
 
 Generate a deterministic report without installing dependencies:
 

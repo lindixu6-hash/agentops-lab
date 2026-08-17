@@ -25,6 +25,7 @@ Release 或公开链接。
 - [使用首轮 5 位用户测试脚本](research/first-5-users.md)
 - [查看本地 OpenVINO Skill](skills/local-agentops/SKILL.md)
 - [查看可复现的 OpenVINO 实跑记录](docs/openvino-validation.zh-CN.md)
+- [查看成果与简历证据台账](docs/outcome-ledger.zh-CN.md)
 
 无需安装依赖即可生成确定性报告：
 
