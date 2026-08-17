@@ -202,6 +202,8 @@ test("package and bilingual quickstarts expose the initializer contract", () => 
   assert.match(chinese, /CI、Pages 和 Star Watch 工作流/);
   assert.match(english, /Dependabot checks[\s\S]*references weekly/);
   assert.match(chinese, /Dependabot 每周检查/);
+  assert.match(english, /v0\.14 provenance[\s\S]*published attested identity/);
+  assert.match(chinese, /v0\.14 Provenance[\s\S]*Attestation 身份/);
   for (const profile of PROFILES) {
     assert.match(english, new RegExp(`\\\`${profile}\\\``));
     assert.match(chinese, new RegExp(`\\\`${profile}\\\``));

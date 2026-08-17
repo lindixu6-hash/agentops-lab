@@ -137,7 +137,7 @@ feature counts.
 - [x] Pin every third-party Action in CI, Pages, and Star Watch to a full SHA
 - [x] Preserve local actions and the deliberate public `@v0` compatibility probes
 - [x] Add a repository-wide regression that rejects mutable third-party Action tags
-- [x] Configure weekly Dependabot updates for GitHub Actions
+- [x] Configure weekly Dependabot updates, excluding attestation-bound major upgrades
 - [x] Document update and trust boundaries in English and Simplified Chinese
 
 ## Current Priorities

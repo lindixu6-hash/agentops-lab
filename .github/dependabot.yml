@@ -9,3 +9,12 @@ updates:
       time: "01:37"
       timezone: "Etc/UTC"
     open-pull-requests-limit: 5
+    ignore:
+      # These older majors are part of the published v0.14 attested workflow
+      # identity. A major upgrade requires a new producer/verifier evidence run.
+      - dependency-name: actions/checkout
+        update-types:
+          - version-update:semver-major
+      - dependency-name: actions/setup-node
+        update-types:
+          - version-update:semver-major

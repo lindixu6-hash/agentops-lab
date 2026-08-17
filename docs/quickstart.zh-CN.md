@@ -43,6 +43,11 @@ Commit SHA。Dependabot 每周检查这些 GitHub Actions 引用，但更新仍�
 CI。`uses: ./` 执行当前检出的提交；同仓库 `@v0` 调用只用于冒烟测试公开可移动
 通道。
 
+Dependabot 会忽略 v0.14 Provenance 工作流中 checkout/setup-node 的 Major
+升级，因为这些旧 SHA 属于已发布的 Attestation 身份。升级它们必须重新执行
+Producer/Verifier 证据流程，不能只合并自动依赖 PR；当前 v7 引用仍可接收 Minor
+与 Patch 更新。
+
 选择一个风险 Profile：
 
 | Profile | 适用情况 |

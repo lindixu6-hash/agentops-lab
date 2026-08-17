@@ -47,6 +47,12 @@ references weekly, but an update still requires review and CI. Local
 `uses: ./` steps execute the checked-out commit; same-repository `@v0` calls
 exist only to smoke-test the public moving channel.
 
+Dependabot ignores major checkout/setup-node upgrades for the v0.14 provenance
+workflows because those older SHAs are part of a published attested identity.
+Upgrading them requires a new producer/verifier evidence run, not an automatic
+dependency-only PR. Current v7 references can still receive minor and patch
+updates.
+
 Choose one profile:
 
 | Profile | Use when |

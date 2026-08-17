@@ -114,6 +114,14 @@ test("Dependabot maintains pinned GitHub Actions references", () => {
   assert.match(config, /directory: "\/"/);
   assert.match(config, /interval: weekly/);
   assert.match(config, /open-pull-requests-limit: 5/);
+  assert.match(
+    config,
+    /dependency-name: actions\/checkout[\s\S]*version-update:semver-major/
+  );
+  assert.match(
+    config,
+    /dependency-name: actions\/setup-node[\s\S]*version-update:semver-major/
+  );
 });
 
 test("CI verifies generated starters fail closed", () => {
