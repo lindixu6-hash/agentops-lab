@@ -87,6 +87,47 @@ test("LangGraph eval structured data identifies both localized TechArticles", ()
   assert.match(chinese.headline, /LangGraph 提示注入 Eval/);
 });
 
+test("OpenAI Agents eval pages expose reciprocal metadata and evidence limits", () => {
+  const english = read("web/openai-agents-eval/index.html");
+  const chinese = read("web/zh/openai-agents-eval/index.html");
+
+  assert.match(
+    english,
+    /rel="canonical"\s+href="https:\/\/lindixu6-hash\.github\.io\/awesome-agentic-engineering\/openai-agents-eval\/"/
+  );
+  assert.match(
+    chinese,
+    /rel="canonical"\s+href="https:\/\/lindixu6-hash\.github\.io\/awesome-agentic-engineering\/zh\/openai-agents-eval\/"/
+  );
+  assert.match(english, /hreflang="zh-CN"/);
+  assert.match(chinese, /hreflang="en"/);
+  assert.match(english, /OpenAI Agents SDK Prompt Injection Eval/);
+  assert.match(chinese, /OpenAI Agents SDK 提示注入 Eval/);
+  assert.match(english, /8\/8/);
+  assert.match(chinese, /8\/8/);
+  assert.match(
+    english,
+    /does not prove arbitrary OpenAI Agents SDK applications/
+  );
+  assert.match(chinese, /不能证明任意 OpenAI Agents SDK 应用都安全/);
+  assert.match(english, /provider network access/);
+  assert.match(chinese, /Provider 网络访问/);
+});
+
+test("OpenAI Agents eval structured data identifies localized TechArticles", () => {
+  const english = structuredData(read("web/openai-agents-eval/index.html"));
+  const chinese = structuredData(
+    read("web/zh/openai-agents-eval/index.html")
+  );
+
+  assert.equal(english["@type"], "TechArticle");
+  assert.equal(english.inLanguage, "en");
+  assert.equal(chinese["@type"], "TechArticle");
+  assert.equal(chinese.inLanguage, "zh-CN");
+  assert.match(english.headline, /OpenAI Agents SDK Prompt Injection Eval/);
+  assert.match(chinese.headline, /OpenAI Agents SDK 提示注入 Eval/);
+});
+
 test("sitemap and robots expose every public Pages entry", () => {
   const sitemap = read("web/sitemap.xml");
   const robots = read("web/robots.txt");
@@ -101,6 +142,14 @@ test("sitemap and robots expose every public Pages entry", () => {
   assert.match(
     sitemap,
     /awesome-agentic-engineering\/zh\/langgraph-eval\/<\/loc>/
+  );
+  assert.match(
+    sitemap,
+    /awesome-agentic-engineering\/openai-agents-eval\/<\/loc>/
+  );
+  assert.match(
+    sitemap,
+    /awesome-agentic-engineering\/zh\/openai-agents-eval\/<\/loc>/
   );
   assert.match(sitemap, /hreflang="zh-CN"/);
   assert.match(
@@ -123,6 +172,25 @@ test("scorecard and guides link to the LangGraph eval pages", () => {
   assert.match(
     read("web/zh/guide/index.html"),
     /href="\.\.\/langgraph-eval\/"/
+  );
+});
+
+test("guides and runtime pages cross-link the OpenAI Agents eval", () => {
+  assert.match(
+    read("web/guide/index.html"),
+    /href="\.\.\/openai-agents-eval\/"/
+  );
+  assert.match(
+    read("web/zh/guide/index.html"),
+    /href="\.\.\/openai-agents-eval\/"/
+  );
+  assert.match(
+    read("web/langgraph-eval/index.html"),
+    /href="\.\.\/openai-agents-eval\/"/
+  );
+  assert.match(
+    read("web/zh/langgraph-eval/index.html"),
+    /href="\.\.\/openai-agents-eval\/"/
   );
 });
 
@@ -158,7 +226,9 @@ test("public pages advertise the LLM-readable project index", () => {
     "web/guide/index.html",
     "web/zh/guide/index.html",
     "web/langgraph-eval/index.html",
-    "web/zh/langgraph-eval/index.html"
+    "web/zh/langgraph-eval/index.html",
+    "web/openai-agents-eval/index.html",
+    "web/zh/openai-agents-eval/index.html"
   ]) {
     const html = read(relativePath);
     assert.match(html, /type="text\/plain"/);
@@ -182,6 +252,8 @@ test("llms.txt exposes bilingual contracts, evidence, commands, and limits", () 
   assert.match(index, /evals\/prompt-injection\/fixtures\.jsonl/);
   assert.match(index, /## Executable Adapters/);
   assert.match(index, /langgraph-eval\//);
+  assert.match(index, /openai-agents-eval\//);
+  assert.match(index, /eval:openai-agents/);
   assert.match(index, /## Evidence/);
   assert.match(index, /31975175069/);
   assert.match(index, /31974318431/);

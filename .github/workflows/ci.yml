@@ -22,6 +22,7 @@ jobs:
             end
           '
       - run: npm run install:langgraph
+      - run: npm run install:openai-agents
       - run: npm test
       - run: npm run validate:fixtures
       - run: npm run validate:results
@@ -105,6 +106,22 @@ jobs:
         with:
           name: langgraph-eval-evidence
           path: artifacts/langgraph-eval
+      - name: Run OpenAI Agents SDK eval
+        env:
+          SOURCE_DATE_EPOCH: "1786924800"
+        run: npm run eval:openai-agents
+      - name: Validate OpenAI Agents results with published v0
+        run: |
+          npm exec --yes \
+            --package=github:lindixu6-hash/awesome-agentic-engineering#v0 \
+            -- agentic-validate-results \
+            artifacts/openai-agents-eval/results.jsonl \
+            --fixtures evals/prompt-injection/fixtures.jsonl
+      - name: Upload OpenAI Agents eval evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: openai-agents-eval-evidence
+          path: artifacts/openai-agents-eval
       - name: Test published v0 fixture validator
         run: |
           npm exec --yes \

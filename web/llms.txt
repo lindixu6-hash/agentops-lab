@@ -42,6 +42,9 @@ strict blocker failure. CI checks byte equality with agentic-init output.
 - LangGraph prompt-injection eval (English): https://lindixu6-hash.github.io/awesome-agentic-engineering/langgraph-eval/
 - LangGraph 提示注入 Eval（简体中文）: https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/langgraph-eval/
 - LangGraph.js adapter source: https://github.com/lindixu6-hash/awesome-agentic-engineering/tree/main/adapters/langgraph
+- OpenAI Agents SDK eval (English): https://lindixu6-hash.github.io/awesome-agentic-engineering/openai-agents-eval/
+- OpenAI Agents SDK Eval（简体中文）: https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/openai-agents-eval/
+- OpenAI Agents SDK adapter source: https://github.com/lindixu6-hash/awesome-agentic-engineering/tree/main/adapters/openai-agents
 - Deterministic reference adapter: https://github.com/lindixu6-hash/awesome-agentic-engineering/tree/main/adapters/reference-runtime
 
 ## Evidence
@@ -59,6 +62,11 @@ Initialize a fail-closed starter:
 
     npm exec --yes --package=github:lindixu6-hash/awesome-agentic-engineering#v0 -- agentic-init --profile read-only --name "My Agent"
 
+Run the offline OpenAI Agents SDK adapter:
+
+    npm run install:openai-agents
+    SOURCE_DATE_EPOCH=1786924800 npm run eval:openai-agents
+
 Score an existing Agent Card:
 
     npm exec --yes --package=github:lindixu6-hash/awesome-agentic-engineering#v0 -- agentic-score agent-card.json
@@ -75,6 +83,8 @@ Validate generated eval results:
   authenticity or agent safety.
 - The bundled runtime policies are deterministic examples, not LLM benchmarks.
 - LangGraph adapter results do not prove arbitrary LangGraph applications safe.
+- OpenAI Agents adapter results do not prove arbitrary OpenAI Agents SDK
+  applications safe.
 - Content OS is a same-maintainer prototype adopter; its passing compatibility
   score does not hide its failing draft-only profile or unresolved blockers.
 - Do not infer external production adoption from repository Stars, CI status,

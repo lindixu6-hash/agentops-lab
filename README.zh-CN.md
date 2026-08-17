@@ -47,6 +47,10 @@
 - [LangGraph.js 适配器](adapters/langgraph/README.zh-CN.md)：通过锁定的外部
   `StateGraph` Runtime 执行同一契约，并保留节点级证据。也可以直接阅读
   [在线 LangGraph 提示注入 Eval 指南](https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/langgraph-eval/)。
+- [OpenAI Agents SDK 适配器](adapters/openai-agents/README.zh-CN.md)：
+  通过真实 `Agent` 与离线自定义 Model 的 `Runner.run()` 循环执行同一契约，
+  包含经 Zod 校验的只读工具调用与禁用 Provider 网络后的测试。也可以阅读
+  [在线 OpenAI Agents SDK 提示注入 Eval 指南](https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/openai-agents-eval/)。
 - [风险分级 Profile](profiles/README.zh-CN.md)：针对只读、仅草稿与状态变更
   Agent 使用不同的总分、分项、工具影响、审批和阻塞项门禁。
 - [Launch Checklist](templates/launch-checklist.md)：上线前做一次生产就绪检查。
@@ -124,6 +128,8 @@ npm run validate:results
 npm run eval:reference
 npm run install:langgraph
 npm run eval:langgraph
+npm run install:openai-agents
+npm run eval:openai-agents
 npm test
 ```
 
@@ -320,8 +326,8 @@ Agent 不断积累过时或错误假设。
 
 ## 后续路线
 
-- [增加第二个带公开 CI 证据的外部 Runtime 适配器](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/14)。
 - 增加带公开 CI 证据的外部采用项目。
+- 将独立采用项目暴露的失败转成可复用 Profile、Fixture 与回归案例。
 
 已交付版本与当前优先级见证据驱动的 [ROADMAP.md](ROADMAP.md)。
 

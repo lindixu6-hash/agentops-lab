@@ -15,7 +15,7 @@ const chineseReadme = fs.readFileSync(
   "utf8"
 );
 
-test("roadmap marks shipped versions through v0.12 as completed", () => {
+test("roadmap marks shipped versions through v0.13 as completed", () => {
   for (const version of [
     "v0.1",
     "v0.2",
@@ -28,7 +28,8 @@ test("roadmap marks shipped versions through v0.12 as completed", () => {
     "v0.9",
     "v0.10",
     "v0.11",
-    "v0.12"
+    "v0.12",
+    "v0.13"
   ]) {
     assert.match(roadmap, new RegExp(`### ${version.replace(".", "\\.")}`));
   }
@@ -65,8 +66,13 @@ test("completed product surfaces are not listed as future README work", () => {
   assert.doesNotMatch(futureChinese, /增加生产就绪 badge/);
 });
 
-test("roadmap and bilingual READMEs expose the next runtime contribution", () => {
-  for (const document of [roadmap, readme, chineseReadme]) {
-    assert.match(document, /issues\/14/);
-  }
+test("completed second runtime is no longer listed as future work", () => {
+  const currentRoadmap = roadmap.split("## Current Priorities")[1] || "";
+  const futureEnglish = readme.split("## Roadmap")[1] || "";
+  const futureChinese = chineseReadme.split("## 后续路线")[1] || "";
+
+  assert.doesNotMatch(currentRoadmap, /issues\/14/);
+  assert.doesNotMatch(futureEnglish, /issues\/14/);
+  assert.doesNotMatch(futureChinese, /issues\/14/);
+  assert.match(roadmap, /### v0\.13: OpenAI Agents SDK runtime adapter/);
 });

@@ -49,6 +49,11 @@ Use these first:
   contract through a pinned external `StateGraph` runtime with node-linked
   evidence. Read the
   [live LangGraph prompt-injection eval guide](https://lindixu6-hash.github.io/awesome-agentic-engineering/langgraph-eval/).
+- [OpenAI Agents SDK Adapter](adapters/openai-agents/README.md): execute the
+  contract through a real `Agent` and offline custom-Model `Runner.run()` loop,
+  including Zod-validated read-only tool calls and provider-network-disabled
+  tests. Read the
+  [live OpenAI Agents SDK prompt-injection eval guide](https://lindixu6-hash.github.io/awesome-agentic-engineering/openai-agents-eval/).
 - [Risk-Tiered Profiles](profiles/README.md): apply different total, per-area,
   tool-effect, approval, and blocker gates to read-only, draft-only, and
   state-changing Agents.
@@ -128,6 +133,8 @@ npm run validate:results
 npm run eval:reference
 npm run install:langgraph
 npm run eval:langgraph
+npm run install:openai-agents
+npm run eval:openai-agents
 npm test
 ```
 
@@ -399,8 +406,9 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting.
 
 ## Roadmap
 
-- [Add a second external runtime adapter with public CI evidence](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/14).
 - Add external adopters with public CI evidence.
+- Convert independent adopter failures into reusable profiles, fixtures, and
+  regression cases.
 
 See the evidence-based [ROADMAP.md](ROADMAP.md) for shipped versions and current
 priorities.

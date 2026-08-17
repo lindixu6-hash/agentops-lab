@@ -97,9 +97,18 @@ feature counts.
 - [x] English and Chinese README, Quickstart, and web-guide entry points
 - [x] LLM-readable Starter links and npm package inclusion
 
+### v0.13: OpenAI Agents SDK runtime adapter
+
+- [x] Pin OpenAI Agents SDK and Zod in an isolated reproducible subpackage
+- [x] Execute all fixtures through a real `Agent` and `Runner.run()` loop
+- [x] Exercise SDK-managed, Zod-validated read-only function calls
+- [x] Complete with provider network access disabled and no API key
+- [x] Emit results, assertions, responses, and tool/policy traces
+- [x] Retain CI evidence and validate results with public `@v0`
+- [x] Publish English and Chinese technical guides with explicit limitations
+
 ## Current Priorities
 
-- [Add a second external runtime adapter with public CI evidence](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/14).
 - Add source-linked incidents only when they introduce a distinct control or
   regression, not to inflate a case count.
 - Add external adopters with public CI evidence.

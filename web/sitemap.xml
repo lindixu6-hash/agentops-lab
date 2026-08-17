@@ -37,4 +37,20 @@
     <xhtml:link rel="alternate" hreflang="zh-CN"
                 href="https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/langgraph-eval/"/>
   </url>
+  <url>
+    <loc>https://lindixu6-hash.github.io/awesome-agentic-engineering/openai-agents-eval/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="en"
+                href="https://lindixu6-hash.github.io/awesome-agentic-engineering/openai-agents-eval/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN"
+                href="https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/openai-agents-eval/"/>
+  </url>
+  <url>
+    <loc>https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/openai-agents-eval/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="en"
+                href="https://lindixu6-hash.github.io/awesome-agentic-engineering/openai-agents-eval/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN"
+                href="https://lindixu6-hash.github.io/awesome-agentic-engineering/zh/openai-agents-eval/"/>
+  </url>
 </urlset>

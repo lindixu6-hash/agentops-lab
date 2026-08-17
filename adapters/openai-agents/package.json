@@ -1,0 +1,15 @@
+{
+  "name": "awesome-agentic-engineering-openai-agents-adapter",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "OpenAI Agents SDK adapter for the prompt-injection fixture and Eval Result contracts.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@openai/agents": "0.16.1",
+    "zod": "4.4.3"
+  }
+}

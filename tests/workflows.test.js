@@ -132,3 +132,17 @@ test("CI installs LangGraph and retains external-runtime eval evidence", () => {
   assert.match(workflow, /name: langgraph-eval-evidence/);
   assert.match(workflow, /path: artifacts\/langgraph-eval/);
 });
+
+test("CI installs OpenAI Agents and retains offline Runner evidence", () => {
+  const workflow = readWorkflow("ci.yml");
+
+  assert.match(workflow, /npm run install:openai-agents/);
+  assert.match(workflow, /npm run eval:openai-agents/);
+  assert.match(
+    workflow,
+    /agentic-validate-results \\\n\s+artifacts\/openai-agents-eval\/results\.jsonl/
+  );
+  assert.match(workflow, /uses: actions\/upload-artifact@v7/);
+  assert.match(workflow, /name: openai-agents-eval-evidence/);
+  assert.match(workflow, /path: artifacts\/openai-agents-eval/);
+});
