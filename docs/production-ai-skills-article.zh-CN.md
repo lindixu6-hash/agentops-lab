@@ -76,16 +76,24 @@ skills/local-agentops/
     └── client.py
 ```
 
-`scripts/run.ps1` 是唯一入口：
+Windows 与 macOS / Linux 分别通过固定包装器进入同一执行链：
 
 ```powershell
 scripts\run.ps1 "runs.csv" --output "report.md" --json "metrics.json"
 ```
 
+```bash
+scripts/run.sh "runs.csv" --output "report.md" --json "metrics.json"
+```
+
+两个包装器都委托给 `run.py`，由它清理 Host 注入的 `PYTHONHOME` /
+`PYTHONPATH`，隔离 OpenVINO 运行目录，再调用 `client.py`。生产力 Agent
+不需要绕过 Skill 入口直接运行内部脚本。
+
 第一次运行会建立 Python 环境并下载本地 Qwen 模型。下载中断时可以使用：
 
-```powershell
-scripts\run.ps1 --continue
+```text
+<当前平台包装器> --continue
 ```
 
 为了测试和审计，项目同时保留透明的 `--no-model` 模式。它只运行确定性计算，并在报告中明确标注没有使用本地模型。
@@ -141,6 +149,8 @@ run-002,false,9400,0.047,true,tool_error,v1,2
 - 自动化测试；
 - 本地 OpenVINO Skill 结构；
 - OpenVINO 原生 IR 冷启动实跑：30 条记录完整分析耗时 20.27 秒，峰值内存约 1.26 GB；
+- TRAE Work 连续调用验证：识别 `local-agentops`，仅通过 `run.sh` 执行，
+  在不手动清理环境变量、不绕过入口、不请求提权的条件下返回 exit code 0；
 - 一页 PRD、首轮用户测试脚本和隐私同意口径。
 
 示例数据的结果只用于验证计算链路，不代表真实业务效果：
@@ -150,12 +160,16 @@ run-002,false,9400,0.047,true,tool_error,v1,2
 - 最高频失败：`tool_error`；
 - 系统会触发 P0 失败模式修复建议和版本对比。
 
+这些数字来自仓库内明确标注的合成样例，只证明链路和计算可复现，不是业务提升。
+5 位真人体验用于验证报告是否真的支持放量决策，是产品证据与比赛加分项，不是
+Agent Skill 成立或参赛的硬门槛。
+
 ## 下一步
 
 1. 完成 5 位真实用户的首轮测试；
 2. 将最高频卡点转成产品迭代；
 3. 在 Intel AI PC 上补充 GPU / NPU 推理耗时与内存；
-4. 将已完成的 TRAE Work Host 调用剪成 2 分钟演示；
+4. 将已完成的 TRAE Work Host 调用整理成 2 分钟演示；
 5. 将真实失败样本转成可公开、脱敏的回归 fixtures。
 
 ## 项目链接

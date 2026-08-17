@@ -9,6 +9,8 @@
 - 截止时间：2026-08-31 23:59
 - 代码仓库：https://github.com/lindixu6-hash/agentops-lab
 - Demo：https://lindixu6-hash.github.io/agentops-lab/agentops/
+- ModelScope Skill：https://modelscope.cn/skills/lindi312/local-agentops
+- 技术文章：https://modelscope.cn/learn/435817
 
 ## 一句话介绍
 
@@ -38,7 +40,7 @@
 - [x] TRAE Work / WorkBuddy 类 Host 完成稳定调用；
 - [x] 保存完整 Host 调用截图；
 - [ ] 5 位真实用户记录完成，不含伪造或空白记录；
-- [ ] 技术文章发布到 ModelScope 研习社；
+- [x] 技术文章发布到 ModelScope 研习社；
 - [ ] 小红书发布并正确 @ 社区、添加指定话题；
 - [ ] 记录各渠道阅读量和有效转化；
 - [ ] 比赛作品提交成功并保存截图。
