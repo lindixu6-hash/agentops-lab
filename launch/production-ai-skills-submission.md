@@ -36,7 +36,7 @@
 - [x] ModelScope Skills 中心发布 `local-agentops`；
 - [x] Skill 添加 `AI PC` 自定义标签；
 - [ ] Windows / Intel 环境完成一次默认模型运行；
-- [ ] `--continue` 模型续传路径验证；
+- [x] `--continue` 模型续传路径验证；
 - [x] TRAE Work / WorkBuddy 类 Host 完成稳定调用；
 - [x] 保存完整 Host 调用截图；
 - [ ] 5 位真实用户记录完成，不含伪造或空白记录；

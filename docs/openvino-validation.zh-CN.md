@@ -47,6 +47,26 @@ skills/local-agentops/scripts/run.sh \
 
 已连续运行三次成功。
 
+## 断点续跑验证
+
+使用隔离的 `AGENTOPS_RUNTIME_HOME` 写入待续状态后，通过当前平台固定入口执行：
+
+```bash
+AGENTOPS_RUNTIME_HOME="artifacts/continue-validation/.agentops-runtime" \
+AGENTOPS_VENV="artifacts/openvino-venv" \
+skills/local-agentops/scripts/run.sh \
+  --continue \
+  --model-path artifacts/qwen2.5-0.5b-openvino-fp16
+```
+
+验证结果：
+
+- 成功恢复 30 条合成记录的分析；
+- Markdown 与 JSON 输出均生成；
+- OpenVINO 本地模型正常运行；
+- 成功结束后 `agentops-pending.json` 自动删除；
+- 退出码为 `0`。
+
 ## TRAE Work Host 验证
 
 2026-08-17 在 TRAE Work 中通过全局安装的 `local-agentops` Skill 复测：
@@ -61,6 +81,14 @@ skills/local-agentops/scripts/run.sh \
 - 成功生成 `host-validation-v3.md` 与 `host-validation-v3.json`。
 
 ![TRAE Work Host 验证结果](assets/traework-host-validation-v3.jpg)
+
+## ModelScope 文章发布
+
+技术文章已发布至 ModelScope 研习社，并添加 `Intel AI PC` 专题：
+
+- https://modelscope.cn/learn/435817
+
+![ModelScope 文章发布结果](assets/modelscope-article-published.png)
 
 ## 兼容性结论
 
