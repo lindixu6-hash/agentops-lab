@@ -1,4 +1,4 @@
-name: Deploy Scorecard
+name: Deploy AgentOps Lab
 
 on:
   push:
