@@ -8,15 +8,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 24
       - name: Validate community YAML
         run: |
           ruby -e '
             require "yaml"
-            Dir[".github/ISSUE_TEMPLATE/*.{yml,yaml}"].sort.each do |path|
+            paths = Dir[".github/ISSUE_TEMPLATE/*.{yml,yaml}"] +
+              [".github/dependabot.yml"]
+            paths.sort.each do |path|
               YAML.safe_load(File.read(path), aliases: true)
               puts "Parsed #{path}"
             end
@@ -87,7 +89,7 @@ jobs:
             -- agentic-validate-results artifacts/reference-eval/results.jsonl \
             --fixtures evals/prompt-injection/fixtures.jsonl
       - name: Upload reference eval evidence
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: reference-eval-evidence
           path: artifacts/reference-eval
@@ -102,7 +104,7 @@ jobs:
             -- agentic-validate-results artifacts/langgraph-eval/results.jsonl \
             --fixtures evals/prompt-injection/fixtures.jsonl
       - name: Upload LangGraph eval evidence
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: langgraph-eval-evidence
           path: artifacts/langgraph-eval
@@ -118,7 +120,7 @@ jobs:
             artifacts/openai-agents-eval/results.jsonl \
             --fixtures evals/prompt-injection/fixtures.jsonl
       - name: Upload OpenAI Agents eval evidence
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: openai-agents-eval-evidence
           path: artifacts/openai-agents-eval

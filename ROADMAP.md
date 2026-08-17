@@ -132,6 +132,14 @@ feature counts.
 - [x] Document the third-party SHA pin and the deliberate moving `@v0` channel
 - [x] Preserve the same guidance in English and Simplified Chinese
 
+### v0.17: Repository workflow supply-chain hardening
+
+- [x] Pin every third-party Action in CI, Pages, and Star Watch to a full SHA
+- [x] Preserve local actions and the deliberate public `@v0` compatibility probes
+- [x] Add a repository-wide regression that rejects mutable third-party Action tags
+- [x] Configure weekly Dependabot updates for GitHub Actions
+- [x] Document update and trust boundaries in English and Simplified Chinese
+
 ## Current Priorities
 
 - Add source-linked incidents only when they introduce a distinct control or

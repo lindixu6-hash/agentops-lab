@@ -8,6 +8,7 @@ const projectRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   ".."
 );
+const uploadArtifactSha = "043fb46d1a93c77aae656e7c1c64a875d1fc6a0a";
 
 function readWorkflow(name) {
   return fs.readFileSync(
@@ -19,7 +20,10 @@ function readWorkflow(name) {
 test("Star Watch preserves its hidden JSON snapshot in the artifact", () => {
   const workflow = readWorkflow("star-watch.yml");
 
-  assert.match(workflow, /uses: actions\/upload-artifact@v7/);
+  assert.match(
+    workflow,
+    new RegExp(`uses: actions/upload-artifact@${uploadArtifactSha}`)
+  );
   assert.match(workflow, /include-hidden-files: true/);
   assert.match(workflow, /path: \|\n\s+\.star-watch\.json\n\s+star-watch\.txt/);
 });
@@ -59,7 +63,57 @@ test("CI parses every community YAML form", () => {
   assert.match(workflow, /name: Validate community YAML/);
   assert.match(workflow, /require "yaml"/);
   assert.match(workflow, /ISSUE_TEMPLATE\/\*\.\{yml,yaml\}/);
+  assert.match(workflow, /\.github\/dependabot\.yml/);
   assert.match(workflow, /YAML\.safe_load/);
+});
+
+test("every third-party workflow action is pinned to a full commit SHA", () => {
+  const workflowDirectory = path.join(projectRoot, ".github", "workflows");
+  const workflowFiles = fs
+    .readdirSync(workflowDirectory)
+    .filter((name) => /\.ya?ml$/.test(name));
+
+  for (const name of workflowFiles) {
+    const workflow = readWorkflow(name);
+    for (const match of workflow.matchAll(
+      /^\s*(?:-\s*)?uses:\s*([^\s#]+)/gm
+    )) {
+      const target = match[1];
+      if (target.startsWith("./")) continue;
+
+      const separator = target.lastIndexOf("@");
+      assert.notEqual(separator, -1, `${name}: missing action ref: ${target}`);
+      const action = target.slice(0, separator);
+      const ref = target.slice(separator + 1);
+
+      if (action.startsWith("lindixu6-hash/awesome-agentic-engineering")) {
+        assert.match(
+          ref,
+          /^(?:v0|[0-9a-f]{40})$/,
+          `${name}: unexpected self-reference: ${target}`
+        );
+        continue;
+      }
+
+      assert.match(
+        ref,
+        /^[0-9a-f]{40}$/,
+        `${name}: third-party action must use a full commit SHA: ${target}`
+      );
+    }
+  }
+});
+
+test("Dependabot maintains pinned GitHub Actions references", () => {
+  const config = fs.readFileSync(
+    path.join(projectRoot, ".github", "dependabot.yml"),
+    "utf8"
+  );
+
+  assert.match(config, /package-ecosystem: github-actions/);
+  assert.match(config, /directory: "\/"/);
+  assert.match(config, /interval: weekly/);
+  assert.match(config, /open-pull-requests-limit: 5/);
 });
 
 test("CI verifies generated starters fail closed", () => {
@@ -115,7 +169,10 @@ test("CI executes and retains provenance-aware reference eval results", () => {
     workflow,
     /agentic-validate-results artifacts\/reference-eval\/results\.jsonl/
   );
-  assert.match(workflow, /uses: actions\/upload-artifact@v7/);
+  assert.match(
+    workflow,
+    new RegExp(`uses: actions/upload-artifact@${uploadArtifactSha}`)
+  );
   assert.match(workflow, /name: reference-eval-evidence/);
   assert.match(workflow, /path: artifacts\/reference-eval/);
 });
@@ -142,7 +199,10 @@ test("CI installs OpenAI Agents and retains offline Runner evidence", () => {
     workflow,
     /agentic-validate-results \\\n\s+artifacts\/openai-agents-eval\/results\.jsonl/
   );
-  assert.match(workflow, /uses: actions\/upload-artifact@v7/);
+  assert.match(
+    workflow,
+    new RegExp(`uses: actions/upload-artifact@${uploadArtifactSha}`)
+  );
   assert.match(workflow, /name: openai-agents-eval-evidence/);
   assert.match(workflow, /path: artifacts\/openai-agents-eval/);
 });

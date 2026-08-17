@@ -41,6 +41,12 @@ reviewed v7.0.1 commit SHA. The readiness gate uses this project's moving
 that step to a release tag or commit SHA if your repository requires fully
 immutable dependencies.
 
+This repository's own CI, Pages, and Star Watch workflows also pin every
+third-party Action to a full commit SHA. Dependabot checks those GitHub Actions
+references weekly, but an update still requires review and CI. Local
+`uses: ./` steps execute the checked-out commit; same-repository `@v0` calls
+exist only to smoke-test the public moving channel.
+
 Choose one profile:
 
 | Profile | Use when |

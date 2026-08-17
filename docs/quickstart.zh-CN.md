@@ -38,6 +38,11 @@ SHA。生产就绪门禁使用本项目可移动的 `@v0` 稳定通道，让兼�
 消费者；如果你的仓库要求依赖完全不可变，请将该步骤固定到 Release Tag 或
 Commit SHA。
 
+本仓库自己的 CI、Pages 和 Star Watch 工作流也会把所有第三方 Action 固定到完整
+Commit SHA。Dependabot 每周检查这些 GitHub Actions 引用，但更新仍需经过审核与
+CI。`uses: ./` 执行当前检出的提交；同仓库 `@v0` 调用只用于冒烟测试公开可移动
+通道。
+
 选择一个风险 Profile：
 
 | Profile | 适用情况 |

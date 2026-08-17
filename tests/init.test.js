@@ -198,6 +198,10 @@ test("package and bilingual quickstarts expose the initializer contract", () => 
   assert.match(chinese, /第三方 `actions\/checkout` 固定/);
   assert.match(english, /moving\n`@v0` stable channel/);
   assert.match(chinese, /可移动的 `@v0` 稳定通道/);
+  assert.match(english, /CI, Pages, and Star Watch workflows/);
+  assert.match(chinese, /CI、Pages 和 Star Watch 工作流/);
+  assert.match(english, /Dependabot checks[\s\S]*references weekly/);
+  assert.match(chinese, /Dependabot 每周检查/);
   for (const profile of PROFILES) {
     assert.match(english, new RegExp(`\\\`${profile}\\\``));
     assert.match(chinese, new RegExp(`\\\`${profile}\\\``));
