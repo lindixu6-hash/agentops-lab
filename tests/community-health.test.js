@@ -41,9 +41,13 @@ test("bilingual READMEs route contributors to localized forms and guides", () =>
 
   assert.match(english, /agent-card-adoption\.yml/);
   assert.match(english, /runtime-adapter\.yml/);
+  assert.match(english, /issues\/16/);
+  assert.match(english, /CrewAI adapter with delegated-task trust boundaries/);
   assert.match(english, /\[CONTRIBUTING\.md\]\(CONTRIBUTING\.md\)/);
   assert.match(chinese, /agent-card-adoption\.yml/);
   assert.match(chinese, /runtime-adapter\.yml/);
+  assert.match(chinese, /issues\/16/);
+  assert.match(chinese, /带委派任务信任边界的 CrewAI 适配器/);
   assert.match(chinese, /CONTRIBUTING\.zh-CN\.md/);
 });
 

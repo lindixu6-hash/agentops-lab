@@ -7,8 +7,8 @@
 [![License](https://img.shields.io/github/license/lindixu6-hash/awesome-agentic-engineering?style=flat-square)](LICENSE)
 [![Use This Template](https://img.shields.io/badge/use_this-template-0969da?style=flat-square)](https://github.com/new?template_name=awesome-agentic-engineering&template_owner=lindixu6-hash)
 
-Not another resource list: an executable scorecard and GitHub Actions gate for
-shipping AI agents that survive real users.
+Not another resource list: an executable AI agent readiness scorecard and
+GitHub Actions gate for shipping systems that survive real users.
 
 [![Score an AI agent from 0/20 to production candidate](assets/readiness-scorecard-demo.gif)](https://lindixu6-hash.github.io/awesome-agentic-engineering/)
 
@@ -405,6 +405,7 @@ High-value contributions:
 - Cost control patterns
 - MCP server review checklists
 - Agent UX examples
+- [Help wanted: CrewAI adapter with delegated-task trust boundaries](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/16)
 - [Public Agent Card adoption evidence](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/new?template=agent-card-adoption.yml)
 - [Executable runtime adapter proposals](https://github.com/lindixu6-hash/awesome-agentic-engineering/issues/new?template=runtime-adapter.yml)
 
