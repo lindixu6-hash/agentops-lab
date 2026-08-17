@@ -187,6 +187,13 @@ Action 会输出 `score`、`rating`、`badge`、`passed`、`blocker-count`、
   同时运行严格阻塞项与 `draft-only` Profile 审计，明确暴露 12/14 总分差距、
   1/2 工具权限差距和 3 个未解决的上线阻塞项，不让兼容门槛通过掩盖真实技术债。
 
+## 外部验证
+
+- [EvalRepro #31](https://github.com/seva9523/EvalRepro/pull/31) 独立复现了
+  `v0.15.0` 到 `v0.16.0` 的 8 文件版本契约。其标准 Python 测试矩阵和公开
+  源码复现工作流均通过，并准确检测到 3 个预期的生成工作流变化。这是公开
+  设计伙伴验证，不代表采用或背书。
+
 发布到 GitHub 后，可以这样检查 star：
 
 ```bash

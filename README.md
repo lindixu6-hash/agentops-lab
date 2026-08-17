@@ -196,6 +196,14 @@ separately.
   a 12/14 profile score gap, a 1/2 tool-permission gap, and three unresolved
   launch blockers without hiding them behind the passing compatibility score.
 
+## External Validation
+
+- [EvalRepro #31](https://github.com/seva9523/EvalRepro/pull/31) independently
+  reproduced the pinned `v0.15.0` to `v0.16.0` eight-file release contract. Its
+  standard Python matrix and public-source workflow passed while detecting
+  exactly the three intended generated-workflow changes. This is public
+  design-partner validation, not adoption or endorsement.
+
 After publishing on GitHub, check repository stars:
 
 ```bash
