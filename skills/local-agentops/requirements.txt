@@ -1,4 +1,7 @@
 openvino>=2025.2
 openvino-genai>=2025.2
 modelscope>=1.26
+optimum-intel[openvino]>=2.1
+transformers>=4.48,<4.58
+sentencepiece>=0.2
 numpy<2.0

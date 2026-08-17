@@ -26,6 +26,7 @@ while keeping its repository and release history unchanged.
 - [Read the one-page PRD](docs/agentops-lab-prd.zh-CN.md)
 - [Use the first-five-user test script](research/first-5-users.md)
 - [Inspect the local OpenVINO skill](skills/local-agentops/SKILL.md)
+- [Review the reproducible OpenVINO validation](docs/openvino-validation.zh-CN.md)
 
 Generate a deterministic report without installing dependencies:
 

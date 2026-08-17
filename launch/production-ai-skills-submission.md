@@ -12,7 +12,7 @@
 
 ## 一句话介绍
 
-一个隐私优先的本地 Agent 评测与运营 Skill：导入 CSV / JSON 日志，生成成功率、失败类型、版本、成本与延迟复盘，并通过 OpenVINO GenAI 在本机归纳可执行建议。
+一个隐私优先的本地 Agent 评测与运营 Skill：导入 CSV / JSON 日志，生成成功率、失败类型、版本、成本与延迟复盘，并通过 OpenVINO GenAI 在本机排序确定性建议。
 
 ## 评分映射
 
@@ -22,21 +22,21 @@
 | 商用生产力 30% | 本地处理敏感日志；CSV/JSON 接入；Markdown/JSON 输出；用户任务验证 |
 | 工具使用 20% | `local-agentops` Skill、OpenVINO GenAI、Qwen 本地模型、固定入口 |
 | 文章质量 10% | 完整架构、数据协议、隐私边界、可复现命令和结论边界 |
-| 创新性 10% | 确定性指标层 + 本地模型归纳层；只向模型提供聚合数据 |
+| 创新性 10% | 确定性指标层 + 本地模型排序层；只向模型提供聚合数据和带 ID 的确定性建议 |
 | 传播附加分 5% | ModelScope 研习社 + 小红书 + GitHub 数据台账 |
 
 ## 提交前必须完成
 
-- [ ] ModelScope 赛事报名成功并保存截图；
-- [ ] 新 GitHub 仓库公开，原 `awesome-agentic-engineering` 未被修改；
-- [ ] CI 全部通过；
-- [ ] GitHub Pages Demo 可访问；
-- [ ] ModelScope Skills 中心发布 `local-agentops`；
+- [x] ModelScope 赛事报名成功并保存截图；
+- [x] 新 GitHub 仓库公开，原 `awesome-agentic-engineering` 未被修改；
+- [x] CI 全部通过；
+- [x] GitHub Pages Demo 可访问；
+- [x] ModelScope Skills 中心发布 `local-agentops`；
 - [ ] Skill 添加 `AI PC` 自定义标签；
 - [ ] Windows / Intel 环境完成一次默认模型运行；
 - [ ] `--continue` 模型续传路径验证；
-- [ ] TRAE Work / WorkBuddy 类 Host 完成稳定调用；
-- [ ] 录制完整调用截图或视频；
+- [x] TRAE Work / WorkBuddy 类 Host 完成稳定调用；
+- [x] 保存完整 Host 调用截图；
 - [ ] 5 位真实用户记录完成，不含伪造或空白记录；
 - [ ] 技术文章发布到 ModelScope 研习社；
 - [ ] 小红书发布并正确 @ 社区、添加指定话题；
@@ -86,4 +86,3 @@
 - 尚未发生的企业采用或商业合作；
 - 页面访问量不能写成体验用户数；
 - 合成样例结果不能写成真实业务提升。
-

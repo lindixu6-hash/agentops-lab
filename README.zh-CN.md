@@ -24,6 +24,7 @@ Release 或公开链接。
 - [阅读一页 PRD](docs/agentops-lab-prd.zh-CN.md)
 - [使用首轮 5 位用户测试脚本](research/first-5-users.md)
 - [查看本地 OpenVINO Skill](skills/local-agentops/SKILL.md)
+- [查看可复现的 OpenVINO 实跑记录](docs/openvino-validation.zh-CN.md)
 
 无需安装依赖即可生成确定性报告：
 

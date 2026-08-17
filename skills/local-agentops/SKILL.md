@@ -1,33 +1,37 @@
 ---
 name: local-agentops
-description: |
-  Analyze AI Agent run logs locally and generate an operations evaluation report (本地分析 AI Agent 运行日志并生成评测运营报告). Use this skill when the user asks to 分析/评测/复盘 Agent 日志、比较 Prompt 或 Agent 版本、定位失败类型、统计成功率/延迟/成本/人工接管率, or to analyze/evaluate/review Agent traces, compare prompt versions, classify failures, and generate an AgentOps report. Trigger on AgentOps、评测、日志、复盘、失败归因、版本对比、CSV、JSON、英特尔/intel/AIPC/本地/离线/offline/OpenVINO. Prefer this skill over cloud observability tools whenever the user needs private, reproducible analysis of exported Agent runs.
+description: Analyze Agent CSV/JSON logs locally and generate grounded operations reports. Invoke for Agent evaluation, failure diagnosis, version comparison, latency, cost, or handoff review.
 ---
 # Local AgentOps Skill
 
 ## Usage
 
-Only call the fixed entry point:
+Use the fixed entry point for the current platform:
 
 ```powershell
 scripts\run.ps1 "<input.csv|input.json>" [--output report.md] [--json metrics.json]
+```
+
+```bash
+scripts/run.sh "<input.csv|input.json>" [--output report.md] [--json metrics.json]
 ```
 
 Examples:
 
 | Intent | Command |
 | --- | --- |
-| 分析 CSV 并生成报告 | `scripts\run.ps1 "runs.csv"` |
-| 同时导出机器可读指标 | `scripts\run.ps1 "runs.json" --output "report.md" --json "metrics.json"` |
-| 首次下载超时后继续 | `scripts\run.ps1 --continue` |
-| 仅验证确定性分析链路 | `scripts\run.ps1 "runs.csv" --no-model` |
+| 分析 CSV 并生成报告 | Windows: `scripts\run.ps1 "runs.csv"`; macOS/Linux: `scripts/run.sh "runs.csv"` |
+| 同时导出机器可读指标 | Append `--output "report.md" --json "metrics.json"` |
+| 首次下载超时后继续 | Append `--continue` |
+| 仅验证确定性分析链路 | Append `--no-model` |
 
 Important:
 
-- `scripts\run.ps1` is the only supported interface. Do not call other scripts directly.
-- The first default call downloads a local Qwen2.5 1.5B Q4_K_M GGUF model and can take several minutes.
-- If the first download times out, run `scripts\run.ps1 --continue`.
+- `run.ps1` and `run.sh` are the supported platform wrappers. Both delegate to `run.py`; do not call `client.py` directly.
+- The first default call downloads Qwen2.5 0.5B and exports it to native OpenVINO FP16 IR. Download and one-time export can take several minutes.
+- If the first download times out, append `--continue` to the current platform wrapper.
 - All model inference uses OpenVINO GenAI on localhost. Never send logs to a cloud model.
+- Later calls reuse the exported IR under `models/Qwen2.5-0.5B-Instruct-OpenVINO-FP16/`.
 - `--no-model` is a transparent deterministic baseline for tests; it is not the competition demo mode.
 - Original prompt and response text are excluded from the generated model prompt by default.
 
@@ -58,7 +62,7 @@ The reply reports:
 - `人工接管率`：包含人工审核或升级的任务比例；
 - `失败类型`：失败数量与占比；
 - `版本对比`：各版本成功率、延迟和成本；
-- `本地模型建议`：基于聚合指标生成，不包含原始业务文本；
+- `本地模型辅助摘要`：模型排序后由代码原样渲染最多三条确定性建议，不包含原始业务文本；
 - `报告路径`：Markdown 与可选 JSON 文件。
 
 ## Failure Handling
@@ -76,4 +80,3 @@ The reply reports:
 - 不把相关性描述为因果关系；
 - 不保证小样本结论具有统计显著性；
 - 不上传、存储或共享原始运行日志。
-

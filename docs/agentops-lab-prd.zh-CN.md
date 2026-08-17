@@ -59,7 +59,7 @@ AgentOps Lab 是一个隐私优先的本地 AI Agent 评测与运营工作台：
 **比赛增强**
 
 1. 封装为 `local-agentops` Skill；
-2. 使用本地 OpenVINO GenAI 模型归纳失败原因与行动建议；
+2. 使用本地 OpenVINO GenAI 模型对确定性建议排序，代码原样渲染证据与行动；
 3. 支持确定性规则模式，模型不可用时不调用云服务；
 4. 在 TRAE Work / WorkBuddy 类 Host 中验证稳定调用；
 5. 发布代码、测试、技术文章和完整运行证据。
@@ -129,4 +129,3 @@ AgentOps Lab 是一个隐私优先的本地 AI Agent 评测与运营工作台：
 - D8-D10：第二轮测试、评测报告和演示视频；
 - D11-D12：ModelScope Skill 与技术文章；
 - D13-D14：比赛提交、开源发布、内容传播和数据复盘。
-

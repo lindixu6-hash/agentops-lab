@@ -6,6 +6,9 @@ import argparse
 import csv
 import json
 import math
+import os
+import re
+import subprocess
 import statistics
 import sys
 from collections import Counter, defaultdict
@@ -14,7 +17,10 @@ from typing import Any
 
 SKILL_ROOT = Path(__file__).resolve().parents[1]
 INFO_PATH = SKILL_ROOT / "info.json"
-PENDING_PATH = SKILL_ROOT / ".agentops-pending.json"
+RUNTIME_ROOT = Path(
+    os.environ.get("AGENTOPS_RUNTIME_HOME", Path.cwd() / ".agentops-runtime")
+).resolve()
+PENDING_PATH = RUNTIME_ROOT / "agentops-pending.json"
 
 TRUE_VALUES = {"true", "1", "yes", "y", "success", "passed", "成功"}
 FIELD_ALIASES = {
@@ -284,34 +290,51 @@ def deterministic_recommendations(metrics: dict[str, Any]) -> list[dict[str, str
 def find_or_download_model(continue_download: bool) -> Path:
     info = json.loads(INFO_PATH.read_text(encoding="utf-8"))
     config = info["models"][0]
-    model_root = SKILL_ROOT / "models" / config["dir_name"]
-    filename = config["required_files"][0]
-    candidate = model_root / filename
-    if candidate.exists():
-        return candidate
+    source_root = SKILL_ROOT / "models" / config["dir_name"]
+    openvino_root = SKILL_ROOT / "models" / f"{config['dir_name']}-OpenVINO-FP16"
+    if (openvino_root / "openvino_model.xml").exists():
+        return openvino_root
 
     try:
         from modelscope import snapshot_download
     except ImportError as exc:
         raise RuntimeError("缺少 modelscope；请先运行环境安装。") from exc
 
-    print("正在本地下载 Qwen2.5 1.5B Q4_K_M 模型，可用 --continue 续传。")
-    downloaded = Path(
+    required_files = config["required_files"]
+    if not all((source_root / name).exists() for name in required_files):
+        print("正在下载 Qwen2.5 0.5B 官方权重，可用 --continue 续传。")
         snapshot_download(
             config["model_id"],
-            local_dir=str(model_root),
-            allow_file_pattern=[filename],
+            local_dir=str(source_root),
+            allow_file_pattern=required_files,
         )
-    )
-    candidate = downloaded / filename
-    if not candidate.exists():
-        candidates = list(downloaded.rglob(filename))
-        if not candidates:
-            raise RuntimeError(f"模型下载完成但未找到必需文件：{filename}")
-        candidate = candidates[0]
+
+    missing = [name for name in required_files if not (source_root / name).exists()]
+    if missing:
+        raise RuntimeError(f"模型下载不完整，缺少：{', '.join(missing)}")
+
+    print("正在首次导出 OpenVINO FP16 IR；后续运行将直接复用。")
+    command = [
+        sys.executable,
+        "-m",
+        "optimum.commands.optimum_cli",
+        "export",
+        "openvino",
+        "--model",
+        str(source_root),
+        "--task",
+        "text-generation-with-past",
+        "--weight-format",
+        "fp16",
+        str(openvino_root),
+    ]
+    subprocess.run(command, check=True)
+    if not (openvino_root / "openvino_model.xml").exists():
+        raise RuntimeError("OpenVINO 导出结束但未生成 openvino_model.xml。")
+
     if continue_download:
         PENDING_PATH.unlink(missing_ok=True)
-    return candidate
+    return openvino_root
 
 
 def local_model_summary(metrics: dict[str, Any], model_path: Path, device: str) -> str:
@@ -320,6 +343,16 @@ def local_model_summary(metrics: dict[str, Any], model_path: Path, device: str) 
     except ImportError as exc:
         raise RuntimeError("缺少 openvino-genai；请先运行环境安装。") from exc
 
+    recommendations = metrics["recommendations"]
+    actions = [
+        {
+            "id": f"A{index}",
+            "priority": item["priority"],
+            "evidence": item["evidence"],
+            "action": item["action"],
+        }
+        for index, item in enumerate(recommendations, start=1)
+    ]
     aggregate = {
         "total": metrics["total"],
         "success_rate": metrics["success_rate"],
@@ -328,22 +361,39 @@ def local_model_summary(metrics: dict[str, Any], model_path: Path, device: str) 
         "average_cost_usd": metrics["average_cost_usd"],
         "error_types": metrics["error_types"],
         "versions": metrics["versions"],
+        "grounded_actions": actions,
     }
     prompt = (
-        "你是 AI Agent 产品运营分析师。只根据以下聚合指标，用中文给出三条"
-        "可验证、带优先级的迭代建议。不要编造因果、用户反馈或原始日志内容。"
-        "每条格式：P0/P1/P2｜问题｜证据｜下一步。\n"
+        "你是 AI Agent 产品运营分析师。根据聚合指标，从 grounded_actions "
+        "中按执行优先级选择最多三个 ID。只返回 JSON 字符串数组，例如 "
+        '["A1","A3"]。不得输出解释、数字、建议或其他文本。\n'
         + json.dumps(aggregate, ensure_ascii=False)
     )
     pipeline = ov_genai.LLMPipeline(str(model_path), device)
-    return str(
-        pipeline.generate(
-            prompt,
-            max_new_tokens=280,
-            temperature=0.2,
-            top_p=0.9,
-        )
+    raw_output = str(
+        pipeline.generate(prompt, max_new_tokens=48, do_sample=False)
     ).strip()
+    valid_ids = {item["id"] for item in actions}
+    selected_ids: list[str] = []
+    for candidate in re.findall(r"A[1-9]\d*", raw_output):
+        if candidate in valid_ids and candidate not in selected_ids:
+            selected_ids.append(candidate)
+        if len(selected_ids) == 3:
+            break
+    for item in actions:
+        if len(selected_ids) == 3:
+            break
+        if item["id"] not in selected_ids:
+            selected_ids.append(item["id"])
+
+    selected = {
+        item["id"]: item for item in actions if item["id"] in selected_ids
+    }
+    return "\n".join(
+        f"{selected[item_id]['priority']}｜{selected[item_id]['evidence']}｜"
+        f"{selected[item_id]['action']}"
+        for item_id in selected_ids
+    )
 
 
 def display(value: Any, suffix: str = "") -> str:
@@ -406,9 +456,11 @@ def markdown(metrics: dict[str, Any], source: str, model_output: str) -> str:
 
 {deterministic}
 
-## 本地 OpenVINO 模型建议
+## 本地 OpenVINO 模型辅助摘要
 
 {model_output}
+
+模型摘要只用于压缩聚合结果，不覆盖上方确定性指标和规则建议。
 
 ## 结论边界
 
@@ -450,6 +502,7 @@ def main(argv: list[str]) -> int:
         if args.no_model:
             model_output = "未运行本地模型：本次使用透明的确定性分析模式。"
         else:
+            PENDING_PATH.parent.mkdir(parents=True, exist_ok=True)
             PENDING_PATH.write_text(
                 json.dumps(
                     {
@@ -484,7 +537,7 @@ def main(argv: list[str]) -> int:
         )
         return 0
     except KeyboardInterrupt:
-        print("模型下载或分析被中断，请运行 scripts\\run.ps1 --continue。")
+        print("模型下载或分析被中断，请通过当前平台入口附加 --continue 后重试。")
         return 3
     except Exception as exc:
         print(f"错误：{exc}", file=sys.stderr)
@@ -493,4 +546,3 @@ def main(argv: list[str]) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main(sys.argv[1:]))
-
