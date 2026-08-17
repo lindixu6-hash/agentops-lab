@@ -1,0 +1,108 @@
+name: Attested OpenAI Agents Eval
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/provenance-eval.yml"
+      - ".github/workflows/verify-eval-evidence.yml"
+      - "adapters/openai-agents/**"
+      - "bin/validate-eval-results.js"
+      - "evals/prompt-injection/fixtures.jsonl"
+      - "schema/eval-result.schema.json"
+      - "scripts/eval-evidence-provenance.js"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  produce:
+    if: >-
+      github.repository == 'lindixu6-hash/awesome-agentic-engineering' &&
+      github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      attestations: write
+      contents: read
+      id-token: write
+    steps:
+      - name: Check out producer source
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: 24
+
+      - name: Install pinned OpenAI Agents adapter
+        run: npm ci --prefix adapters/openai-agents --ignore-scripts
+
+      - name: Execute all fixtures
+        env:
+          SOURCE_DATE_EPOCH: "1786924800"
+        run: |
+          node adapters/openai-agents/run.js \
+            evals/prompt-injection/fixtures.jsonl \
+            artifacts/openai-agents-eval
+
+      - name: Build source-bound evidence manifest
+        env:
+          PROVENANCE_REPOSITORY: ${{ github.repository }}
+          PROVENANCE_COMMIT_SHA: ${{ github.sha }}
+          PROVENANCE_REF: ${{ github.ref }}
+          PROVENANCE_WORKFLOW_REF: ${{ github.workflow_ref }}
+          PROVENANCE_WORKFLOW_SHA: ${{ github.workflow_sha }}
+          SOURCE_DATE_EPOCH: "1786924800"
+        run: |
+          node scripts/eval-evidence-provenance.js \
+            build \
+            artifacts/openai-agents-eval \
+            .
+
+      - name: Validate with immutable v0.13 CLI
+        run: |
+          npm exec --yes \
+            --package=github:lindixu6-hash/awesome-agentic-engineering#ceaaaa58373c5603b4a28d3d650787a2117e533b \
+            -- agentic-validate-results \
+            artifacts/openai-agents-eval/results.jsonl \
+            --fixtures evals/prompt-injection/fixtures.jsonl
+
+      - name: Create deterministic evidence bundle
+        run: |
+          mkdir bundle
+          tar \
+            --sort=name \
+            --mtime="@1786924800" \
+            --owner=0 \
+            --group=0 \
+            --numeric-owner \
+            -czf bundle/openai-agents-evidence.tar.gz \
+            -C artifacts \
+            openai-agents-eval
+          sha256sum bundle/openai-agents-evidence.tar.gz
+
+      - name: Attest evidence bundle
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6
+        with:
+          subject-path: bundle/openai-agents-evidence.tar.gz
+
+      - name: Upload producer bundle
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: openai-agents-provenance-bundle
+          path: bundle/openai-agents-evidence.tar.gz
+          if-no-files-found: error
+          retention-days: 14
+
+  verify:
+    needs: produce
+    permissions:
+      actions: read
+      attestations: read
+      contents: read
+    uses: lindixu6-hash/awesome-agentic-engineering/.github/workflows/verify-eval-evidence.yml@8d4b435f66f58a570b65dd8b4952bf7e1e2dd62f

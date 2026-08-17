@@ -177,3 +177,28 @@ test("reusable verifier pins code, actions, identity, and negative checks", () =
   assert.match(workflow, /eval-evidence-provenance\.js/);
   assert.doesNotMatch(workflow, /uses: [^\n]+@v\d/);
 });
+
+test("producer attests one bundle before calling immutable verifier", () => {
+  const workflow = readWorkflow("provenance-eval.yml");
+
+  assert.match(workflow, /github\.ref == 'refs\/heads\/main'/);
+  assert.match(workflow, /attestations: write/);
+  assert.match(workflow, /id-token: write/);
+  assert.match(workflow, /eval-evidence-provenance\.js \\\n\s+build/);
+  assert.match(
+    workflow,
+    /awesome-agentic-engineering#ceaaaa58373c5603b4a28d3d650787a2117e533b/
+  );
+  assert.match(workflow, /--sort=name/);
+  assert.match(workflow, /openai-agents-evidence\.tar\.gz/);
+  assert.match(
+    workflow,
+    /actions\/attest@1e69f48acb82d1966a394da916b4c1698aa569d6/
+  );
+  assert.match(workflow, /needs: produce/);
+  assert.match(
+    workflow,
+    /verify-eval-evidence\.yml@8d4b435f66f58a570b65dd8b4952bf7e1e2dd62f/
+  );
+  assert.doesNotMatch(workflow, /uses: [^\n]+@v\d/);
+});
