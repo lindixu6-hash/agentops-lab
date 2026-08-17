@@ -214,6 +214,8 @@ test("bilingual OpenAI Agents docs state integration evidence limits", () => {
   assert.match(chinese, /真实.*Agent.*Runner\.run/);
   assert.match(chinese, /不是 LLM Benchmark/);
   assert.match(chinese, /不能证明任意 OpenAI Agents SDK 应用都安全/);
+  assert.match(english, /31980983499/);
+  assert.match(chinese, /31980983499/);
   assert.match(english, /README\.zh-CN\.md/);
   assert.match(chinese, /\[English\]\(README\.md\)/);
 });

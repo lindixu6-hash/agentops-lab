@@ -60,7 +60,8 @@ node bin/validate-eval-results.js \
 ```
 
 CI 会安装锁定的子包、运行全部 8 条 Fixture、使用公开 `@v0` CLI 校验结果，并
-上传 `openai-agents-eval-evidence`。
+上传 `openai-agents-eval-evidence`。可以检查
+[公开证据运行](https://github.com/lindixu6-hash/awesome-agentic-engineering/actions/runs/31980983499)。
 
 ## 可以证明什么
 

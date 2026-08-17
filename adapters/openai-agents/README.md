@@ -64,7 +64,8 @@ node bin/validate-eval-results.js \
 ```
 
 CI installs the pinned subpackage, runs all eight fixtures, validates results
-with the public `@v0` CLI, and uploads `openai-agents-eval-evidence`.
+with the public `@v0` CLI, and uploads `openai-agents-eval-evidence`. Inspect
+the [public evidence run](https://github.com/lindixu6-hash/awesome-agentic-engineering/actions/runs/31980983499).
 
 ## What This Proves
 
