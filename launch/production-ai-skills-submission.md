@@ -32,7 +32,7 @@
 - [x] CI 全部通过；
 - [x] GitHub Pages Demo 可访问；
 - [x] ModelScope Skills 中心发布 `local-agentops`；
-- [ ] Skill 添加 `AI PC` 自定义标签；
+- [x] Skill 添加 `AI PC` 自定义标签；
 - [ ] Windows / Intel 环境完成一次默认模型运行；
 - [ ] `--continue` 模型续传路径验证；
 - [x] TRAE Work / WorkBuddy 类 Host 完成稳定调用；
