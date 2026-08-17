@@ -6,3 +6,5 @@ dist/
 *.log
 *.tgz
 .star-watch.json
+skills/local-agentops/models/
+skills/local-agentops/.agentops-pending.json
