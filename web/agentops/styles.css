@@ -202,7 +202,8 @@ code {
 }
 
 .import-actions,
-.report-actions {
+.report-actions,
+.feedback-actions {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -526,7 +527,8 @@ tbody tr:last-child td {
   }
 
   .import-actions,
-  .report-actions {
+  .report-actions,
+  .feedback-actions {
     align-items: stretch;
     flex-direction: column;
   }
@@ -575,4 +577,3 @@ tbody tr:last-child td {
     scroll-behavior: auto;
   }
 }
-

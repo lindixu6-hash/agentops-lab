@@ -111,5 +111,6 @@ test("browser MVP exposes local import and report controls", () => {
   assert.match(html, /加载示例/);
   assert.match(html, /下载 Markdown/);
   assert.match(html, /原始文件不会上传/);
+  assert.match(html, /提交匿名反馈/);
+  assert.match(html, /agentops-lab\/issues\/1/);
 });
-
