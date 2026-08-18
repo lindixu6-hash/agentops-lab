@@ -17,6 +17,7 @@
 | 自动化质量门禁 | 核心解析、指标、报告与 README 契约有自动化测试；GitHub CI 已通过 | [Actions](https://github.com/lindixu6-hash/agentops-lab/actions) | 是 |
 | 技术文章 | ModelScope 研习社文章已公开，专题为 `Intel AI PC` | [技术文章](https://modelscope.cn/learn/435817) | 是 |
 | 比赛提交 | Production AI Skills 官方表单已显示“提交完成 / 已收到你的提交” | [提交回执](assets/production-ai-skills-submission-success.png) | 是 |
+| 小红书传播 | 5 张图文已公开；管理后台于 2026-08-18 02:09 记录发布，核验时为 51 次浏览 | [公开笔记](https://www.xiaohongshu.com/explore/6a834e60000000002402fe82) / [发布证据](assets/xiaohongshu-agentops-published.png) | 是 |
 | 用户研究准备 | 已公开 10 分钟任务、同意口径、成功条件和匿名记录协议 | [首测脚本](../research/first-5-users.md) / [招募 Issue](https://github.com/lindixu6-hash/agentops-lab/issues/1) | 是 |
 
 ## 性能与样例边界
@@ -37,10 +38,9 @@
 
 | 项目 | 完成证据 | 当前状态 |
 | --- | --- | --- |
-| 小红书传播 | 公开笔记 URL | 已登录并保存含 5 张卡片的完整草稿；两次发布请求均在官方接口阶段 15 秒超时，笔记管理仍为 0 |
 | 5 位真人首测 | 5 条有明确同意记录的有效匿名数据 | 招募中，当前为 0/5 |
 | Intel AI PC GPU/NPU 验证 | 目标硬件命令、版本、耗时和输出 | 未补测 |
-| 传播附加分 | 截止日期前各公开渠道累计阅读量 | 已记录 2026-08-17 基线；小红书尚未发布 |
+| 传播附加分 | 截止日期前各公开渠道累计阅读量 | 小红书已发布；累计阅读量尚未达到 1000 |
 
 ## 当前可用简历表述
 

@@ -11,6 +11,7 @@
 - Demo：https://lindixu6-hash.github.io/agentops-lab/agentops/
 - ModelScope Skill：https://modelscope.cn/skills/lindi312/local-agentops
 - 技术文章：https://modelscope.cn/learn/435817
+- 小红书：https://www.xiaohongshu.com/explore/6a834e60000000002402fe82
 - 官方表单：已于 2026-08-18 提交成功
 - 提交证据：[成功回执截图](../docs/assets/production-ai-skills-submission-success.png)
 
@@ -43,7 +44,7 @@
 - [x] 保存完整 Host 调用截图；
 - [ ] 5 位真实用户记录完成，不含伪造或空白记录；
 - [x] 技术文章发布到 ModelScope 研习社；
-- [ ] 小红书发布并正确 @ 社区、添加指定话题；
+- [x] 小红书图文发布，包含文章、Skill 链接及指定社区与话题；
 - [x] 记录当前公开渠道阅读量基线，且未将浏览量计为用户；
 - [x] 比赛作品提交成功并保存截图。
 
