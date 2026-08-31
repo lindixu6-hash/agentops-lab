@@ -105,4 +105,4 @@ jobs:
       actions: read
       attestations: read
       contents: read
-    uses: lindixu6-hash/awesome-agentic-engineering/.github/workflows/verify-eval-evidence.yml@8d4b435f66f58a570b65dd8b4952bf7e1e2dd62f
+    uses: lindixu6-hash/awesome-agentic-engineering/.github/workflows/verify-eval-evidence.yml@bd10fd9d12c697f1b5fc77ec235545294164221f
